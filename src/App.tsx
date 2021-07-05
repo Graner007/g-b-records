@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <Header className="header">
+        <Header className="header" style={{backgroundColor: '#fff'}}>
           <Navbar />
         </Header>
       </Layout>
