@@ -1,4 +1,4 @@
-import { Input, Menu, Space } from 'antd';
+import { Input, Menu } from 'antd';
 import { Component } from 'react';
 import Logo from "./Logo";
 import Dropdown from "./Dropdown";
