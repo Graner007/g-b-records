@@ -9,7 +9,7 @@ enum Genre {
 } 
 
 interface GenreContextInterface {
-    id: number
+    id: number;
     name: Genre;
 }
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface ArtistContextInterface {
-    id: number
+    id: number;
     name: string;
 }
 

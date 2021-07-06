@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface RecordContextInterface {
-    id: number
+    id: number;
     name: string;
     artistId: number;
     genreId: number;

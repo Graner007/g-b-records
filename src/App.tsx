@@ -7,6 +7,7 @@ import { Header } from 'antd/lib/layout/layout';
 import { RecordContextProvider } from './context/RecordContext';
 import { ArtistContextProvider } from './context/ArtistContext';
 import { GenreContextProvider } from './context/GenreContext';
+import { UserContextProvider } from './context/UserContext';
 
 function App() {
   return (
@@ -14,11 +15,13 @@ function App() {
       <RecordContextProvider>
       <ArtistContextProvider>
       <GenreContextProvider>
+      <UserContextProvider> 
         <Layout>
           <Header className="header" style={{backgroundColor: '#fff'}}>
             <Navbar />
           </Header>
         </Layout>
+      </UserContextProvider>  
       </GenreContextProvider>  
       </ArtistContextProvider>  
       </RecordContextProvider>
