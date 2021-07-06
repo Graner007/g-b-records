@@ -6,17 +6,20 @@ import { Layout } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 import { RecordContextProvider } from './context/RecordContext';
 import { ArtistContextProvider } from './context/ArtistContext';
+import { GenreContextProvider } from './context/GenreContext';
 
 function App() {
   return (
     <div className="App">
       <RecordContextProvider>
       <ArtistContextProvider>
+      <GenreContextProvider>
         <Layout>
-            <Header className="header" style={{backgroundColor: '#fff'}}>
-              <Navbar />
-            </Header>
-          </Layout>
+          <Header className="header" style={{backgroundColor: '#fff'}}>
+            <Navbar />
+          </Header>
+        </Layout>
+      </GenreContextProvider>  
       </ArtistContextProvider>  
       </RecordContextProvider>
     </div>

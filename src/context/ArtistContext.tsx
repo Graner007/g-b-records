@@ -7,7 +7,7 @@ interface ArtistContextInterface {
 
 export const ArtistCtx = React.createContext<ArtistContextInterface[] | null>(null);
 
-const sampleAppContext: ArtistContextInterface[] = [
+const sampleAppContext: ArtistContextInterface[] = [ 
     {
         id: 1,
         name: "Elvis Presley"
