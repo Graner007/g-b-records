@@ -8,6 +8,7 @@ import { RecordContextProvider } from './context/RecordContext';
 import { ArtistContextProvider } from './context/ArtistContext';
 import { GenreContextProvider } from './context/GenreContext';
 import { UserContextProvider } from './context/UserContext';
+import { CartContextProvider } from './context/CartContext';
 
 function App() {
   return (
@@ -16,11 +17,13 @@ function App() {
       <ArtistContextProvider>
       <GenreContextProvider>
       <UserContextProvider> 
+      <CartContextProvider>
         <Layout>
           <Header className="header" style={{backgroundColor: '#fff'}}>
             <Navbar />
           </Header>
         </Layout>
+      </CartContextProvider>
       </UserContextProvider>  
       </GenreContextProvider>  
       </ArtistContextProvider>  

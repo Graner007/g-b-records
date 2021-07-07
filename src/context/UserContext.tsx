@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface UserContextInterface {
     id: number;
-    cardId: number;
+    cartId: number;
     username: string;
     email: string;
     password: string;
@@ -14,7 +14,7 @@ export const UserCtx = React.createContext<UserContextInterface[] | null>(null);
 const sampleAppContext: UserContextInterface[] = [ 
     {
         id: 1,
-        cardId: 1,
+        cartId: 1,
         username: "bobby.charlton",
         email: "bobby.charlton@gmail.com",
         password: "man_utd",
@@ -22,7 +22,7 @@ const sampleAppContext: UserContextInterface[] = [
     },
     {
         id: 2,
-        cardId: 2,
+        cartId: 2,
         username: "ben.brown",
         email: "ben.brown@gmail.com",
         password: "barcelona",
