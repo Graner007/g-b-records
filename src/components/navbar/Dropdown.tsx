@@ -1,27 +1,56 @@
 import { Component } from 'react';
 import { Dropdown as Drop, Menu } from 'antd';
+import axios from 'axios';
 
 type Props = {
     title: string;
-    items: string[]; 
+    itemName: "artist" | "genre";
 }
 
-export default class Dropdown extends Component<Props> {
+type State = {
+    items: any[];
+    loading: boolean;
+    error: null;
+}
+
+export default class Dropdown extends Component<Props, State> {
+
+    state: State = {
+        items: [],
+        loading: true,
+        error: null
+    }
+
+    componentDidMount() {
+        axios.get(`./data/${this.props.itemName}.json`)
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState({loading: false, error: null, items: res.data})
+                }
+            })
+            .catch(err => this.setState({ error: err, loading: false }));
+    }
+
     render() {
+        const {error, items, loading} = this.state;
+
+        if (error) {
+            return <h1 style = {{color:"red"}}>Can't be loaded!</h1>;
+        }
 
         const menuList = (
             <Menu>
-              {this.props.items.map((item, index) => (
-                  <Menu.Item key={index}>{item}</Menu.Item>
+              {loading ? <div>Loading...</div> : items.map((item, index) => (
+                  <Menu.Item key={index}>{item.name}</Menu.Item>
               ))}
             </Menu>
         );
 
         return (
             <Drop overlay={menuList}>
-                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                     {this.props.title}
-                </a>
+                </div>
             </Drop>
         )
     }
