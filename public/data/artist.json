@@ -1,0 +1,22 @@
+[ 
+    {
+        "id": 1,
+        "name": "Elvis Presley"
+    },
+    {
+        "id": 2,
+        "name": "Beatles"
+    },
+    {
+        "id": 3,
+        "name": "Eminem"
+    },
+    {
+        "id": 4,
+        "name": "Metallica"
+    },
+    {
+        "id": 5,
+        "name": "Michael Jackson"
+    }
+]
