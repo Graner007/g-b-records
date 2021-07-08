@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Dropdown as Drop, Menu } from 'antd';
+import { Dropdown as Drop, List } from 'antd';
 import axios from 'axios';
 
 type Props = {
@@ -39,12 +39,14 @@ export default class Dropdown extends Component<Props, State> {
         }
 
         const menuList = (
-            <Menu>
-              {loading ? <div>Loading...</div> : items.map((item, index) => (
-                  <Menu.Item key={index}>{item.name}</Menu.Item>
-              ))}
-            </Menu>
-        );
+            loading ? <div>Loading...</div> : <List 
+                    grid={{ gutter: 16, column: 4 }}
+                    dataSource={items}
+                    renderItem={(item, index) => (
+                        <List.Item key={index} style={{cursor: "pointer"}}>{item.name}</List.Item>
+                    )}
+                />    
+        )
 
         return (
             <Drop overlay={menuList}>
