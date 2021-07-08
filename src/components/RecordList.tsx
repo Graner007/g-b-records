@@ -3,24 +3,15 @@ import { List, Card } from 'antd';
 import axios from 'axios';
 import Meta from 'antd/lib/card/Meta';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
-
-interface Record {
-    id: number;
-    name: string;
-    artist: string;
-    genre: string;
-    description: string;
-    releaseDate: string;
-    albumCover: string;
-    price: number;
-}
+import { RecordModel } from "./interface/RecordModel";
+import { Link } from "react-router-dom";
 
 type Props = {
     name: string;
 }
 
 const RecordList = ({name}: Props) => {
-    const [records, setRecords] = React.useState<Record[]>({} as Record[]);
+    const [records, setRecords] = React.useState<RecordModel[]>({} as RecordModel[]);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<boolean>(false);
 
@@ -28,7 +19,7 @@ const RecordList = ({name}: Props) => {
         axios.get(process.env.PUBLIC_URL + "/data/record.json")
             .then(res => {
                 if (res.status === 200) {
-                    let data: Record[] = [];
+                    let data: RecordModel[] = [];
                     data = res.data;
 
                     let filteredRecords = data.filter(d => d.genre.toString().split(" ").join("-").toLowerCase() === name);
@@ -72,7 +63,7 @@ const RecordList = ({name}: Props) => {
                         cover={<img src={item.albumCover} alt="cover" />} 
                         actions={[<ShoppingCartOutlined />, <HeartOutlined />]}
                         loading={loading} >
-                            <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
+                            <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
                 </List.Item>
             )}

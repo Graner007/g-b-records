@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import SubMenuWithListContent from "./components/SubMenuWithListContent";
+import RecordModel from "./components/Record";
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
@@ -19,6 +19,9 @@ function App() {
             <Content style={{ overflow: 'initial' , padding: "24px", backgroundColor: "#fff"}}>
               <Route path="/collections/:name" exact>
                 <SubMenuWithListContent title="Artist" />
+              </Route>
+              <Route path="/products/:name" exact>
+                <RecordModel />
               </Route>
               <Route path="/" exact>
               </Route>
