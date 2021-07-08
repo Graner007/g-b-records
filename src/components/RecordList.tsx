@@ -17,8 +17,8 @@ interface Record {
 
 const RecordList = () => {
     const [records, setRecords] = React.useState<Record[]>({} as Record[]);
-    const [loading, setLoading] = React.useState<boolean>({} as true);
-    const [error, setError] = React.useState<boolean>({} as false);
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState<boolean>(false);
 
     useEffect(() => {
         axios.get("./data/record.json")
@@ -57,7 +57,8 @@ const RecordList = () => {
                 <List.Item>
                     <Card 
                         cover={<img src={item.albumCover} alt="cover" />} 
-                        actions={[<ShoppingCartOutlined />, <HeartOutlined />]} >
+                        actions={[<ShoppingCartOutlined />, <HeartOutlined />]}
+                        loading={loading} >
                             <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
                 </List.Item>
