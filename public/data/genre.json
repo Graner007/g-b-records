@@ -38,5 +38,9 @@
     {
         "id": 10,
         "name": "Punk Rock"
+    },
+    {
+        "id": 11,
+        "name": "Pop Rock"
     }
 ]
