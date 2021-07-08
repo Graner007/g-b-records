@@ -52,11 +52,11 @@ const Record = () => {
             </Header>
             <Content style={{padding: "30px 50px 30px 50px", backgroundColor:"#fff"}}>
                 <Row>
-                    <Col span={12}><Image src={record?.albumCover} preview={false} /></Col>
+                    <Col span={12}><Image src={record?.albumCover} preview={false} style={{maxWidth: "90%"}} /></Col>
                     <Col span={12}>
                         <h1 style={{fontSize: 50}}>{record?.name}</h1>
-                        <h3 style={{fontSize: 40}}>{record?.artist}</h3>
-                        <h4 style={{fontSize: 30}}>{record?.price} $</h4>
+                        <p style={{fontSize: 40}}>{record?.artist}</p>
+                        <p style={{fontSize: 30, color: "#01579b"}}>{record?.price} $</p>
                         <Button block type="primary" size="large" style={{marginBottom: 20}}><ShoppingCartOutlined /> ADD TO CART</Button>
                         <Button block type="primary" danger size="large" style={{marginBottom: 20}}><HeartOutlined /> WISHLIST</Button>
                         <p style={{fontSize: 20}}>{record?.description}</p>
