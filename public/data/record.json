@@ -98,5 +98,205 @@
         "releaseDate": "1983-11-30",
         "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
         "price": 27   
+    },
+    {
+        "id": 11,
+        "name": "Tickets to My Downfall",
+        "artist": "Machine Gun Kelly",
+        "genre": "Punk Rock",
+        "description": "Tickets to My Downfall is the fifth studio album by American musician Machine Gun Kelly. A departure from his established rap sound, the album is a more guitar-driven pop punk album. It was released through Bad Boy Records and Interscope Records on September 25, 2020. The album was a commercial success, debuting atop the US Billboard 200, and was met with positive reviews from critics. Tickets to My Downfall was preceded by the release of the singles: \"Bloody Valentine\", \"Concert for Aliens\" and \"My Ex's Best Friend\".",
+        "releaseDate": "2020-09-25",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 35 
+    },
+    {
+        "id": 12,
+        "name": "Hotel Diablo",
+        "artist": "Machine Gun Kelly",
+        "genre": "Hip Hop",
+        "description": "Hotel Diablo is the fourth studio album by American rapper Machine Gun Kelly. It was released on July 5, 2019 via Bad Boy Records and Interscope Records. The album was supported by four singles: \"Hollywood Whore\", \"El Diablo\", \"I Think I'm Okay\" with Yungblud and Travis Barker, and \"Glass House\" featuring Naomi Wild, with promotional single \"Floor 13\". The record is a rap rock album and followed less than 10 months after September 2018's Binge EP. The album's production also included Foster The People frontman Mark Foster. It debuted at number five on the US Billboard 200. The album has received generally positive reviews. Lyrically, the songs deal with problems with drugs, childhood family struggles, among other themes.",
+        "releaseDate": "2009-07-05",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 25   
+    },
+    {
+        "id": 13,
+        "name": "Nevermind",
+        "artist": "Nirvana",
+        "genre": "Rock",
+        "description": "King Creole is the second soundtrack album by American singer and musician Elvis Presley, issued by RCA Victor, LPM 1884 in mono in September 1958, recorded in four days at Radio Recorders in Hollywood. It contains songs written and recorded expressly for the 1958 film of the same name starring Presley, and peaked at No. 2 on the Billboard Top Pop Albums chart. The album was previously released as an EP album with two volumes, King Creole Vol 1 and King Creole Vol 2. King Creole Vol 1 peaked at #1 for 30 weeks on the EP album charts. It followed the film's release by over ten weeks. It was certified Gold on July 15, 1999 by the Recording Industry Association of America.",
+        "releaseDate": "1991-09-24",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 28
+    },
+    {
+        "id": 14,
+        "name": "No.6 Collaborations Project",
+        "artist": "Ed Sheeran",
+        "genre": "Pop",
+        "description": "Twist and Shout was the Beatles' second album released in Canada, in mono by Capitol Records (catalogue number T-6054) on 3 February 1964. It consists of songs mostly drawn from Please Please Me, their first LP released in the United Kingdom. This album, like its parent album, contains both original Beatles songs, as well as covers (including its namesake, \"Twist and Shout\"), denoted in the track listing.",
+        "releaseDate": "2019-07-12",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 15  
+    },
+    {
+        "id": 15,
+        "name": "Future Nostalgia",
+        "artist": "Dua Lipa",
+        "genre": "Pop",
+        "description": "Meet the Beatles! is a studio album by the English rock band the Beatles, released as their second album in the United States. It was the group's first American album to be issued by Capitol Records, on 20 January 1964 in both mono and stereo formats. It topped the popular album chart on 15 February 1964 and remained at number one for eleven weeks before being replaced by The Beatles' Second Album. The cover featured Robert Freeman's iconic portrait of the Beatles used in the United Kingdom for With the Beatles, with a blue tint added to the original stark black-and-white photograph.",
+        "releaseDate": "2020-03-27",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 20
+    },
+    {
+        "id": 16,
+        "name": "Highway to Hell",
+        "artist": "AC/DC",
+        "genre": "Hard Rock",
+        "description": "The Eminem Show is the fourth studio album by American rapper Eminem. After it had originally scheduled for release on June 4, 2002, the album was released on May 26, 2002, by Aftermath Entertainment, Shady Records, and Interscope Records due to pirating and bootlegging of it. The album saw Eminem take a substantially more predominant production role; most of it was self-produced, with his longtime collaborator Jeff Bass, and Dr. Dre being the album's executive producer. It features guest appearances from Obie Trice, D12, Dr. Dre, Nate Dogg, Dina Rae and Eminem's daughter Hailie Jade Scott-Mathers.",
+        "releaseDate": "1979-07-27",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 32  
+    },
+    {
+        "id": 17,
+        "name": "Back in Black",
+        "artist": "AC/DC",
+        "genre": "Hard Rock",
+        "description": "Relapse is the sixth studio album by American rapper Eminem. It was released on May 19, 2009, by Aftermath Entertainment, Shady Records, and Interscope Records. It was his first album of original material since Encore (2004), following a four-year hiatus from recording due to his writer's block and an addiction to prescription sleeping medication. Recording sessions for the album took place during 2008 to 2009 at several recording studios, and Dr. Dre, Mark Batson, and Eminem handled production.",
+        "releaseDate": "1980-07-25",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 29   
+    },
+    {
+        "id": 18,
+        "name": "Destroyer",
+        "artist": "KISS",
+        "genre": "Hard Rock",
+        "description": "Master of Puppets is the third studio album by American heavy metal band Metallica, released on March 3, 1986, by Elektra Records. Recorded in Denmark at Sweet Silence Studios with producer Flemming Rasmussen, it was the band's last album to feature bassist Cliff Burton, who died in a bus accident in Sweden during the album's promotional tour.",
+        "releaseDate": "1976-03-15",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 40  
+    },
+    {
+        "id": 19,
+        "name": "Unmasked",
+        "artist": "KISS",
+        "genre": "Hard Rock",
+        "description": "Load is the sixth studio album by the American heavy metal band Metallica, released on June 4, 1996 by Elektra Records in the United States and by Vertigo Records internationally. The album showed more of a hard rock side of Metallica than the band's typical thrash metal style, which alienated much of the band's fanbase. It also featured influences from genres such as Southern rock, blues rock, country rock, and alternative rock. Drummer Lars Ulrich said about Load's more exploratory nature, \"This album and what we're doing with it – that, to me, is what Metallica are all about: exploring different things. The minute you stop exploring, then just sit down and fucking die\". Load is the first of Metallica's albums to feature only three songwriters, the other being 2016's Hardwired... to Self-Destruct. At 79 minutes, Load is Metallica's longest studio album.",
+        "releaseDate": "1980-05-20",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 16   
+    },
+    {
+        "id": 20,
+        "name": "Take Off Your Pants and Jacket",
+        "artist": "blink-182",
+        "genre": "Punk Rock",
+        "description": "Take Off Your Pants and Jacket is the fourth studio album by American rock band Blink-182, released on June 12, 2001, by MCA Records. The band had spent much of the previous year traveling and supporting their previous album Enema of the State (1999), which launched their mainstream career. The album's title is a tongue-in-cheek pun on male masturbation (\"take off your pants and jack it\"), and its cover art has icons for each member of the trio: an airplane (\"take off\"), a pair of pants, and a jacket. It is the band's final release through MCA.",
+        "releaseDate": "2001-06-12",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 27   
+    },
+    {
+        "id": 21,
+        "name": "Goodbye Yellow Brick Road",
+        "artist": "Elthon John",
+        "genre": "Pop Rock",
+        "description": "Elvis Is Back! is the fourth studio album by American rock and roll singer Elvis Presley, released by RCA Victor on April 8, 1960. It was Presley's first album issued in stereophonic sound. Recorded over two sessions in March and April, the album marked Presley's return to recording after his discharge from the U.S. Army. It was Presley's first album of new material since Elvis' Christmas Album was issued in 1957.",
+        "releaseDate": "1973-10-5",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 30 
+    },
+    {
+        "id": 22,
+        "name": "Rock of the Westies",
+        "artist": "Elthon John",
+        "genre": "Rock",
+        "description": "Elvis (also known as Elvis Presley No. 2) is the second studio album by American rock and roll singer Elvis Presley, released by RCA Victor on October 19, 1956 in mono. Recording sessions took place on September 1, September 2, and September 3 at Radio Recorders in Hollywood, with one track left over from the sessions for Presley's debut album at the RCA Victor recording studios on January 30 in New York. It spent four weeks at #1 on the Billboard Top Pop Albums chart that year, making Presley the first recording artist to have both albums go straight to number one in the same year. It would go on to spend 5 weeks at #1 in total. It was certified Gold on February 17, 1960, and Platinum on August 10, 2011, by the Recording Industry Association of America.",
+        "releaseDate": "1975-10-4",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 25   
+    },
+    {
+        "id": 23,
+        "name": "Let's Dance",
+        "artist": "David Bowie",
+        "genre": "Pop Rock",
+        "description": "King Creole is the second soundtrack album by American singer and musician Elvis Presley, issued by RCA Victor, LPM 1884 in mono in September 1958, recorded in four days at Radio Recorders in Hollywood. It contains songs written and recorded expressly for the 1958 film of the same name starring Presley, and peaked at No. 2 on the Billboard Top Pop Albums chart. The album was previously released as an EP album with two volumes, King Creole Vol 1 and King Creole Vol 2. King Creole Vol 1 peaked at #1 for 30 weeks on the EP album charts. It followed the film's release by over ten weeks. It was certified Gold on July 15, 1999 by the Recording Industry Association of America.",
+        "releaseDate": "1983-04-14",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 28
+    },
+    {
+        "id": 24,
+        "name": "The Next Day",
+        "artist": "David Bowie",
+        "genre": "Rock",
+        "description": "Twist and Shout was the Beatles' second album released in Canada, in mono by Capitol Records (catalogue number T-6054) on 3 February 1964. It consists of songs mostly drawn from Please Please Me, their first LP released in the United Kingdom. This album, like its parent album, contains both original Beatles songs, as well as covers (including its namesake, \"Twist and Shout\"), denoted in the track listing.",
+        "releaseDate": "2013-03-08",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 15  
+    },
+    {
+        "id": 25,
+        "name": "The Dark Side of the Moon",
+        "artist": "Pink Floyd",
+        "genre": "Rock",
+        "description": "Meet the Beatles! is a studio album by the English rock band the Beatles, released as their second album in the United States. It was the group's first American album to be issued by Capitol Records, on 20 January 1964 in both mono and stereo formats. It topped the popular album chart on 15 February 1964 and remained at number one for eleven weeks before being replaced by The Beatles' Second Album. The cover featured Robert Freeman's iconic portrait of the Beatles used in the United Kingdom for With the Beatles, with a blue tint added to the original stark black-and-white photograph.",
+        "releaseDate": "1973-03-01",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 20
+    },
+    {
+        "id": 26,
+        "name": "Wish You Were Here",
+        "artist": "Pink Floyd",
+        "genre": "Rock",
+        "description": "The Eminem Show is the fourth studio album by American rapper Eminem. After it had originally scheduled for release on June 4, 2002, the album was released on May 26, 2002, by Aftermath Entertainment, Shady Records, and Interscope Records due to pirating and bootlegging of it. The album saw Eminem take a substantially more predominant production role; most of it was self-produced, with his longtime collaborator Jeff Bass, and Dr. Dre being the album's executive producer. It features guest appearances from Obie Trice, D12, Dr. Dre, Nate Dogg, Dina Rae and Eminem's daughter Hailie Jade Scott-Mathers.",
+        "releaseDate": "1975-09-12",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 32  
+    },
+    {
+        "id": 27,
+        "name": "Meteora",
+        "artist": "Linkin Park",
+        "genre": "Rock",
+        "description": "Relapse is the sixth studio album by American rapper Eminem. It was released on May 19, 2009, by Aftermath Entertainment, Shady Records, and Interscope Records. It was his first album of original material since Encore (2004), following a four-year hiatus from recording due to his writer's block and an addiction to prescription sleeping medication. Recording sessions for the album took place during 2008 to 2009 at several recording studios, and Dr. Dre, Mark Batson, and Eminem handled production.",
+        "releaseDate": "2003-03-25",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 29   
+    },
+    {
+        "id": 28,
+        "name": "Hybrid Theory",
+        "artist": "Linkin Park",
+        "genre": "Rock",
+        "description": "Master of Puppets is the third studio album by American heavy metal band Metallica, released on March 3, 1986, by Elektra Records. Recorded in Denmark at Sweet Silence Studios with producer Flemming Rasmussen, it was the band's last album to feature bassist Cliff Burton, who died in a bus accident in Sweden during the album's promotional tour.",
+        "releaseDate": "2000-10-24",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 40  
+    },
+    {
+        "id": 29,
+        "name": "Hot Space",
+        "artist": "Queen",
+        "genre": "Pop Rock",
+        "description": "Hot Space is the tenth studio album by the British rock band Queen. It was released on 21 May 1982 by EMI Records in the UK and by Elektra Records in the US. Marking a notable shift in direction from their earlier work, they employed many elements of disco, funk, rhythm and blues, dance and pop music on the album. This made the album less popular with fans who preferred the traditional rock style they had come to associate with the band. Queen's decision to record a dance-oriented album germinated with the massive success of their 1980 hit \"Another One Bites the Dust\" in both the UK and US.",
+        "releaseDate": "1982-05-21",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 16   
+    },
+    {
+        "id": 30,
+        "name": "The Works",
+        "artist": "Queen",
+        "genre": "Pop Rock",
+        "description": "The Works is the eleventh studio album by the British rock band Queen. It was released on 27 February 1984 by EMI Records in the United Kingdom and it is the band's first studio album to be released by Capitol Records in the United States. After the synth-heavy Hot Space (1982), the album saw the re-emergence of Brian May and Roger Taylor's rock sound, while still incorporating the early 80s retro futuristic electronic music (Freddie Mercury) and New York funk scenes (John Deacon). Recorded at the Record Plant Studios in Los Angeles, California and Musicland Studios in Munich, Germany from August 1983 to January 1984, the album's title comes from a comment Taylor made as recording began – \"Let's give them the works!\".",
+        "releaseDate": "1984-02-27",
+        "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg",
+        "price": 27   
     }
 ]

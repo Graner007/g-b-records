@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
+import RecordList from "./components/RecordList";
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
+import { Content, Header } from 'antd/lib/layout/layout';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <Header className="header" style={{backgroundColor: '#fff'}}>
           <Navbar />
         </Header>
+        <Content style={{ overflow: 'initial' , padding: "24px", backgroundColor: "#fff"}}>
+          <RecordList />
+        </Content>
       </Layout>
     </div>
   );

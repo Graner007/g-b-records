@@ -18,5 +18,29 @@
     {
         "id": 5,
         "name": "Jazz"
+    },
+    {
+        "id": 6,
+        "name": "Rock"
+    },
+    {
+        "id": 7,
+        "name": "Blues"
+    },
+    {
+        "id": 8,
+        "name": "Country"
+    },
+    {
+        "id": 9,
+        "name": "Hard Rock"
+    },
+    {
+        "id": 10,
+        "name": "Punk Rock"
+    },
+    {
+        "id": 11,
+        "name": "Pop Rock"
     }
 ]
