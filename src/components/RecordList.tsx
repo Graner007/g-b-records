@@ -15,16 +15,29 @@ interface Record {
     price: number;
 }
 
-const RecordList = () => {
+type Props = {
+    name: string;
+}
+
+const RecordList = ({name}: Props) => {
     const [records, setRecords] = React.useState<Record[]>({} as Record[]);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<boolean>(false);
 
     useEffect(() => {
-        axios.get("./data/record.json")
+        axios.get(process.env.PUBLIC_URL + "/data/record.json")
             .then(res => {
                 if (res.status === 200) {
-                    setRecords(res.data);
+                    let data: Record[] = [];
+                    data = res.data;
+
+                    let filteredRecords = data.filter(d => d.genre.toString().split(" ").join("-").toLowerCase() === name);
+
+                    if (filteredRecords.length < 1) {
+                        filteredRecords = data.filter(d => d.artist.toString().split(" ").join("-").toLowerCase() === name);
+                    }
+
+                    setRecords(filteredRecords);
                     setLoading(false);
                     setError(false);
                 }

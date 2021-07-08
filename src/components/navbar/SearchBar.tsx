@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { Input } from 'antd';
 
-export default class SearchBar extends Component {
+type Props = {
+    placeholder?: string;
+    size: "large" | "middle" | "small";
+    width?: string;
+    padding?: string;
+}
+
+export default class SearchBar extends Component<Props> {
     render() {
 
         const {Search} = Input;
 
         return (
-            <Search placeholder="Search for Records" allowClear style={{ width: 200, paddingTop: 17 }} />
+            <Search placeholder={this.props.placeholder} size={this.props.size} allowClear style={{ width: this.props.width, padding: this.props.padding }} />
         )
     }
 }
