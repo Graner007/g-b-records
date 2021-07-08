@@ -18,5 +18,65 @@
     {
         "id": 5,
         "name": "Michael Jackson"
+    },
+    {
+        "id": 6,
+        "name": "Machine Gun Kelly"
+    },
+    {
+        "id": 7,
+        "name": "Nirvana"
+    },
+    {
+        "id": 8,
+        "name": "Queen"
+    },
+    {
+        "id": 9,
+        "name": "Ed Sheeran"
+    },
+    {
+        "id": 10,
+        "name": "Dua Lipa"
+    },
+    {
+        "id": 11,
+        "name": "3 Doors Down"
+    },
+    {
+        "id": 12,
+        "name": "Pink Floyd"
+    },
+    {
+        "id": 13,
+        "name": "Linkin Park"
+    },
+    {
+        "id": 14,
+        "name": "Guns N' Roses"
+    },
+    {
+        "id": 15,
+        "name": "KISS"
+    },
+    {
+        "id": 16,
+        "name": "blink-182"
+    },
+    {
+        "id": 17,
+        "name": "Elthon John"
+    },
+    {
+        "id": 18,
+        "name": "ABBA"
+    },
+    {
+        "id": 19,
+        "name": "David Bowie"
+    },
+    {
+        "id": 20,
+        "name": "AC/DC"
     }
 ]

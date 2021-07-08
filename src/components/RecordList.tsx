@@ -56,8 +56,7 @@ const RecordList = () => {
             renderItem={item => (
                 <List.Item>
                     <Card 
-                        cover={<img src={item.albumCover}
-                        alt="cover" />} 
+                        cover={<img src={item.albumCover} alt="cover" />} 
                         actions={[<ShoppingCartOutlined />, <HeartOutlined />]} >
                             <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
