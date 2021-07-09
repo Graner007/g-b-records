@@ -7,6 +7,7 @@ import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from './components/Footer';
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
                 <Registration />
               </Route>
               <Route path="/" exact>
+              </Route>
+              <Route path="*" exact>
+                <ErrorPage />
               </Route>
             </Switch>
             </Content>
