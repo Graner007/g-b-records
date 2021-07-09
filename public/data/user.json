@@ -2,7 +2,6 @@
     {
         "id": 1,
         "cart": [],
-        "username": "bobby.charlton",
         "email": "bobby.charlton@gmail.com",
         "password": "man_utd",
         "registeredDate": "2020-12-11"
@@ -29,7 +28,6 @@
                 "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg"  
             }
         ],
-        "username": "ben.brown",
         "email": "ben.brown@gmail.com",
         "password": "barcelona",
         "registeredDate": "2019-05-29"

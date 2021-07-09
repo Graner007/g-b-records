@@ -1,5 +1,5 @@
-import React from 'react';
 import Navbar from "./components/navbar/Navbar";
+import Registration from "./components/auth/Registration";
 import SubMenuWithListContent from "./components/SubMenuWithListContent";
 import RecordModel from "./components/Record";
 import 'antd/dist/antd.css';
@@ -16,18 +16,21 @@ function App() {
           <Header className="header" style={{backgroundColor: '#fff'}}>
             <Navbar />
           </Header>
-          <Switch>
             <Content style={{ overflow: 'initial' , padding: "24px", backgroundColor: "#fff"}}>
+            <Switch>
               <Route path="/collections/:name" exact>
                 <SubMenuWithListContent title="Artist" />
               </Route>
               <Route path="/products/:name" exact>
                 <RecordModel />
               </Route>
+              <Route path="/registration" exact>
+                <Registration />
+              </Route>
               <Route path="/" exact>
               </Route>
+            </Switch>
             </Content>
-          </Switch>
           <Footer />
         </Layout>
       </div>

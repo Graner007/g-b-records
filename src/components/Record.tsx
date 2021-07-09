@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Content, Header } from 'antd/lib/layout/layout';
-import { Layout, Button, Row, Col, PageHeader, Image, Descriptions } from "antd";
+import { Layout, Button, Row, Col, PageHeader, Image } from "antd";
 import { RecordModel } from "./interface/RecordModel";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
@@ -36,7 +36,7 @@ const Record = () => {
                 setLoading(false);
             });
         
-    }, [record]);
+    }, [record, name]);
 
     if (error) {
         return (
