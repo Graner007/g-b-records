@@ -38,7 +38,7 @@ const RecordList = ({name}: Props) => {
                 setLoading(false);
             });
         
-    }, [records]);
+    }, [records, name]);
 
     if (error) {
         return (
