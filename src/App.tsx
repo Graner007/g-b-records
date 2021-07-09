@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               </Route>
             </Content>
           </Switch>
+          <Footer />
         </Layout>
       </div>
     </Router>
