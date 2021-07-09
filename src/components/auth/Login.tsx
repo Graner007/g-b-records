@@ -1,12 +1,44 @@
-import { Form, Input, Button, Row, Col, Space } from 'antd';
+import { Form, Input, Button, Row, Col, Space, Alert } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import React from "react";
+import { UserModel } from '../interface/UserModel';
+
+type LoginForm = {
+    email: string;
+    password: string;
+}
 
 const Login = () => {
 
-    const onFinish = (values: any[]) => {
-        console.log('Received values of form: ', values);
+    const [users, setUsers] = React.useState<UserModel[]>({} as UserModel[]);
+    const [error, setError] = React.useState<boolean>(false);
+    const history = useHistory();
+
+    const onFinish = (values: LoginForm) => {
+
+        axios.get(process.env.PUBLIC_URL + '/data/user.json')
+            .then(res => {
+                if (res.status === 200) {
+                    setUsers(res.data);
+                    
+                    const user = users.find(user => user.email === values.email && user.password === values.password);
+
+                    if (user) {
+                        setError(false);
+                        localStorage.setItem("email", user.email);
+                        history.push("/");
+                    }
+                    else {
+                        setError(true);
+                    }
+                }
+            })
+            .catch(err => {
+                setError(true);
+            });
     };
     
     return (
@@ -24,9 +56,8 @@ const Login = () => {
 
                     <Header style={{backgroundColor: "#fff", textAlign: "center", fontSize: 25}} className="header"><b>Sign in</b></Header><br /><br />
 
-
                 <Form.Item
-                    name="username"
+                    name="email"
                     style={{width: "50%"}}
                     rules={[
                     {
@@ -35,7 +66,7 @@ const Login = () => {
                     },
                     ]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
                 </Form.Item>
 
                 <Form.Item
@@ -54,6 +85,8 @@ const Login = () => {
                     placeholder="Password"
                     />
                 </Form.Item>
+
+                {error ? <Alert message="Authentication Failed" type="error" showIcon style={{width: "75%", marginBottom: 20}} /> : null}
             
                 <Form.Item>
                     <Space direction="horizontal" size="small">
@@ -68,4 +101,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login;
