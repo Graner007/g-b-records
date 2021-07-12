@@ -4,8 +4,10 @@ import axios from 'axios';
 import Meta from 'antd/lib/card/Meta';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import { RecordModel } from "./interface/RecordModel";
+import { StatusCodeModel } from "./interface/StatusCodeModel";
 import { Link } from "react-router-dom";
 import Loading from "./warning/Loading";
+import Error from "./warning/Error";
 
 type Props = {
     name: string;
@@ -15,6 +17,7 @@ const RecordList = ({name}: Props) => {
     const [records, setRecords] = React.useState<RecordModel[]>({} as RecordModel[]);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<boolean>(false);
+    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "500"});
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + "/data/record.json")
@@ -35,6 +38,16 @@ const RecordList = ({name}: Props) => {
                 }
             })
             .catch(err => {
+                switch (err.response.status) {
+                    case 404:
+                        setStatusCode({code : "404"});
+                        break;
+                    case 500:
+                        setStatusCode({code : "500"});
+                        break;
+                    default:
+                        break;
+                }
                 setError(true);
                 setLoading(false);
             });
@@ -43,7 +56,7 @@ const RecordList = ({name}: Props) => {
 
     if (error) {
         return (
-            <h1 style = {{color:"red"}}>Can't be loaded!</h1>
+            <Error status={statusCode.code} />
         )
     }
 
