@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from './components/Footer';
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/auth/Login";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
               </Route>
               <Route path="/login" exact>
                 <Login />
+              </Route>
+              <Route path="/cart">
+                <Cart />
               </Route>
               <Route path="/" exact>
               </Route>

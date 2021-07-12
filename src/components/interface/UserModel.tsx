@@ -1,8 +1,8 @@
-import { RecordModel } from './RecordModel';
+import { CartItemModel } from './CartItemModel';
 
 export interface UserModel {
     id: number;
-    cart: RecordModel[];
+    cart: CartItemModel[];
     email: string;
     password: string;
     registrationDate: string;
