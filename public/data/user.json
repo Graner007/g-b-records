@@ -16,7 +16,9 @@
                 "genre": "Pop",
                 "description": "Meet the Beatles! is a studio album by the English rock band the Beatles, released as their second album in the United States. It was the group's first American album to be issued by Capitol Records, on 20 January 1964 in both mono and stereo formats. It topped the popular album chart on 15 February 1964 and remained at number one for eleven weeks before being replaced by The Beatles' Second Album. The cover featured Robert Freeman's iconic portrait of the Beatles used in the United Kingdom for With the Beatles, with a blue tint added to the original stark black-and-white photograph.",
                 "releaseDate": "1964-01-20",
-                "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg"  
+                "albumCover": "https://www.udiscovermusic.com/wp-content/uploads/2017/11/The-Beatles-Meet-The-Beatles-Album-Cover-web-730.jpg",
+                "price": 20,
+                "quantity": 1
             },
             {
                 "id": 6,
@@ -25,7 +27,9 @@
                 "genre": "Hip Hop",
                 "description": "The Eminem Show is the fourth studio album by American rapper Eminem. After it had originally scheduled for release on June 4, 2002, the album was released on May 26, 2002, by Aftermath Entertainment, Shady Records, and Interscope Records due to pirating and bootlegging of it. The album saw Eminem take a substantially more predominant production role; most of it was self-produced, with his longtime collaborator Jeff Bass, and Dr. Dre being the album's executive producer. It features guest appearances from Obie Trice, D12, Dr. Dre, Nate Dogg, Dina Rae and Eminem's daughter Hailie Jade Scott-Mathers.",
                 "releaseDate": "2002-05-26",
-                "albumCover": "http://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd/829521842.jpg"  
+                "albumCover": "https://images.rapgenius.com/54ws9f3gi86oww1er9ieaqitn.1000x1000x1.jpg",
+                "price": 32,
+                "quantity": 2  
             }
         ],
         "email": "ben.brown@gmail.com",
