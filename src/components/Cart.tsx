@@ -3,7 +3,7 @@ import  { Layout, Button, Row, Col, List, InputNumber, Avatar } from "antd";
 import { UserModel } from "../components/interface/UserModel";
 import axios from "axios";
 import { DeleteFilled } from '@ant-design/icons';
-import Loading from "../components/Loading";
+import Loading from "./warning/Loading";
 
 type State = {
     users: UserModel[];

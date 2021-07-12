@@ -5,7 +5,7 @@ import Meta from 'antd/lib/card/Meta';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import { RecordModel } from "./interface/RecordModel";
 import { Link } from "react-router-dom";
-import Loading from "./Loading";
+import Loading from "./warning/Loading";
 
 type Props = {
     name: string;

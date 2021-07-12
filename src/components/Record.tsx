@@ -5,7 +5,7 @@ import { RecordModel } from "./interface/RecordModel";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
-import Loading from "./Loading";
+import Loading from "./warning/Loading";
 
 interface RouteParams {
     name: string; 

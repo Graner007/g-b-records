@@ -7,7 +7,7 @@ import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from './components/Footer';
-import ErrorPage from "./components/ErrorPage";
+import Error from "./components/warning/Error";
 import Login from "./components/auth/Login";
 import Cart from "./components/Cart";
 
@@ -39,7 +39,7 @@ function App() {
               <Route path="/" exact>
               </Route>
               <Route path="*" exact>
-                <ErrorPage />
+                <Error status="404" />
               </Route>
             </Switch>
             </Content>
