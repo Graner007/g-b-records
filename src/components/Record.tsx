@@ -2,10 +2,12 @@ import React, {useEffect} from 'react'
 import { Content, Header } from 'antd/lib/layout/layout';
 import { Layout, Button, Row, Col, PageHeader, Image } from "antd";
 import { RecordModel } from "./interface/RecordModel";
+import { StatusCodeModel } from "./interface/StatusCodeModel";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import Loading from "./warning/Loading";
+import Error from "./warning/Error";
 
 interface RouteParams {
     name: string; 
@@ -16,6 +18,7 @@ const Record = () => {
     const [record, setRecord] = React.useState<RecordModel | undefined>({} as RecordModel);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<boolean>(false);
+    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "500"});
     const { name } = useParams<RouteParams>();
 
     useEffect(() => {
@@ -33,6 +36,16 @@ const Record = () => {
                 }
             })
             .catch(err => {
+                switch (err.response.status) {
+                    case 404:
+                        setStatusCode({code : "404"});
+                        break;
+                    case 500:
+                        setStatusCode({code : "500"});
+                        break;
+                    default:
+                        break;
+                }
                 setError(true);
                 setLoading(false);
             });
@@ -41,7 +54,7 @@ const Record = () => {
 
     if (error) {
         return (
-            <h1 style = {{color:"red"}}>Can't be loaded!</h1>
+            <Error status={statusCode.code} />
         )
     }
 
