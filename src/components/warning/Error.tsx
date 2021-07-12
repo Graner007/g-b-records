@@ -19,7 +19,6 @@ export default class Error extends Component<Props, State> {
     }
 
     componentDidMount() {
-        console.log(this.props.status);
         switch (this.props.status) {
             case "500":
                 this.setState({title: this.props.status, subTitle: "Sorry, something went wrong."});
