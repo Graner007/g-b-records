@@ -3,6 +3,7 @@ import  { Layout, Button, Row, Col, List, InputNumber, Avatar } from "antd";
 import { UserModel } from "../components/interface/UserModel";
 import axios from "axios";
 import { DeleteFilled } from '@ant-design/icons';
+import Loading from "./warning/Loading";
 
 type State = {
     users: UserModel[];
@@ -52,7 +53,7 @@ export default class Cart extends Component {
                     </Row>
                 </Header>
                 <Content style={{padding: 50, backgroundColor: 'white'}}>
-                {this.state.error ? <div>Can't be loaded!</div> : (this.state.loading ? <div>Loading...</div> : <List
+                {this.state.error ? <div>Can't be loaded!</div> : (this.state.loading ? <Loading size={35} /> : <List
                         itemLayout="horizontal"
                         dataSource={this.state.user.cart}
                         size="large"

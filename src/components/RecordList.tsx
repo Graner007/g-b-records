@@ -5,6 +5,7 @@ import Meta from 'antd/lib/card/Meta';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 import { RecordModel } from "./interface/RecordModel";
 import { Link } from "react-router-dom";
+import Loading from "./warning/Loading";
 
 type Props = {
     name: string;
@@ -47,7 +48,7 @@ const RecordList = ({name}: Props) => {
     }
 
     return (
-        loading ? <div>Loading...</div> : <List
+        loading ? <Loading size={35} /> : <List
             grid={{
                 gutter: 16,
                 xs: 1,
