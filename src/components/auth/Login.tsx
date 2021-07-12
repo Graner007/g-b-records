@@ -1,4 +1,4 @@
-import { Form, Input, Button, Row, Col, Space, Alert } from 'antd';
+import { Form, Input, Button, Row, Col, Space, Alert, message } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
@@ -28,6 +28,7 @@ const Login = () => {
 
                     if (user) {
                         setError(false);
+                        message.success("Successful login.");
                         localStorage.setItem("email", user.email);
                         history.push("/");
                     }
