@@ -5,6 +5,7 @@ import { RecordModel } from "./interface/RecordModel";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+import Loading from "./Loading";
 
 interface RouteParams {
     name: string; 
@@ -45,7 +46,7 @@ const Record = () => {
     }
 
     return (
-        loading ? <div>Loading...</div> :
+        loading ? <Loading size={35} /> :
         <Layout>
             <Header className="header" style={{backgroundColor: "#fff"}}>
                 <PageHeader title={"Home > " + record?.name} />

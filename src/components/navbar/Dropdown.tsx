@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { Dropdown as Drop, List } from 'antd';
 import axios from 'axios';
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+import Loading from "../Loading"; 
 
 type Props = {
     title: string;
@@ -37,7 +38,7 @@ export default class Dropdown extends Component<Props, State> {
 
         const menuList = (
             error ? <h4 style={{color: "red"}}>Can't be loaded!</h4> : 
-            (loading ? <div>Loading...</div> : <List
+            (loading ? <Loading size={30} /> : <List
                     grid={{ gutter: 16, column: 4 }}
                     dataSource={items}
                     renderItem={(item, index) => (
