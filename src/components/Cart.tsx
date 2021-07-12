@@ -4,12 +4,14 @@ import { UserModel } from "../components/interface/UserModel";
 import axios from "axios";
 import { DeleteFilled } from '@ant-design/icons';
 import Loading from "./warning/Loading";
+import Error from "./warning/Error";
 
 type State = {
     users: UserModel[];
     user: UserModel;
     error: false;
     loading: boolean;
+    statusCode: "404" | "500" | "403";
 }
 
 export default class Cart extends Component {
@@ -18,7 +20,8 @@ export default class Cart extends Component {
         users: [] as UserModel[],
         user: {} as UserModel,
         error: false,
-        loading: true
+        loading: true,
+        statusCode: "500"
     }
 
     componentDidMount() {
@@ -33,11 +36,26 @@ export default class Cart extends Component {
                         this.setState({loading: false, error: false, user: user});
                     }
                     else {
-                        this.setState({loading: false, error: true});
+                        this.setState({loading: false});
                     }
                 }
             })
-            .catch(err => this.setState({ error: true, loading: false }));
+            .catch(err => {
+                this.setState({ error: true, loading: false });
+                switch (err.response.status) {
+                    case 403:
+                        this.setState({statusCode: '403'});
+                        break;
+                    case 404:
+                        this.setState({statusCode: '404'});
+                        break;
+                    case 500:
+                        this.setState({statusCode: '500'});
+                        break;
+                    default:
+                        break;
+                }
+            });
     }
 
     render() {
@@ -53,7 +71,7 @@ export default class Cart extends Component {
                     </Row>
                 </Header>
                 <Content style={{padding: 50, backgroundColor: 'white'}}>
-                {this.state.error ? <div>Can't be loaded!</div> : (this.state.loading ? <Loading size={35} /> : <List
+                {this.state.error ? <Error status={this.state.statusCode} /> : (this.state.loading ? <Loading size={35} /> : <List
                         itemLayout="horizontal"
                         dataSource={this.state.user.cart}
                         size="large"
