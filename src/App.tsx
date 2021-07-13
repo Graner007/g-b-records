@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Error from "./components/warning/Error";
 import Login from "./components/auth/Login";
 import Cart from "./components/Cart";
+import MyAccount from "./components/MyAccount";
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
                 return <Redirect to="/" />;
               }}>
               </Route>
+              <Route path="/my-account" exact>
+                <MyAccount />
+              </Route> 
               <Route path="/" exact>
               </Route>
               <Route path="*" exact>
