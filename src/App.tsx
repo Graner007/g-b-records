@@ -11,6 +11,7 @@ import Error from "./components/warning/Error";
 import Login from "./components/auth/Login";
 import Cart from "./components/Cart";
 import MyAccount from "./components/MyAccount";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 <MyAccount />
               </Route> 
               <Route path="/" exact>
+                <Home />
               </Route>
               <Route path="*" exact>
                 <Error status="404" />
