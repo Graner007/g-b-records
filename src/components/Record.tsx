@@ -29,6 +29,7 @@ const Record = () => {
                     data = res.data;
 
                     const record = data.find(d => d.name.toString().split(" ").join("-").toLowerCase() === name);
+                    console.log(record);
 
                     setRecord(record);
                     setLoading(false);
@@ -50,7 +51,7 @@ const Record = () => {
                 setLoading(false);
             });
         
-    }, [record, name]);
+    }, [record?.id, name.length]);
 
     if (error) {
         return (

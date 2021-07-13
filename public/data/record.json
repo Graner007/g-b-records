@@ -96,7 +96,7 @@
         "genre": "Pop",
         "description": "Thriller is the sixth studio album by American singer and songwriter Michael Jackson, released on November 30, 1982, by Epic Records. It was produced by Quincy Jones, who had previously worked with Jackson on his 1979 album Off the Wall. Jackson wanted to create an album where \"every song was a killer\". With the ongoing backlash against disco, he moved in a new musical direction, resulting in a mix of pop, post-disco, rock, funk, and soul sounds. Thriller foreshadows the contradictory themes of Jackson's personal life, as he began using a motif of paranoia and darker themes. The album features a single guest appearance, with Paul McCartney becoming the first artist to be featured on one of Jackson's albums. Recording took place from April to November 1982 at Westlake Recording Studios in Los Angeles, with a production budget of $750,000.",
         "releaseDate": "1983-11-30",
-        "albumCover": "https://i.redd.it/80rt2zjgjfx41.jpg",
+        "albumCover": "http://img.wennermedia.com/920-width/rs-136809-5f1d3499fb3eed91d03d8c94213829d42fb87658.jpg",
         "price": 27   
     },
     {
@@ -196,7 +196,7 @@
         "genre": "Punk Rock",
         "description": "Take Off Your Pants and Jacket is the fourth studio album by American rock band Blink-182, released on June 12, 2001, by MCA Records. The band had spent much of the previous year traveling and supporting their previous album Enema of the State (1999), which launched their mainstream career. The album's title is a tongue-in-cheek pun on male masturbation (\"take off your pants and jack it\"), and its cover art has icons for each member of the trio: an airplane (\"take off\"), a pair of pants, and a jacket. It is the band's final release through MCA.",
         "releaseDate": "2001-06-12",
-        "albumCover": "https://images.genius.com/89992ff870d0842bcec20f900b631354.953x953x1.jpg",
+        "albumCover": "https://imagescdn.juno.co.uk/full/CS737888-01A-BIG.jpg",
         "price": 27   
     },
     {
@@ -231,12 +231,12 @@
     },
     {
         "id": 24,
-        "name": "The Next Day",
+        "name": "Tonight",
         "artist": "David Bowie",
         "genre": "Rock",
-        "description": "Twist and Shout was the Beatles' second album released in Canada, in mono by Capitol Records (catalogue number T-6054) on 3 February 1964. It consists of songs mostly drawn from Please Please Me, their first LP released in the United Kingdom. This album, like its parent album, contains both original Beatles songs, as well as covers (including its namesake, \"Twist and Shout\"), denoted in the track listing.",
-        "releaseDate": "2013-03-08",
-        "albumCover": "https://3.bp.blogspot.com/-aJpT7gZKpi4/UT_8WRhbJUI/AAAAAAAADNk/97P_d6HUwSU/s1600/718XvopqKTL._AA1500_.jpg",
+        "description": "Tonight is the 16th studio album by English singer-songwriter David Bowie, released on 24 September 1984 by EMI America Records. The follow-up to his most commercially successful album Let's Dance (1983), it was written and recorded in mid-1984 at Le Studio in Morin-Heights, Canada, following the conclusion of the Serious Moonlight Tour. Much of the album's sound is the same as its predecessor's, due to Bowie's effort to retain the new audience that he had recently attracted, although some tracks are influenced by R&B and reggae music.",
+        "releaseDate": "1984-09-24",
+        "albumCover": "https://www.sentireascoltare.com/wp-content/uploads/2015/10/david-bowie-tonight-e1445850168151.jpg",
         "price": 15  
     },
     {
@@ -246,7 +246,7 @@
         "genre": "Rock",
         "description": "Meet the Beatles! is a studio album by the English rock band the Beatles, released as their second album in the United States. It was the group's first American album to be issued by Capitol Records, on 20 January 1964 in both mono and stereo formats. It topped the popular album chart on 15 February 1964 and remained at number one for eleven weeks before being replaced by The Beatles' Second Album. The cover featured Robert Freeman's iconic portrait of the Beatles used in the United Kingdom for With the Beatles, with a blue tint added to the original stark black-and-white photograph.",
         "releaseDate": "1973-03-01",
-        "albumCover": "https://i.redd.it/a7uei14hc80z.png",
+        "albumCover": "https://vignette3.wikia.nocookie.net/pinkfloyd/images/4/45/The_Dark_Side_Of_The_Moon.jpg/revision/latest?cb=20060830125611",
         "price": 20
     },
     {
@@ -256,7 +256,7 @@
         "genre": "Rock",
         "description": "The Eminem Show is the fourth studio album by American rapper Eminem. After it had originally scheduled for release on June 4, 2002, the album was released on May 26, 2002, by Aftermath Entertainment, Shady Records, and Interscope Records due to pirating and bootlegging of it. The album saw Eminem take a substantially more predominant production role; most of it was self-produced, with his longtime collaborator Jeff Bass, and Dr. Dre being the album's executive producer. It features guest appearances from Obie Trice, D12, Dr. Dre, Nate Dogg, Dina Rae and Eminem's daughter Hailie Jade Scott-Mathers.",
         "releaseDate": "1975-09-12",
-        "albumCover": "https://wallpapercave.com/wp/wp505458.jpg",
+        "albumCover": "https://images.esellerpro.com/2486/I/279/2/magnet-pink-floyd-wish-you-were-here-a.jpg",
         "price": 32  
     },
     {
@@ -266,7 +266,7 @@
         "genre": "Rock",
         "description": "Relapse is the sixth studio album by American rapper Eminem. It was released on May 19, 2009, by Aftermath Entertainment, Shady Records, and Interscope Records. It was his first album of original material since Encore (2004), following a four-year hiatus from recording due to his writer's block and an addiction to prescription sleeping medication. Recording sessions for the album took place during 2008 to 2009 at several recording studios, and Dr. Dre, Mark Batson, and Eminem handled production.",
         "releaseDate": "2003-03-25",
-        "albumCover": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8e371e36-e381-4c8a-9dfe-05db31140d68/d1cgap-5f6bb7fb-1f8c-43c4-9227-8c5702fbcc06.jpg/v1/fill/w_1280,h_1024,q_75,strp/meteora_wp_by_neographixx.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi84ZTM3MWUzNi1lMzgxLTRjOGEtOWRmZS0wNWRiMzExNDBkNjgvZDFjZ2FwLTVmNmJiN2ZiLTFmOGMtNDNjNC05MjI3LThjNTcwMmZiY2MwNi5qcGciLCJ3aWR0aCI6Ijw9MTI4MCIsImhlaWdodCI6Ijw9MTAyNCJ9XV19.WN-lfxlIx2hGFp4azSyIe7Gwb6aB4_K_UC8jEmjhBd8",
+        "albumCover": "https://1.bp.blogspot.com/-hO_D0hLC-Vo/V_DZo-Cf0tI/AAAAAAAACWA/chpNCVK3k4s-lmyKho5G53g2ryi4XL4PgCLcB/s1600/linkin-park-meteora.jpg",
         "price": 29   
     },
     {
