@@ -5,7 +5,7 @@ import RecordModel from "./components/Record";
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Footer from './components/Footer';
 import Error from "./components/warning/Error";
 import Login from "./components/auth/Login";
@@ -35,6 +35,10 @@ function App() {
               </Route>
               <Route path="/cart">
                 <Cart />
+              </Route>
+              <Route path="/log-out" exact render={() => {
+                return <Redirect to="/" />;
+              }}>
               </Route>
               <Route path="/" exact>
               </Route>
