@@ -52,7 +52,7 @@ const RecordList = ({name}: Props) => {
                 setLoading(false);
             });
         
-    }, [records, name]);
+    }, [records.length, name.length]);
 
     if (error) {
         return (

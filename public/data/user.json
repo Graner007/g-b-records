@@ -4,7 +4,7 @@
         "cart": [],
         "email": "bobby.charlton@gmail.com",
         "password": "man_utd",
-        "registeredDate": "2020-12-11"
+        "registrationDate": "2020-12-11"
     },
     {
         "id": 2,
@@ -34,6 +34,6 @@
         ],
         "email": "ben.brown@gmail.com",
         "password": "barcelona",
-        "registeredDate": "2019-05-29"
+        "registrationDate": "2019-05-29"
     }
 ]

@@ -5,11 +5,12 @@ import RecordModel from "./components/Record";
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Footer from './components/Footer';
 import Error from "./components/warning/Error";
 import Login from "./components/auth/Login";
 import Cart from "./components/Cart";
+import MyAccount from "./components/MyAccount";
 
 function App() {
   return (
@@ -36,6 +37,13 @@ function App() {
               <Route path="/cart">
                 <Cart />
               </Route>
+              <Route path="/log-out" exact render={() => {
+                return <Redirect to="/" />;
+              }}>
+              </Route>
+              <Route path="/my-account" exact>
+                <MyAccount />
+              </Route> 
               <Route path="/" exact>
               </Route>
               <Route path="*" exact>
