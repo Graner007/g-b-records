@@ -56,7 +56,7 @@ const ImageSlider = () => {
                 disableDotsControls={true}
                 infinite={true}>
                 {images.map((image, index) => (
-                    <Link to={image.collectionUrl}><img key={index} src={image.src} className="sliderimg" alt="" /></Link>
+                    <Link key={index} to={image.collectionUrl}><img src={image.src} className="sliderimg" alt="" /></Link>
                 ))}
             </AliceCarousel>
         </div>
