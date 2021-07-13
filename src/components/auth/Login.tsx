@@ -3,7 +3,7 @@ import { Header } from 'antd/lib/layout/layout';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { UserModel } from '../interface/UserModel';
 
 type LoginForm = {
@@ -13,33 +13,32 @@ type LoginForm = {
 
 const Login = () => {
 
-    const [users, setUsers] = React.useState<UserModel[]>({} as UserModel[]);
+    const [users, setUsers] = React.useState<UserModel[]>([] as UserModel[]);
     const [error, setError] = React.useState<boolean>(false);
     const history = useHistory();
 
-    const onFinish = (values: LoginForm) => {
-
+    useEffect(() => {
         axios.get(process.env.PUBLIC_URL + '/data/user.json')
-            .then(res => {
-                if (res.status === 200) {
-                    setUsers(res.data);
-                    
-                    const user = users.find(user => user.email === values.email && user.password === values.password);
+        .then(res => {
+            if (res.status === 200) {
+                setUsers(res.data);
+            }
+        })
+        .catch(err => {
+            setError(true);
+        });
+    }, [users.length]);
 
-                    if (user) {
-                        setError(false);
-                        message.success("Successful login.");
-                        localStorage.setItem("email", user.email);
-                        history.push("/");
-                    }
-                    else {
-                        setError(true);
-                    }
-                }
-            })
-            .catch(err => {
-                setError(true);
-            });
+    const onFinish = (values: LoginForm) => {
+        const user = users.find(user => user.email === values.email && user.password === values.password);
+
+        if (user) {
+            setError(false);
+            message.success("Successful login.");
+            localStorage.setItem("email", user.email);
+            history.push("/");
+        }
+        else { setError(true); }
     };
     
     return (
