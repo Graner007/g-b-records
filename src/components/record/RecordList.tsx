@@ -22,7 +22,7 @@ const RecordList = ({records, maxWidth}: Props) => {
                 gutter: 16,
                 xs: 1,
                 sm: 2,
-                md: 4,
+                md: 3,
                 lg: 4,
                 xl: 6
             }}

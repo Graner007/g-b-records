@@ -1,4 +1,4 @@
-import  { Layout } from "antd";
+import  { Layout, Menu } from "antd";
 import RecordListByCategory from "./record/RecordListByCategory";
 import SearchBar from "./navbar/SearchBar";
 import { useParams } from "react-router-dom";
@@ -19,11 +19,21 @@ const SubMenuWithListContent = ({title}: Props) => {
 
     return (
         <Layout>
-            <Sider theme="light">
-                <h3>Filters</h3>
-                <h4>{title}</h4>
-                <SearchBar placeholder={title.toLowerCase()} size="small" width="75%" padding="10px 0 10px 0" />
-                <p>{displayName}</p>
+            <Sider theme="light" breakpoint="lg" collapsedWidth="0" >
+                <Menu theme="light" mode="inline" selectable={false} style={{cursor: "no-pointer"}}>
+                    <Menu.Item key="1">
+                        <h3>Filters</h3>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                        <h4>{title}</h4>
+                    </Menu.Item>
+                    <Menu.Item key="3">
+                        <SearchBar placeholder={title.toLowerCase()} size="small" width="75%" padding="10px 0 10px 0" />
+                    </Menu.Item>
+                    <Menu.Item key="4">
+                        <p>{displayName}</p>
+                    </Menu.Item>
+                </Menu>
             </Sider>
             <Layout>
                 <Header className="header" style={{backgroundColor: '#fff'}}>
