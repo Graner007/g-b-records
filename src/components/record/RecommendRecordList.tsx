@@ -5,7 +5,7 @@ import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
 import Error from "../warning/Error";
 import RecordList from "./RecordList";
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
 
 const RecommendRecordList = () => {
@@ -58,8 +58,10 @@ const RecommendRecordList = () => {
                 <Header className="header" style={{backgroundColor: "white", textAlign: "center"}}>
                     <h1 style={{fontSize: 24, color: "black"}}>Recommended Records</h1>
                 </Header>
-                <Content style={{backgroundColor: "#fff", padding: "30px 50px 0 190px"}}>
-                    <RecordList records={records} />
+                <Content style={{backgroundColor: "#fff", paddingTop: 30}}>
+                    <Row justify="center" >
+                        <Col><RecordList records={records} maxWidth={300} /></Col>
+                    </Row>
                 </Content>
             </Layout>
     )
