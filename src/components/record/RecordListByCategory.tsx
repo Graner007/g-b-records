@@ -49,7 +49,7 @@ const RecordListByCategory = ({name}: Props) => {
                 setLoading(false);
             });
         
-    }, [records.length, name.length]);
+    }, [records.length, name]);
 
     if (error) {
         return (
