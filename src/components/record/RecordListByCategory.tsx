@@ -58,7 +58,7 @@ const RecordListByCategory = ({name}: Props) => {
     }
 
     return (
-        loading ? <Loading size={35} /> : <RecordList records={records} />
+        loading ? <Loading size={35} /> : <RecordList records={records} maxWidth={200} />
     )
 }
 

@@ -7,9 +7,10 @@ import { RecordModel } from '../interface/RecordModel';
 
 type Props = {
     records: RecordModel[];
+    maxWidth: number;
 };
 
-const RecordList = ({records}: Props) => {
+const RecordList = ({records, maxWidth}: Props) => {
     return (
         <List
             grid={{
@@ -23,7 +24,7 @@ const RecordList = ({records}: Props) => {
             dataSource={records}
             renderItem={item => (
                 <List.Item>
-                    <Card 
+                    <Card style={{maxWidth: maxWidth}}
                         cover={<img src={item.albumCover} alt="cover" />} 
                         actions={[<ShoppingCartOutlined />, <HeartOutlined />]}>
                             <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
