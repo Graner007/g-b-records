@@ -1,6 +1,5 @@
-import React from 'react'
 import  { Layout } from "antd";
-import RecordList from "./RecordList";
+import RecordListByCategory from "./record/RecordListByCategory";
 import SearchBar from "./navbar/SearchBar";
 import { useParams } from "react-router-dom";
 
@@ -31,7 +30,7 @@ const SubMenuWithListContent = ({title}: Props) => {
                     <h4>Home {'>'} {displayName}</h4>
                 </Header>
                 <Content style={{padding: 24}}>
-                    <RecordList name={name} />
+                    <RecordListByCategory name={name} />
                 </Content>
             </Layout>
         </Layout>

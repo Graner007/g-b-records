@@ -1,7 +1,7 @@
 import Navbar from "./components/navbar/Navbar";
 import Registration from "./components/auth/Registration";
 import SubMenuWithListContent from "./components/SubMenuWithListContent";
-import RecordModel from "./components/Record";
+import Record from "./components/record/Record";
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Content, Header } from 'antd/lib/layout/layout';
@@ -27,7 +27,7 @@ function App() {
                 <SubMenuWithListContent title="Artist" />
               </Route>
               <Route path="/products/:name" exact>
-                <RecordModel />
+                <Record />
               </Route>
               <Route path="/registration" exact>
                 <Registration />
