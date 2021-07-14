@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
 import { Content, Header } from 'antd/lib/layout/layout';
 import { Layout, Button, Row, Col, PageHeader, Image } from "antd";
-import { RecordModel } from "./interface/RecordModel";
-import { StatusCodeModel } from "./interface/StatusCodeModel";
+import { RecordModel } from "../interface/RecordModel";
+import { StatusCodeModel } from "../interface/StatusCodeModel";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
-import Loading from "./warning/Loading";
-import Error from "./warning/Error";
+import Loading from "../warning/Loading";
+import Error from "../warning/Error";
 
 interface RouteParams {
     name: string; 
@@ -29,7 +29,6 @@ const Record = () => {
                     data = res.data;
 
                     const record = data.find(d => d.name.toString().split(" ").join("-").toLowerCase() === name);
-                    console.log(record);
 
                     setRecord(record);
                     setLoading(false);
@@ -51,7 +50,7 @@ const Record = () => {
                 setLoading(false);
             });
         
-    }, [record?.id, name.length]);
+    }, [record?.id, name]);
 
     if (error) {
         return (
