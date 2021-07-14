@@ -27,7 +27,7 @@ const RecommendRecordList = () => {
     `;
 
     const H1 = styled.h1`
-        font-size: 24;
+        font-size: 24px;
         color: black;
     `;
 
@@ -80,8 +80,8 @@ const RecommendRecordList = () => {
                     <H1>Recommended Records</H1>
                 </Header>
                 <Content>
-                    <Row justify="center">
-                        <Col><RecordList records={records} maxWidth={300} /></Col>
+                    <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col className="gutter-row"><RecordList records={records} maxWidth={300} /></Col>
                     </Row>
                 </Content>
             </Layout>
