@@ -5,10 +5,31 @@ import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
 import Error from "../warning/Error";
 import RecordList from "./RecordList";
-import { Layout, Row, Col } from 'antd';
-import { Content, Header } from 'antd/lib/layout/layout';
+import { Layout as layout, Row, Col } from 'antd';
+import { Content as content, Header as header } from 'antd/lib/layout/layout'; 
+import styled from '@emotion/styled';
 
 const RecommendRecordList = () => {
+
+    const Header = styled(header)`
+        background-color: #fff;
+        text-align: center;
+    `;
+
+    const Layout = styled(layout)`
+        padding-top: 30px;
+        background-color: #fff;
+    `;
+
+    const Content = styled(content)`
+        padding-top: 30px;
+        background-color: #fff;
+    `;
+
+    const H1 = styled.h1`
+        font-size: 24;
+        color: black;
+    `;
 
     const [records, setRecords] = React.useState<RecordModel[]>([] as RecordModel[]);
     const [loading, setLoading] = React.useState<boolean>(true);
@@ -54,12 +75,12 @@ const RecommendRecordList = () => {
 
     return (
         loading ? <Loading size={35} /> : 
-            <Layout style={{paddingTop: 30, backgroundColor: "#fff"}}>
-                <Header className="header" style={{backgroundColor: "white", textAlign: "center"}}>
-                    <h1 style={{fontSize: 24, color: "black"}}>Recommended Records</h1>
+            <Layout>
+                <Header className="header">
+                    <H1>Recommended Records</H1>
                 </Header>
-                <Content style={{backgroundColor: "#fff", paddingTop: 30}}>
-                    <Row justify="center" >
+                <Content>
+                    <Row justify="center">
                         <Col><RecordList records={records} maxWidth={300} /></Col>
                     </Row>
                 </Content>

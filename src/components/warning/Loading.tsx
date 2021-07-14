@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined as loadingOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled';
 
 type Props = {
     size: number;
@@ -8,9 +9,13 @@ type Props = {
 
 export default class Loading extends Component<Props> {
     render() {
-        const antIcon = <LoadingOutlined style={{ fontSize: this.props.size }} spin />;
+
+        const LoadingOutlined = styled(loadingOutlined)`
+           font-size: ${this.props.size}px;
+        `;
+
         return (
-            <Spin indicator={antIcon} />
+            <Spin indicator={<LoadingOutlined spin />} />
         )
     }
 }
