@@ -1,13 +1,15 @@
-import React, {useEffect} from 'react'
-import { Content, Header } from 'antd/lib/layout/layout';
-import { Layout, Button, Row, Col, PageHeader, Image } from "antd";
-import { RecordModel } from "../interface/RecordModel";
-import { StatusCodeModel } from "../interface/StatusCodeModel";
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { Layout, Button, Row, Col, PageHeader, Image, Space } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+
+import { Content, Header } from "../Styles";
+import { P } from "../Styles";
+import { RecordModel } from "../interface/RecordModel";
+import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
-import Error from "../warning/Error";
+import ErrorPage from "../warning/ErrorPage";
 
 interface RouteParams {
     name: string; 
@@ -15,10 +17,10 @@ interface RouteParams {
 
 const Record = () => {
 
-    const [record, setRecord] = React.useState<RecordModel | undefined>({} as RecordModel);
-    const [loading, setLoading] = React.useState<boolean>(true);
-    const [error, setError] = React.useState<boolean>(false);
-    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "500"});
+    const [record, setRecord] = useState<RecordModel>({} as RecordModel);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
+    const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
     const { name } = useParams<RouteParams>();
 
     useEffect(() => {
@@ -30,9 +32,16 @@ const Record = () => {
 
                     const record = data.find(d => d.name.toString().split(" ").join("-").toLowerCase() === name);
 
-                    setRecord(record);
-                    setLoading(false);
-                    setError(false);
+                    if (record) {
+                        setRecord(record);
+                        setLoading(false);
+                        setError(false);
+                    }
+                    else {
+                        setLoading(false);
+                        setError(true);
+                        setStatusCode({code : "404"});
+                    }
                 }
             })
             .catch(err => {
@@ -50,30 +59,32 @@ const Record = () => {
                 setLoading(false);
             });
         
-    }, [record?.id, name]);
+    }, [record.id, name]);
 
     if (error) {
         return (
-            <Error status={statusCode.code} />
+            <ErrorPage status={statusCode.code} />
         )
     }
 
     return (
         loading ? <Loading size={35} /> :
         <Layout>
-            <Header className="header" style={{backgroundColor: "#fff"}}>
-                <PageHeader title={"Home > " + record?.name} />
+            <Header className="header">
+                <PageHeader title={"Home > " + record.name} />
             </Header>
-            <Content style={{padding: "30px 50px 30px 50px", backgroundColor:"#fff"}}>
+            <Content padding="30px 50px 30px 50px">
                 <Row>
-                    <Col span={12}><Image src={record?.albumCover} preview={false} style={{maxWidth: "90%"}} /></Col>
+                    <Col span={12}><Image src={record.albumCover} preview={false} style={{maxWidth: "90%"}} /></Col>
                     <Col span={12}>
-                        <h1 style={{fontSize: 50}}>{record?.name}</h1>
-                        <p style={{fontSize: 40}}>{record?.artist}</p>
-                        <p style={{fontSize: 30, color: "#01579b"}}>{record?.price} $</p>
-                        <Button block type="primary" size="large" style={{marginBottom: 20}}><ShoppingCartOutlined /> ADD TO CART</Button>
-                        <Button block type="primary" danger size="large" style={{marginBottom: 20}}><HeartOutlined /> WISHLIST</Button>
-                        <p style={{fontSize: 20}}>{record?.description}</p>
+                        <P fontSize={50}>{record.name}</P>
+                        <P fontSize={40}>{record.artist}</P>
+                        <P fontSize={40} color="#01579b">{record.price}$</P>
+                        <Space direction="vertical" size="middle" style={{width: "100%"}}>
+                            <Button block type="primary" size="large"><ShoppingCartOutlined /> ADD TO CART</Button>
+                            <Button block type="primary" danger size="large"><HeartOutlined /> WISHLIST</Button>
+                        </Space>
+                        <P fontSize={20}>{record.description}</P>
                     </Col>
                 </Row>
             </Content>

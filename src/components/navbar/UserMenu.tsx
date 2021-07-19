@@ -2,30 +2,21 @@ import React, { Component } from 'react';
 import { Menu, Button, message } from "antd";
 import { Link } from "react-router-dom";
 
-type State = {
-    loggedIn: boolean;
-}
+import { LoginCtx } from "../../context/LoginContext";
 
 export default class UserMenu extends Component {
 
-    state: State = {
-        loggedIn: false,
-    }
-
-    componentDidMount() {
-        if (localStorage.getItem('email')) { this.setState({loggedIn: true}); }
-    }
+    static contextType = LoginCtx;
 
     render() {
 
         const logout = () => {
-            localStorage.removeItem("email");
-            this.setState({loggedIn: false});
-            message.success("Successful logout");
+            this.context.update({loggedIn: false, email: ""});
+            message.success("Successful logout!");
         }
 
         return (
-            this.state.loggedIn ? 
+            this.context.state.loggedIn ? 
             <Menu>
                 <Menu.Item key="1"><Link to="/my-account">My Account</Link></Menu.Item>
                 <Menu.Item key="2"><Link to="/wishlist">Wish List</Link></Menu.Item>

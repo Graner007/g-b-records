@@ -1,5 +1,5 @@
 import { Form, Input, Button } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
+import { Header, H1 } from '../Styles';
 
 const formItemLayout = {
     labelCol: {
@@ -45,7 +45,7 @@ const Registration = () => {
             scrollToFirstError
             >
 
-            <Header style={{backgroundColor: "#fff", textAlign: "center", fontSize: 25}} className="header"><b>Create an Account</b></Header><br /><br />
+            <Header textAlign="center"><H1>Create an Account</H1></Header><br /><br />
 
             <Form.Item
                 name="email"

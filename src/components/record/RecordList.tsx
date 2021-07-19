@@ -1,9 +1,10 @@
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
-import { List, Card as card } from 'antd';
+import { Card } from "./Styles";
+import { List } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Link } from 'react-router-dom';
+
 import { RecordModel } from '../interface/RecordModel';
-import styled from '@emotion/styled';
 
 type Props = {
     records: RecordModel[];
@@ -11,11 +12,6 @@ type Props = {
 };
 
 const RecordList = ({records, maxWidth}: Props) => {
-
-    const Card = styled(card)`
-        max-width: ${maxWidth}px;
-    `;
-
     return (
         <List
             grid={{
@@ -26,11 +22,12 @@ const RecordList = ({records, maxWidth}: Props) => {
                 lg: 4,
                 xl: 6
             }}
-            dataSource={records}
+            dataSource={ records }
             renderItem={item => (
                 <List.Item>
                     <Card
-                        cover={<img src={item.albumCover} alt="cover" />} 
+                        maxWidth={ maxWidth }
+                        cover={ <img src={item.albumCover} alt="cover" /> } 
                         actions={[<ShoppingCartOutlined />, <HeartOutlined />]}>
                             <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
