@@ -1,10 +1,11 @@
-import { Menu, Dropdown as Drop } from 'antd';
 import { Component } from 'react';
-import Dropdown from "./Dropdown";
-import SearchBar from "./SearchBar";
+import { Menu, Dropdown as Drop } from 'antd';
 import { UserOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+
 import UserMenu from "./UserMenu";
+import Dropdown from "./Dropdown";
+import SearchBar from "./SearchBar";
 
 export default class Navbar extends Component {
     render() {

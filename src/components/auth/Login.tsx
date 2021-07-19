@@ -1,11 +1,13 @@
+import { useEffect, useState, useContext } from "react";
 import { Form, Input, Button, Row, Col, Space, Alert, message } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import React, { useEffect } from "react";
-import { UserModel } from '../interface/UserModel';
 
+import { Header, H1 } from '../Styles';
+import { UserModel } from '../interface/UserModel';
+import { LoginCtx } from '../../context/LoginContext';
+ 
 type LoginForm = {
     email: string;
     password: string;
@@ -13,9 +15,10 @@ type LoginForm = {
 
 const Login = () => {
 
-    const [users, setUsers] = React.useState<UserModel[]>([] as UserModel[]);
-    const [error, setError] = React.useState<boolean>(false);
+    const [users, setUsers] = useState<UserModel[]>([] as UserModel[]);
+    const [error, setError] = useState<boolean>(false);
     const history = useHistory();
+    const {update} = useContext(LoginCtx);
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + '/data/user.json')
@@ -34,8 +37,8 @@ const Login = () => {
 
         if (user) {
             setError(false);
-            message.success("Successful login.");
-            localStorage.setItem("email", user.email);
+            message.success("Successful login!");
+            update({loggedIn: true, email: user.email});
             history.push("/");
         }
         else { setError(true); }
@@ -54,7 +57,7 @@ const Login = () => {
                 onFinish={onFinish}
                 >
 
-                    <Header style={{backgroundColor: "#fff", textAlign: "center", fontSize: 25}} className="header"><b>Sign in</b></Header><br /><br />
+                    <Header textAlign="center"><H1>Sing in</H1></Header><br /><br />
 
                 <Form.Item
                     name="email"

@@ -2,9 +2,14 @@
     {
         "id": 1,
         "cart": [],
+        "name": "Bobby Charlton",
         "email": "bobby.charlton@gmail.com",
         "password": "man_utd",
-        "registrationDate": "2020-12-11"
+        "registrationDate": "2020-12-11",
+        "address": "516 Lakeview St Mary Esther, Florida",
+        "zipcode": 516,
+        "country": "usa",
+        "phoneNumber": "+1 412-554-7098" 
     },
     {
         "id": 2,
@@ -32,8 +37,13 @@
                 "quantity": 2  
             }
         ],
+        "name": "Ben Brown",
         "email": "ben.brown@gmail.com",
         "password": "barcelona",
-        "registrationDate": "2019-05-29"
+        "registrationDate": "2019-05-29",
+        "address": "871 Haunani Pl Wailuku, Hawaii",
+        "zipcode": 871,
+        "country": "usa",
+        "phoneNumber": "+1 479-317-9476"
     }
 ]

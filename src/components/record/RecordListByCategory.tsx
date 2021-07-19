@@ -3,7 +3,7 @@ import axios from 'axios';
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
-import Error from "../warning/Error";
+import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
 
 type Props = {
@@ -53,7 +53,7 @@ const RecordListByCategory = ({name}: Props) => {
 
     if (error) {
         return (
-            <Error status={statusCode.code} />
+            <ErrorPage status={statusCode.code} />
         )
     }
 

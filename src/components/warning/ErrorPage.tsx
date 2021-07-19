@@ -11,7 +11,7 @@ type State = {
     subTitle: string;
 }
 
-export default class Error extends Component<Props, State> {
+export default class ErrorPage extends Component<Props, State> {
 
     state: State = {
         title: "",

@@ -1,40 +1,21 @@
-import React, {useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Row, Col } from 'antd';
+
+import { Header, Content, Layout } from "../Styles";
+import { H1 } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
-import Error from "../warning/Error";
+import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
-import { Layout as layout, Row, Col } from 'antd';
-import { Content as content, Header as header } from 'antd/lib/layout/layout'; 
-import styled from '@emotion/styled';
 
 const RecommendRecordList = () => {
 
-    const Header = styled(header)`
-        background-color: #fff;
-        text-align: center;
-    `;
-
-    const Layout = styled(layout)`
-        padding-top: 30px;
-        background-color: #fff;
-    `;
-
-    const Content = styled(content)`
-        padding-top: 30px;
-        background-color: #fff;
-    `;
-
-    const H1 = styled.h1`
-        font-size: 24px;
-        color: black;
-    `;
-
-    const [records, setRecords] = React.useState<RecordModel[]>([] as RecordModel[]);
-    const [loading, setLoading] = React.useState<boolean>(true);
-    const [error, setError] = React.useState<boolean>(false);
-    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "500"});
+    const [records, setRecords] = useState<RecordModel[]>([] as RecordModel[]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
+    const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + "/data/record.json")
@@ -69,17 +50,17 @@ const RecommendRecordList = () => {
 
     if (error) {
         return (
-            <Error status={statusCode.code} />
+            <ErrorPage status={statusCode.code} />
         )
     }
 
     return (
         loading ? <Loading size={35} /> : 
             <Layout>
-                <Header className="header">
+                <Header className="header" textAlign="center">
                     <H1>Recommended Records</H1>
                 </Header>
-                <Content>
+                <Content padding="40px 0 0 0">
                     <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                         <Col className="gutter-row"><RecordList records={records} maxWidth={300} /></Col>
                     </Row>

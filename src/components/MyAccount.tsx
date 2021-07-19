@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Layout, Row, Col, List, Card } from "antd";
-import { Content, Header } from 'antd/lib/layout/layout';
+import axios from "axios";
+
+import { Content, Header } from './Styles';
 import { OrderModel } from "../components/interface/OrderModel";
 import { StatusCodeModel } from "./interface/StatusCodeModel";
-import axios from "axios";
-import Error from "./warning/Error";
+import ErrorPage from "./warning/ErrorPage";
 import Loading from "./warning/Loading";
+import { LoginCtx } from "../context/LoginContext";
 
 const MyAccount = () => {
 
-    const [orders, setOrders] = React.useState<OrderModel[]>([] as OrderModel[]);
-    const [error, setError] = React.useState<boolean>(false);
-    const [loading, setLoading] = React.useState<boolean>(true);
-    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "500"});
+    const [orders, setOrders] = useState<OrderModel[]>([] as OrderModel[]);
+    const [error, setError] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
+    const {state} = useContext(LoginCtx);
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + '/data/order.json')
@@ -20,7 +23,7 @@ const MyAccount = () => {
                 if (res.status === 200) {
                     setOrders(res.data);
 
-                    const accountOrders = orders.filter(order => order.user.email === localStorage.getItem("email"));
+                    const accountOrders = orders.filter(order => order.user.email === state.email);
 
                     if (accountOrders.length) {
                         setError(false);
@@ -49,22 +52,22 @@ const MyAccount = () => {
                 setError(true);
                 setLoading(false);
             });
-    }, [orders.length]);
+    }, [orders.length, state.email]);
 
 
     if (error) {
         return (
-            <Error status={statusCode.code} />
+            <ErrorPage status={statusCode.code} />
         )
     }
 
     return (
         loading ? <Loading size={35} /> :
             <Layout>
-                <Header className="header" style={{backgroundColor: 'white', textAlign: "center"}}>
+                <Header textAlign="center">
                     <h1 style={{fontSize: 25}}>My Account</h1>
                 </Header>
-                <Content style={{padding: 50}} >
+                <Content padding={50}>
                     <Row>
                         <Col span={12}>
                             <Card title="Order History">

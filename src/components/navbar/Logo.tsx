@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import logo from "../../vinyl.svg";
 import { Image } from "antd";
+
+import logo from "../../vinyl.svg";
 
 export default class Logo extends Component {
     render() {

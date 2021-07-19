@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "react-alice-carousel/lib/alice-carousel.css";
+import AliceCarousel from 'react-alice-carousel';
+
 import { StatusCodeModel } from './interface/StatusCodeModel';
 import ErrorMessage from "./warning/ErrorMessage";
 import Loading from "./warning/Loading";
-import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
 import { ImageModel } from "./interface/ImageModel";
-import { Link } from "react-router-dom";
 
 const ImageSlider = () => {
 
-    const [images, setImages] = React.useState<ImageModel[]>([] as ImageModel[]);
-    const [error, setError] = React.useState<boolean>(false);
-    const [statusCode, setStatusCode] = React.useState<StatusCodeModel>({code: "404"});
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [images, setImages] = useState<ImageModel[]>([] as ImageModel[]);
+    const [error, setError] = useState<boolean>(false);
+    const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "404"});
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + '/data/image.json')

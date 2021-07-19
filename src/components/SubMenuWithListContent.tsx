@@ -1,7 +1,9 @@
-import  { Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
+import { useParams } from "react-router-dom";
+
+import { Content, Header } from './Styles';
 import RecordListByCategory from "./record/RecordListByCategory";
 import SearchBar from "./navbar/SearchBar";
-import { useParams } from "react-router-dom";
 
 type Props = {
     title: string;
@@ -13,7 +15,7 @@ interface RouteParams {
 
 const SubMenuWithListContent = ({title}: Props) => {
 
-    const { Header, Sider, Content } = Layout;
+    const { Sider } = Layout;
     const { name } = useParams<RouteParams>();
     const displayName = name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ");
 
@@ -36,10 +38,10 @@ const SubMenuWithListContent = ({title}: Props) => {
                 </Menu>
             </Sider>
             <Layout>
-                <Header className="header" style={{backgroundColor: '#fff'}}>
+                <Header>
                     <h4>Home {'>'} {displayName}</h4>
                 </Header>
-                <Content style={{padding: 24}}>
+                <Content padding="3%" backgroundColor="#ececec">
                     <RecordListByCategory name={name} />
                 </Content>
             </Layout>

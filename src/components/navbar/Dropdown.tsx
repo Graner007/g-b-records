@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Dropdown as Drop, List } from 'antd';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+
 import Loading from "../warning/Loading";
 import ErrorMessage from "../warning/ErrorMessage"; 
 
@@ -35,19 +36,18 @@ export default class Dropdown extends Component<Props, State> {
     }
 
     render() {
-        const {error, items, loading} = this.state;
 
         const menuList = (
-            error ? <ErrorMessage text={"Sorry, " + this.props.itemName + "s can't be loaded."} /> : 
-            (loading ? <Loading size={30} /> : <List
+            this.state.error ? <ErrorMessage text={"Sorry, " + this.props.itemName + "s can't be loaded."} /> : 
+            (this.state.loading ? <Loading size={30} /> : <List
                     grid={{ gutter: 16, column: 4 }}
-                    dataSource={items}
+                    dataSource={this.state.items}
                     renderItem={(item, index) => (
                         <Link to={"/collections/" + item.name.split(" ").join("-").toLowerCase()}>
                             <List.Item key={index} style={{cursor: "pointer", margin: "5px"}}>{item.name}</List.Item>
                         </Link>
                     )}
-                />)
+            />)
         )
 
         return (
