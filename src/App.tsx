@@ -25,7 +25,7 @@ function App() {
             <Header>
               <Navbar />
             </Header>
-              <Content padding={30}>
+              <Content padding="30px 0 30px 0">
               <Switch>
                 <Route path="/collections/:name" exact>
                   <SubMenuWithListContent title="Artist" />
