@@ -37,12 +37,18 @@ export const Content = styled(content)<ContentProps>(
     })
 );
 
-export const H1 = styled.h1(
+type HeadingProps = {
+    fontSize?: number;
+    bold: boolean;
+}
+
+export const H1 = styled.h1<HeadingProps>(
     {
-        fontSize: 25,
         color: "black",
-        fontWeight: "bold"
-    }
+    },
+    props => ({ fontSize: props.fontSize || 25,
+                fontWeight: props.bold ? "bold" : "initial" 
+    })
 );
 
 type ParagraphProps = {

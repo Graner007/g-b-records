@@ -97,7 +97,7 @@ export default class Checkout extends Component {
             <Content padding={50}>
                 <Row justify="end" gutter={24}>
                     <Col span={12}>
-                        <Header backgroundColor="inherit" textAlign="center"><H1>Checkout</H1></Header>
+                        <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Checkout</H1></Header>
                         {this.state.loading ? <Loading size={35} /> :
                         <Form
                             name="checkout"
@@ -215,7 +215,7 @@ export default class Checkout extends Component {
                         </Form>}
                     </Col>
                     <Col span={12}>
-                        <Header backgroundColor="inherit" textAlign="center"><H1>Cart</H1></Header>
+                        <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Cart</H1></Header>
                         <ListCart cart={ this.state.user.cart } editable={false} />
                     </Col>
                 </Row> 

@@ -58,7 +58,7 @@ const RecommendRecordList = () => {
         loading ? <Loading size={35} /> : 
             <Layout>
                 <Header className="header" textAlign="center">
-                    <H1>Recommended Records</H1>
+                    <H1 bold={true}>Recommended Records</H1>
                 </Header>
                 <Content padding="40px 0 0 0">
                     <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>

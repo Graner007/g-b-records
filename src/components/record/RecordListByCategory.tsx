@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
+
+import { Layout, Content, Header } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
 import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
+import OrderBar from "../OrderBar";
 
 type Props = {
     name: string;
@@ -58,7 +61,13 @@ const RecordListByCategory = ({name}: Props) => {
     }
 
     return (
-        loading ? <Loading size={35} /> : <RecordList records={records} maxWidth={200} />
+        loading ? <Loading size={35} /> : 
+            <Layout>
+                <Header><OrderBar recordsLength={records.length} /></Header>
+                <Content backgroundColor="#ececec" padding="3%">
+                    <RecordList maxWidth={200} records={records} />
+                </Content>
+            </Layout>
     )
 }
 
