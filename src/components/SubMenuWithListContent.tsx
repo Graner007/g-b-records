@@ -1,7 +1,7 @@
 import { Layout, Menu } from "antd";
 import { useParams } from "react-router-dom";
 
-import { Content, Header } from './Styles';
+import { Header, H1 } from './Styles';
 import RecordListByCategory from "./record/RecordListByCategory";
 import SearchBar from "./navbar/SearchBar";
 
@@ -38,12 +38,10 @@ const SubMenuWithListContent = ({title}: Props) => {
                 </Menu>
             </Sider>
             <Layout>
-                <Header>
-                    <h4>Home {'>'} {displayName}</h4>
+                <Header style={{height:"fit-content"}}>
+                    <H1 fontSize={18} bold={false}>Home {'>'} {displayName}</H1>
                 </Header>
-                <Content padding="3%" backgroundColor="#ececec">
-                    <RecordListByCategory name={name} />
-                </Content>
+                <RecordListByCategory name={name} />
             </Layout>
         </Layout>
     )
