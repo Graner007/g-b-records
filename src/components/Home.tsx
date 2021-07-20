@@ -1,12 +1,19 @@
 import ImageSlider from "./ImageSlider";
 import RecommendRecordList from "./record/RecommendRecordList";
+import RecordUnderPrice from "./record/RecordUnderPrice";
+import Decades from "./Decades";
+import { Layout, Content } from './Styles';
 
 const Home = () => {
     return (
-        <div className="container" style={{paddingRight: 100, paddingLeft: 100}}>
-            <ImageSlider />
-            <RecommendRecordList />
-        </div>
+        <Layout>
+            <Content>
+                <ImageSlider />
+                <RecommendRecordList />
+                <Decades />
+                <RecordUnderPrice price={30} />
+            </Content>
+        </Layout>
     )
 }
 

@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { Content, Header } from './components/Styles';
 import Navbar from "./components/navbar/Navbar";
 import Registration from "./components/auth/Registration";
-import SubMenuWithListContent from "./components/SubMenuWithListContent";
 import Record from "./components/record/Record";
 import Footer from './components/Footer';
 import ErrorPage from "./components/warning/ErrorPage";
@@ -15,6 +14,7 @@ import MyAccount from "./components/MyAccount";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 import LoginProvider from "./context/LoginContext";
+import RecordListByCategory from './components/record/RecordListByCategory';
 
 function App() {
   return (
@@ -25,10 +25,10 @@ function App() {
             <Header>
               <Navbar />
             </Header>
-              <Content padding={30}>
+              <Content padding="30px 0 30px 0">
               <Switch>
                 <Route path="/collections/:name" exact>
-                  <SubMenuWithListContent title="Artist" />
+                  <RecordListByCategory />
                 </Route>
                 <Route path="/products/:name" exact>
                   <Record />

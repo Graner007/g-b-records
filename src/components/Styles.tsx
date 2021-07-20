@@ -5,13 +5,15 @@ import { Content as content, Header as header, Footer as footer } from 'antd/lib
 type HeaderProps = {
     backgroundColor?: string;
     textAlign?: "center" | "left" | "right"; 
-    padding?: string | number; 
+    padding?: string | number;
+    margin?: string | number; 
 }
 
 export const Header = styled(header)<HeaderProps>(
     props => ({ backgroundColor: props.backgroundColor || "#fff",
                 textAlign: props.textAlign || "left",
-                padding: props.padding
+                padding: props.padding,
+                margin: props.margin
     })
 );
 
@@ -28,12 +30,16 @@ export const Layout = styled(layout)<LayoutProps>(
 
 type ContentProps = {
     padding?: string | number;
+    margin?: string | number;
     backgroundColor?: string;
+    textAlign?: "left" | "center" | "right";
 }
 
 export const Content = styled(content)<ContentProps>(
     props => ({ padding: props.padding,
-                backgroundColor: props.backgroundColor || "#fff"
+                margin: props.margin,
+                backgroundColor: props.backgroundColor || "#fff",
+                textAlign: props.textAlign || "left"
     })
 );
 

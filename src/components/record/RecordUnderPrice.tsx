@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'antd';
+import { Link } from "react-router-dom";
+import { Row, Col, Button } from 'antd';
 
 import { Header, Content, Layout } from "../Styles";
 import { H1 } from "../Styles";
@@ -10,7 +11,11 @@ import Loading from "../warning/Loading";
 import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
 
-const RecommendRecordList = () => {
+type Props = {
+    price: number;
+}
+
+const RecommendRecordList = (props: Props) => {
 
     const [records, setRecords] = useState<RecordModel[]>([] as RecordModel[]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -24,9 +29,9 @@ const RecommendRecordList = () => {
                     let data: RecordModel[] = [];
                     data = res.data;
 
-                    const filteredRecords = data.filter(d => d.id < 6);
+                    const filteredRecords = data.filter(d => d.price <= props.price);
 
-                    setRecords(filteredRecords);
+                    setRecords(filteredRecords.slice(0, 10).reverse());
                     setLoading(false);
                     setError(false);
                 }
@@ -46,7 +51,7 @@ const RecommendRecordList = () => {
                 setLoading(false);
             });
         
-    }, [records.length]);
+    }, [records.length, props.price]);
 
     if (error) {
         return (
@@ -58,12 +63,13 @@ const RecommendRecordList = () => {
         loading ? <Loading size={35} /> : 
             <Layout>
                 <Header textAlign="center" margin={30}>
-                    <H1 bold={true}>Recommended Records</H1>
+                    <H1 bold={true}>Records under {props.price}$</H1>
                 </Header>
-                <Content>
+                <Content textAlign="center">
                     <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                        <Col className="gutter-row"><RecordList records={records} maxWidth={300} /></Col>
+                        <Col sm={{ span: 8 }} md={{ span: 17 }} className="gutter-row"><RecordList records={records} maxWidth={250} /></Col>
                     </Row>
+                    <Button type="primary" size="large"><Link to='/'>SHOP ALL VINYL UNDER {props.price}$</Link></Button>
                 </Content>
             </Layout>
     )
