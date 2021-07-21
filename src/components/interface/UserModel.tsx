@@ -11,6 +11,5 @@ export interface UserModel {
     address: string;
     zipcode: number;
     country: string;
-    phoneNumber: string;
     wishList: RecordModel[];
 }

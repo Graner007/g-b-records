@@ -110,8 +110,7 @@ export default class Checkout extends Component {
                                 lastName: this.state.user.name.split(" ")[1],
                                 address: this.state.user.address,
                                 zipcode: this.state.user.zipcode,
-                                country: [this.state.user.country],
-                                phone: this.state.user.phoneNumber
+                                country: [this.state.user.country]
                             }}
                             onFinish={this.finish}
                             >

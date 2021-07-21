@@ -11,7 +11,7 @@
             "address": "516 Lakeview St Mary Esther, Florida",
             "zipcode": 516,
             "country": "usa",
-            "phoneNumber": "+1 412-554-7098"
+            "wishList": []
         },
         "orderDate": "2021-01-12",
         "address": "516 Lakeview St Mary Esther, Florida",
@@ -66,7 +66,6 @@
             "address": "871 Haunani Pl Wailuku, Hawaii",
             "zipcode": 871,
             "country": "usa",
-            "phoneNumber": "+1 479-317-9476",
             "wishList": [
                 {
                     "id": 1,
@@ -165,7 +164,6 @@
             "address": "871 Haunani Pl Wailuku, Hawaii",
             "zipcode": 871,
             "country": "usa",
-            "phoneNumber": "+1 479-317-9476",
             "wishList": [
                 {
                     "id": 1,

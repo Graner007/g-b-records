@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { Layout, Row, Col, List, Card } from "antd";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
-import { Content, Header } from './Styles';
+import { Content, Header, P, H1 } from './Styles';
 import { OrderModel } from "../components/interface/OrderModel";
 import { StatusCodeModel } from "./interface/StatusCodeModel";
 import ErrorPage from "./warning/ErrorPage";
@@ -68,7 +69,7 @@ const MyAccount = () => {
                     <h1 style={{fontSize: 25}}>My Account</h1>
                 </Header>
                 <Content padding={50}>
-                    <Row>
+                    <Row gutter={[24, 24]}>
                         <Col span={12}>
                             <Card title="Order History">
                                 <List
@@ -87,6 +88,11 @@ const MyAccount = () => {
                                     )}
                                 />
                             </Card>
+                        </Col>
+                        <Col span={12} push={5}>
+                            <H1 bold={true} fontSize={18}>{orders[0].user.name}</H1>
+                            <P fontSize={16}>{orders[0].user.email}</P>
+                            <Link to="/add-new-address">Add new address</Link>
                         </Col>
                     </Row>
                 </Content>
