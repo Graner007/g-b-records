@@ -66,8 +66,11 @@ const RecommendRecordList = (props: Props) => {
                     <H1 bold={true}>Records under {props.price}$</H1>
                 </Header>
                 <Content textAlign="center">
-                    <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                        <Col sm={{ span: 8 }} md={{ span: 17 }} className="gutter-row"><RecordList records={records} maxWidth={250} /></Col>
+                    <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col className="gutter-row"><RecordList records={records.slice(0, 5)} maxWidth={250} /></Col>
+                    </Row>
+                    <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col className="gutter-row"><RecordList records={records.slice(5, 10)} maxWidth={250} /></Col>
                     </Row>
                     <Button type="primary" size="large"><Link to='/'>SHOP ALL VINYL UNDER {props.price}$</Link></Button>
                 </Content>

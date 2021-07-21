@@ -82,9 +82,9 @@ const Record = () => {
                         <P fontSize={40} color="#01579b">{record.price}$</P>
                         <Space direction="vertical" size="middle" style={{width: "100%"}}>
                             <Button block type="primary" size="large"><ShoppingCartOutlined /> ADD TO CART</Button>
-                            <Button block type="primary" danger size="large"><HeartOutlined /> WISHLIST</Button>
+                            <Button block type="primary" danger size="large"><HeartOutlined /> WISHLIST</Button><br />
+                            <P fontSize={20}>{record.description}</P>
                         </Space>
-                        <P fontSize={20}>{record.description}</P>
                     </Col>
                 </Row>
             </Content>
