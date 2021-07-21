@@ -72,13 +72,13 @@ export default class Cart extends Component {
 
         return (
             <Layout>
-                <Header padding="0 40px 0 40px">
+                <Header padding="0 15% 0 15%">
                     <Row>
                         <Col span={12}><h1 style={{fontSize: 30}}>Your Cart</h1></Col>
                         <Col span={12}><Button size="large" type="primary" style={{float: "right", marginTop: 15}}><Link to="/checkout">Checkout</Link></Button></Col>
                     </Row>
                 </Header>
-                <Content padding={50}>
+                <Content padding="2% 15% 3% 15%">
                     {this.state.loading ? <Loading size={35} /> : <ListCart cart={this.state.user.cart} editable={true} />}
                 </Content>
             </Layout>        

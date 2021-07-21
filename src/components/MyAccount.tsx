@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Layout, Row, Col, List, Card } from "antd";
+import { Layout, Row, Col, List, Card, Modal, Button } from "antd";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { OrderModel } from "../components/interface/OrderModel";
 import { StatusCodeModel } from "./interface/StatusCodeModel";
 import ErrorPage from "./warning/ErrorPage";
 import Loading from "./warning/Loading";
+import AddressForm from "./AddressForm";
 import { LoginCtx } from "../context/LoginContext";
 
 const MyAccount = () => {
@@ -16,6 +17,10 @@ const MyAccount = () => {
     const [error, setError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
+
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalConfirmLoading, setModalConfirmLoading] = useState<boolean>(false);
+
     const {state} = useContext(LoginCtx);
 
     useEffect(() => {
@@ -32,7 +37,9 @@ const MyAccount = () => {
                         setLoading(false);
                     }
                     else {
+                        setStatusCode({code: '403'});
                         setLoading(false);
+                        setError(true);
                     }
                 }
             })
@@ -55,6 +62,17 @@ const MyAccount = () => {
             });
     }, [orders.length, state.email]);
 
+    const showModal = () => {
+        setModalVisible(true);
+      };
+    
+    const handleOk = () => {
+        setModalConfirmLoading(true);
+    };
+
+    const handleCancel = () => {
+        setModalVisible(false);
+    };
 
     if (error) {
         return (
@@ -68,7 +86,7 @@ const MyAccount = () => {
                 <Header textAlign="center">
                     <h1 style={{fontSize: 25}}>My Account</h1>
                 </Header>
-                <Content padding={50}>
+                <Content padding="2% 15% 3% 15%">
                     <Row gutter={[24, 24]}>
                         <Col span={12}>
                             <Card title="Order History">
@@ -89,10 +107,32 @@ const MyAccount = () => {
                                 />
                             </Card>
                         </Col>
-                        <Col span={12} push={5}>
+                        <Col span={12} push={6}>
                             <H1 bold={true} fontSize={18}>{orders[0].user.name}</H1>
                             <P fontSize={16}>{orders[0].user.email}</P>
-                            <Link to="/add-new-address">Add new address</Link>
+                            <Link to="#" onClick={showModal} >Add new address</Link>
+
+                            <Modal
+                                title="Add new address"
+                                visible={modalVisible}
+                                onOk={handleOk}
+                                confirmLoading={modalConfirmLoading}
+                                onCancel={handleCancel}
+                                footer={[
+                                    <Button onClick={handleCancel}>Cancel</Button>,
+                                    <Button type="primary" onClick={handleOk}>Save</Button>
+                                ]}
+                            >
+                               <AddressForm 
+                                    firstName={orders[0].user.name.split(" ")[0]} 
+                                    lastName={orders[0].user.name.split(" ")[1]} 
+                                    address={orders[0].user.address}
+                                    zipcode={orders[0].user.zipcode}
+                                    country={orders[0].user.country}
+                                    isAgreement={false}
+                                    isButton={false}
+                                />
+                            </Modal>
                         </Col>
                     </Row>
                 </Content>
