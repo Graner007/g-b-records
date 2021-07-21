@@ -24,7 +24,7 @@ export default class ErrorPage extends Component<Props, State> {
                 this.setState({title: this.props.status, subTitle: "Sorry, something went wrong."});
                 break;
             case "403":
-                this.setState({title: this.props.status, subTitle: "Sorry, you are not authorized to access this page."});
+                this.setState({title: this.props.status, subTitle: "Sorry, you are not authorized to access this page. Please Sign In or Register!"});
                 break;
             case "404":
                 this.setState({title: this.props.status, subTitle: "Sorry, the page you visited does not exist."});
