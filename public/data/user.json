@@ -9,7 +9,8 @@
         "address": "516 Lakeview St Mary Esther, Florida",
         "zipcode": 516,
         "country": "usa",
-        "phoneNumber": "+1 412-554-7098" 
+        "phoneNumber": "+1 412-554-7098",
+        "wishList": []
     },
     {
         "id": 2,
@@ -44,6 +45,28 @@
         "address": "871 Haunani Pl Wailuku, Hawaii",
         "zipcode": 871,
         "country": "usa",
-        "phoneNumber": "+1 479-317-9476"
+        "phoneNumber": "+1 479-317-9476",
+        "wishList": [
+            {
+                "id": 1,
+                "name": "Elvis is Back!",
+                "artist": "Elvis Presley",
+                "genre": "Rock and Roll",
+                "description": "Elvis Is Back! is the fourth studio album by American rock and roll singer Elvis Presley, released by RCA Victor on April 8, 1960. It was Presley's first album issued in stereophonic sound. Recorded over two sessions in March and April, the album marked Presley's return to recording after his discharge from the U.S. Army. It was Presley's first album of new material since Elvis' Christmas Album was issued in 1957.",
+                "releaseDate": "1960-04-08",
+                "albumCover": "https://i.pinimg.com/originals/48/71/ab/4871ab5eabbc19bb357e4939ee9d5086.jpg",
+                "price": 30 
+            },
+            {
+                "id": 2,
+                "name": "Elvis",
+                "artist": "Elvis Presley",
+                "genre": "Rock and Roll",
+                "description": "Elvis (also known as Elvis Presley No. 2) is the second studio album by American rock and roll singer Elvis Presley, released by RCA Victor on October 19, 1956 in mono. Recording sessions took place on September 1, September 2, and September 3 at Radio Recorders in Hollywood, with one track left over from the sessions for Presley's debut album at the RCA Victor recording studios on January 30 in New York. It spent four weeks at #1 on the Billboard Top Pop Albums chart that year, making Presley the first recording artist to have both albums go straight to number one in the same year. It would go on to spend 5 weeks at #1 in total. It was certified Gold on February 17, 1960, and Platinum on August 10, 2011, by the Recording Industry Association of America.",
+                "releaseDate": "1956-10-19",
+                "albumCover": "https://fthmb.tqn.com/baDpgpDcOhedKURlMSMX9kbdWEg=/3610x3600/filters:fill(auto,1)/GettyImages-85420355-58dece9e3df78c5162f949ce.jpg",
+                "price": 25   
+            }
+        ]
     }
 ]
