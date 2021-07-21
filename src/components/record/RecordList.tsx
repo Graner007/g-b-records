@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, HeartOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Card } from "./Styles";
 import { List } from 'antd';
 import Meta from 'antd/lib/card/Meta';
@@ -9,9 +9,10 @@ import { RecordModel } from '../interface/RecordModel';
 type Props = {
     records: RecordModel[];
     maxWidth: number;
+    isWishlist: boolean;
 };
 
-const RecordList = ({records, maxWidth}: Props) => {
+const RecordList = ({records, maxWidth, isWishlist}: Props) => {
     return (
         <List
             grid={{
@@ -29,7 +30,7 @@ const RecordList = ({records, maxWidth}: Props) => {
                         className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
-                        actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, <HeartOutlined style={{color: "red", fontSize: 20}} /> ]}>
+                        actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, (isWishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
                             <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
                 </List.Item>

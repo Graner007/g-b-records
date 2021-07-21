@@ -15,6 +15,7 @@ import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 import LoginProvider from "./context/LoginContext";
 import RecordListByCategory from './components/record/RecordListByCategory';
+import Wishlist from './components/Wishlist';
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
                 <Route path="/checkout">
                   <Checkout />
                 </Route> 
+                <Route path="/wishlist">
+                  <Wishlist />
+                </Route>
                 <Route path="/" exact>
                   <Home />
                 </Route>
