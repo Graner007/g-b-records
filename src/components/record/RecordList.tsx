@@ -26,9 +26,10 @@ const RecordList = ({records, maxWidth}: Props) => {
             renderItem={item => (
                 <List.Item>
                     <Card
+                        className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
-                        actions={[<ShoppingCartOutlined />, <HeartOutlined />]}>
+                        actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, <HeartOutlined style={{color: "red", fontSize: 20}} /> ]}>
                             <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
                     </Card>
                 </List.Item>

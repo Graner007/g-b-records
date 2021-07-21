@@ -17,7 +17,7 @@ export default class ListCart extends Component<Props> {
                 dataSource={this.props.cart}
                 size="large"
                 renderItem={item => (
-                <List.Item
+                <List.Item className="shadow"
                     actions={[<p style={{fontSize: 22}} key="price">{item.price * item.quantity}$</p>, (this.props.editable ? <DeleteFilled style={{fontSize: 22}} /> : null )]}
                 >
                     <List.Item.Meta
