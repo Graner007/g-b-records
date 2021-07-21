@@ -26,6 +26,7 @@ const RecordList = ({records, maxWidth}: Props) => {
             renderItem={item => (
                 <List.Item>
                     <Card
+                        className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
                         actions={[<ShoppingCartOutlined />, <HeartOutlined />]}>
