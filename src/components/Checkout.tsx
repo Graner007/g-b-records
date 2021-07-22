@@ -10,6 +10,7 @@ import Loading from "../components/warning/Loading";
 import ListCart from "./ListCart";
 import AddressForm from "./AddressForm";
 import { LoginCtx } from "../context/LoginContext";
+import PaymentStep from "./PaymentStep";
 
 type State = {
     user: UserModel;
@@ -68,28 +69,33 @@ export default class Checkout extends Component {
     }
 
     return (
-        <Layout>
-            <Content padding="2% 15% 3% 15%">
-                <Row justify="end" gutter={24}>
-                    <Col span={12}>
-                        <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Checkout</H1></Header>
-                        {this.state.loading ? <Loading size={35} /> : 
-                            <AddressForm 
-                                firstName={this.state.user.name.split(" ")[0]} 
-                                lastName={this.state.user.name.split(" ")[1]} 
-                                address={this.state.user.address}
-                                zipcode={this.state.user.zipcode}
-                                country={this.state.user.country}
-                                isAgreement={true}
-                                isButton={true}
-                            />
-                        }
-                    </Col>
-                    <Col span={12}>
-                        <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Cart</H1></Header>
-                        <ListCart cart={ this.state.user.cart } editable={false} />
-                    </Col>
-                </Row> 
-            </Content>
-        </Layout>  )}
+        this.state.loading ? <Loading size={35} /> : 
+            <Layout>
+                <Header padding="2% 15% 3% 15%">
+                    <PaymentStep currentIndex={1} />
+                </Header>
+                <Content padding="2% 15% 3% 15%">
+                    <Row justify="end" gutter={24}>
+                        <Col span={12}>
+                            <Header backgroundColor="inherit" textAlign="center">
+                                <H1 bold={true}>Checkout</H1>
+                            </Header>
+                                <AddressForm 
+                                    firstName={this.state.user.name.split(" ")[0]} 
+                                    lastName={this.state.user.name.split(" ")[1]} 
+                                    address={this.state.user.address}
+                                    zipcode={this.state.user.zipcode}
+                                    country={this.state.user.country}
+                                    isAgreement={true}
+                                    isButton={true}
+                                />
+                        </Col>
+                        <Col span={12}>
+                            <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Cart</H1></Header>
+                            <ListCart cart={ this.state.user.cart } editable={false} />
+                        </Col>
+                    </Row> 
+                </Content>
+            </Layout>  
+    )}
 }
