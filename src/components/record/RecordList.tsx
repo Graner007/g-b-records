@@ -15,7 +15,7 @@ type Props = {
 
 const RecordList = ({records, maxWidth, isWishlist}: Props) => {
     return (
-        records.length === 0 ? <EmptyDescription text="No Records" isButton={false} /> :
+        records.length === 0 ? <EmptyDescription text="No Records" /> :
         <List
             grid={{
                 gutter: 16,

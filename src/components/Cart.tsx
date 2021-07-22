@@ -9,13 +9,13 @@ import Loading from "./warning/Loading";
 import ErrorPage from "./warning/ErrorPage";
 import ListCart from "./ListCart";
 import { LoginCtx } from "../context/LoginContext";
+import { StatusCodeModel } from "../components/interface/StatusCodeModel";
  
 type State = {
-    users: UserModel[];
     user: UserModel;
-    error: false;
+    error: boolean;
     loading: boolean;
-    statusCode: "404" | "500" | "403";
+    statusCode: StatusCodeModel;
 }
 
 export default class Cart extends Component {
@@ -23,40 +23,36 @@ export default class Cart extends Component {
     static contextType = LoginCtx;
 
     state: State = {
-        users: [] as UserModel[],
         user: {} as UserModel,
         error: false,
         loading: true,
-        statusCode: "500"
+        statusCode: {} as StatusCodeModel
     }
 
     componentDidMount() {
         axios.get(process.env.PUBLIC_URL + '/data/user.json')
             .then(res => {
                 if (res.status === 200) {
-                    this.setState({users: res.data});
+                    let data: UserModel[] = [];
+                    data = res.data;
 
-                    const user = this.state.users.find(user => user.email === this.context.state.email);
+                    const user = data.find(user => user.email === this.context.state.email);
 
-                    if (user) {
-                        this.setState({loading: false, error: false, user: user});
-                    }
-                    else {
-                        this.setState({loading: false});
-                    }
+                    if (user) { this.setState({user: user, loading: false, error: false, statusCode: {} as StatusCodeModel}); }
+                    else { this.setState({loading: false, error: true, statusCode: {code: "403"}}); }
                 }
             })
             .catch(err => {
-                this.setState({ error: true, loading: false });
+                console.log(err.response.status);
                 switch (err.response.status) {
                     case 403:
-                        this.setState({statusCode: '403'});
-                        break;
+                        this.setState({loading: false, error: true, statusCode: {code: "403"}});
+                        break; 
                     case 404:
-                        this.setState({statusCode: '404'});
+                        this.setState({loading: false, error: true, statusCode: {code: "404"}});
                         break;
                     case 500:
-                        this.setState({statusCode: '500'});
+                        this.setState({loading: false, error: true, statusCode: {code: "500"}});                     
                         break;
                     default:
                         break;
@@ -67,7 +63,7 @@ export default class Cart extends Component {
     render() {
 
         if (this.state.error) {
-            <ErrorPage status={this.state.statusCode} />
+            <ErrorPage status={this.state.statusCode.code} />
         }
 
         return (
@@ -79,7 +75,7 @@ export default class Cart extends Component {
                     </Row>
                 </Header>
                 <Content padding="2% 15% 3% 15%">
-                    {this.state.loading ? <Loading size={35} /> : <ListCart cart={this.state.user.cart} editable={true} />}
+                    { this.state.loading ? <Loading size={35} /> : <ListCart cart={this.state.user.cart ? this.state.user.cart : []} editable={true} /> }
                 </Content>
             </Layout>        
         )

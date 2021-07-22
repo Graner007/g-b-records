@@ -1,11 +1,8 @@
 import { Component } from 'react';
-import { Empty, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Empty } from "antd";
 
 type Props = {
     text: string;
-    isButton: boolean;
-    href?: string;
 }
 
 export default class EmptyDescription extends Component<Props> {
@@ -22,7 +19,6 @@ export default class EmptyDescription extends Component<Props> {
                 </span>
                 }
             >
-                {this.props.isButton ? <Button type="primary"><Link to={"/" + this.props.href}>{this.props.href}</Link></Button> : null}
             </Empty>
         )
     }

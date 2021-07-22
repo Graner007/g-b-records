@@ -40,7 +40,7 @@ function App() {
                 <Route path="/login" exact>
                   <Login />
                 </Route>
-                <Route path="/cart">
+                <Route path="/cart" exact>
                   <Cart />
                 </Route>
                 <Route path="/log-out" exact render={() => {
@@ -50,10 +50,10 @@ function App() {
                 <Route path="/my-account" exact>
                   <MyAccount />
                 </Route>
-                <Route path="/checkout">
+                <Route path="/checkout" exact>
                   <Checkout />
                 </Route> 
-                <Route path="/wishlist">
+                <Route path="/wishlist" exact>
                   <Wishlist />
                 </Route>
                 <Route path="/" exact>
