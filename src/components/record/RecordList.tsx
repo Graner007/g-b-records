@@ -5,6 +5,7 @@ import Meta from 'antd/lib/card/Meta';
 import { Link } from 'react-router-dom';
 
 import { RecordModel } from '../interface/RecordModel';
+import EmptyDescription from '../warning/EmptyDescription';
 
 type Props = {
     records: RecordModel[];
@@ -14,6 +15,7 @@ type Props = {
 
 const RecordList = ({records, maxWidth, isWishlist}: Props) => {
     return (
+        records.length === 0 ? <EmptyDescription text="No Records" isButton={false} /> :
         <List
             grid={{
                 gutter: 16,
