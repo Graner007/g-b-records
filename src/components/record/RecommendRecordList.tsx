@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'antd';
+import { Row, Col, Layout } from 'antd';
 
-import { Header, Content, Layout } from "../Styles";
+import { Header, Content } from "../Styles";
 import { H1 } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
@@ -56,7 +56,7 @@ const RecommendRecordList = () => {
 
     return (
         loading ? <Loading size={35} /> : 
-            <Layout>
+            <Layout style={{backgroundColor: "white"}}>
                 <Header textAlign="center" margin={30}>
                     <H1 bold={true}>Recommended Records</H1>
                 </Header>

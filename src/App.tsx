@@ -1,21 +1,22 @@
 import 'antd/dist/antd.css';
-import { Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Layout } from "antd";
 
 import { Content, Header } from './components/Styles';
 import Navbar from "./components/navbar/Navbar";
 import Registration from "./components/auth/Registration";
 import Record from "./components/record/Record";
-import Footer from './components/Footer';
+import Footer from './components/partials/Footer';
 import ErrorPage from "./components/warning/ErrorPage";
 import Login from "./components/auth/Login";
-import Cart from "./components/Cart";
-import MyAccount from "./components/MyAccount";
-import Home from "./components/Home";
-import Checkout from "./components/Checkout";
+import Cart from "./components/user/cart/Cart";
+import MyAccount from "./components/user/MyAccount";
+import Home from "./components/home/Home";
+import Checkout from "./components/payment/Checkout";
 import LoginProvider from "./context/LoginContext";
 import RecordListByCategory from './components/record/RecordListByCategory';
-import Wishlist from './components/Wishlist';
+import Wishlist from './components/user/Wishlist';
+import Payment from './components/payment/Payment';
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
                 </Route> 
                 <Route path="/wishlist" exact>
                   <Wishlist />
+                </Route>
+                <Route path="/payment" exact>
+                  <Payment />
                 </Route>
                 <Route path="/" exact>
                   <Home />

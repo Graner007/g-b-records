@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Layout } from 'antd';
 
-import { Header, Content, Layout } from "../Styles";
+import { Header, Content } from "../Styles";
 import { H1 } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
@@ -61,7 +61,7 @@ const RecommendRecordList = (props: Props) => {
 
     return (
         loading ? <Loading size={35} /> : 
-            <Layout>
+            <Layout style={{backgroundColor: "white"}}>
                 <Header textAlign="center" margin={30}>
                     <H1 bold={true}>Records under {props.price}$</H1>
                 </Header>

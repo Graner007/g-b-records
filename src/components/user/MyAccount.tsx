@@ -1,15 +1,15 @@
 import { useEffect, useState, useContext } from "react";
-import { Layout, Row, Col, List, Card, Modal, Button } from "antd";
+import { Row, Col, List, Card, Modal, Button } from "antd";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-import { Content, Header, P, H1 } from './Styles';
-import { OrderModel } from "../components/interface/OrderModel";
-import { StatusCodeModel } from "./interface/StatusCodeModel";
-import ErrorPage from "./warning/ErrorPage";
-import Loading from "./warning/Loading";
-import AddressForm from "./AddressForm";
-import { LoginCtx } from "../context/LoginContext";
+import { Content, Header, P, H1, Layout } from '../Styles';
+import { OrderModel } from "../../components/interface/OrderModel";
+import { StatusCodeModel } from "../interface/StatusCodeModel";
+import ErrorPage from "../warning/ErrorPage";
+import Loading from "../warning/Loading";
+import AddressForm from "../partials/AddressForm";
+import { LoginCtx } from "../../context/LoginContext";
 
 const MyAccount = () => {
 
@@ -86,7 +86,7 @@ const MyAccount = () => {
                 <Header textAlign="center">
                     <h1 style={{fontSize: 25}}>My Account</h1>
                 </Header>
-                <Content padding="2% 15% 3% 15%">
+                <Content padding="3%">
                     <Row gutter={[24, 24]}>
                         <Col span={12}>
                             <Card title="Order History">

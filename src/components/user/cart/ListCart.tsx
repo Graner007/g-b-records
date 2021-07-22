@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { List, InputNumber, Avatar } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
 
-import { CartItemModel } from "../components/interface/CartItemModel";
-import EmptyDescription from "./warning/EmptyDescription";
+import { CartItemModel } from "../../../components/interface/CartItemModel";
+import EmptyDescription from "../../warning/EmptyDescription";
 
 type Props = {
     cart: CartItemModel[];

@@ -1,30 +1,30 @@
 import { Component } from 'react';
-import { Button, Row, Col } from "antd";
-import axios from "axios"; 
+import { Row, Col, Table } from "antd";
+import axios from 'axios';
 
-import { Layout, Content, Header, H1 } from "./Styles";
-import ErrorPage from "../components/warning/ErrorPage";
-import Loading from "../components/warning/Loading";
-import RecordList from './record/RecordList';
-import { UserModel } from "../components/interface/UserModel";
-import { StatusCodeModel } from "../components/interface/StatusCodeModel";
-import { LoginCtx } from "../context/LoginContext";
+import { Layout, Header, Content } from "../Styles";
+import PaymentStep from "./PaymentStep";
+import { UserModel } from '../interface/UserModel';
+import { StatusCodeModel } from '../interface/StatusCodeModel';
+import { LoginCtx } from '../../context/LoginContext';
+import ErrorPage from '../warning/ErrorPage';
+import InformationTable from './InformationTable';
 
 type State = {
     user: UserModel;
-    loading: boolean;
     error: boolean;
+    loading: boolean;
     statusCode: StatusCodeModel;
 }
 
-export default class Wishlist extends Component {
-
+export default class Payment extends Component {
+    
     static contextType = LoginCtx;
 
     state: State = {
         user: {} as UserModel,
-        loading: true,
         error: false,
+        loading: true,
         statusCode: {} as StatusCodeModel
     }
 
@@ -65,20 +65,22 @@ export default class Wishlist extends Component {
                 <ErrorPage status={this.state.statusCode.code} />
             )
         }
-
+        
         return (
-            this.state.loading ? <Loading size={35} /> :
-                <Layout padding="2% 15% 15% 15%">
-                    <Header>
-                        <Row gutter={24}>
-                            <Col span={12}><H1 bold={true}>Wish List</H1></Col>
-                            <Col span={12} push={8}><Button type="primary">ADD ALL TO CART</Button></Col>
-                        </Row>
-                    </Header>
-                    <Content padding="3%">
-                        <RecordList records={this.state.user.wishList} maxWidth={200} isWishlist={true} />
-                    </Content>
-                </Layout>
+            <Layout>
+                <Header textAlign="center">
+                    <PaymentStep currentIndex={2} /><br />
+                    {/* <H1 bold={true}>Payment</H1> */}
+                </Header>
+                <Content>
+                    <Row justify="center" gutter={24}>
+                        <Col span={12}>
+                            
+                        </Col>
+                        <Col span={12}></Col>
+                    </Row> 
+                </Content>
+            </Layout>
         )
     }
 }

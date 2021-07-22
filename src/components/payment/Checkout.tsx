@@ -1,15 +1,15 @@
 import { Component } from 'react';
-import { Row, Col, Layout } from 'antd';
+import { Row, Col } from 'antd';
 import axios from "axios";
 
-import { H1, Content, Header } from "./Styles";
-import { UserModel } from "../components/interface/UserModel";
-import { StatusCodeModel } from "../components/interface/StatusCodeModel";
-import ErrorPage from "../components/warning/ErrorPage";
-import Loading from "../components/warning/Loading";
-import ListCart from "./ListCart";
-import AddressForm from "./AddressForm";
-import { LoginCtx } from "../context/LoginContext";
+import { H1, Content, Header, Layout } from "../Styles";
+import { UserModel } from "../interface/UserModel";
+import { StatusCodeModel } from "../interface/StatusCodeModel";
+import ErrorPage from "../warning/ErrorPage";
+import Loading from "../warning/Loading";
+import ListCart from "../user/cart/ListCart";
+import AddressForm from "../partials/AddressForm";
+import { LoginCtx } from "../../context/LoginContext";
 import PaymentStep from "./PaymentStep";
 
 type State = {
@@ -71,10 +71,10 @@ export default class Checkout extends Component {
     return (
         this.state.loading ? <Loading size={35} /> : 
             <Layout>
-                <Header padding="2% 15% 3% 15%">
+                <Header>
                     <PaymentStep currentIndex={1} />
                 </Header>
-                <Content padding="2% 15% 3% 15%">
+                <Content>
                     <Row justify="end" gutter={24}>
                         <Col span={12}>
                             <Header backgroundColor="inherit" textAlign="center">

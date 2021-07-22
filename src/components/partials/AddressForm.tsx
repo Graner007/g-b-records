@@ -139,7 +139,7 @@ export default class AddressForm extends Component<Props> {
                     </Checkbox>
                 </Form.Item> : null}
                 {this.props.isButton ? <Form.Item>
-                    <Button type="primary" htmlType="submit">Payment</Button>
+                    <Button type="primary" htmlType="submit"><Link to="/payment">Payment</Link></Button>
                 </Form.Item> : null}
             </Form>
         )

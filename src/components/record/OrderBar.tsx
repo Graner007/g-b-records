@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
-import SelectOption from './SelectOption';
+import SelectOption from '../partials/SelectOption';
 
 type Props = {
     recordsLength: number;
