@@ -3,6 +3,7 @@ import { List, InputNumber, Avatar } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
 
 import { CartItemModel } from "../components/interface/CartItemModel";
+import EmptyDescription from "./warning/EmptyDescription";
 
 type Props = {
     cart: CartItemModel[];
@@ -12,6 +13,7 @@ type Props = {
 export default class ListCart extends Component<Props> {
     render() {
         return (
+            this.props.cart.length === 0 ? <EmptyDescription text="Your cart is empty" /> : 
             <List
                 itemLayout="horizontal"
                 dataSource={this.props.cart}
