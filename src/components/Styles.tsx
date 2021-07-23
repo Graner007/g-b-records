@@ -46,6 +46,7 @@ export const Content = styled(content)<ContentProps>(
 type HeadingProps = {
     fontSize?: number;
     bold: boolean;
+    textAlign?: "left" | "center" | "right";
 }
 
 export const H1 = styled.h1<HeadingProps>(
@@ -53,18 +54,21 @@ export const H1 = styled.h1<HeadingProps>(
         color: "black",
     },
     props => ({ fontSize: props.fontSize || 25,
-                fontWeight: props.bold ? "bold" : "initial" 
+                fontWeight: props.bold ? "bold" : "initial",
+                textAlign: props.textAlign || "left"
     })
 );
 
 type ParagraphProps = {
     fontSize: number;
     color?: string;
+    textAlign?: "left" | "center" | "right";
 }
 
 export const P = styled.p<ParagraphProps>(
     props => ({ fontSize: props.fontSize, 
-                color: props.color 
+                color: props.color,
+                textAlign: props.textAlign || "left"
     })
 );
 
