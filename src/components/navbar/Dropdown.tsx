@@ -19,7 +19,7 @@ type State = {
 
 export default class Dropdown extends Component<Props, State> {
 
-    constructor(props: Props, state: State) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             items: [],

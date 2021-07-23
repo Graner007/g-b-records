@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Slider } from "antd";
 
 type Props = {
@@ -13,9 +13,12 @@ type State = {
 
 export default class SliderLine extends Component<Props, State> {
 
-    state: State = {
-        min: this.props.defaultValue[0],
-        max: this.props.defaultValue[1],
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            min: this.props.defaultValue[0],
+            max: this.props.defaultValue[1]
+        }
     }
 
     render() {
