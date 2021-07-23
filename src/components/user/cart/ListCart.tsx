@@ -38,7 +38,7 @@ export default class ListCart extends Component<Props> {
                     { this.props.editable ? <InputNumber min={0} defaultValue={item.quantity} size="large" /> : <P fontSize={20}>{item.quantity}X</P> }
                 </List.Item>
                 )}
-                footer={<P fontSize={22} style={{textAlign: "right"}}>Grand Total: {this.grandTotal()}$</P>}
+                footer={<P fontSize={22} textAlign="right">Grand Total: {this.grandTotal()}$</P>}
             />
         )
     }

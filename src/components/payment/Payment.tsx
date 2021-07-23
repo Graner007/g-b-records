@@ -79,15 +79,15 @@ export default class Payment extends Component {
                         <Row justify="center" gutter={24}>
                             <Col span={12}>
                                 <Space direction="vertical" size="large">
-                                    <H1 bold={true} style={{textAlign: "center"}}>Payment</H1>
+                                    <H1 bold={true} textAlign="center">Payment</H1>
                                     <PaymentTable />
                                 </Space>
                             </Col>
                             <Col span={12}>
                                 <Space direction="vertical" size="large">
-                                    <H1 bold={true} style={{textAlign: "center"}}>Shipment</H1>
+                                    <H1 bold={true} textAlign="center">Shipment</H1>
                                     <InformationTable user={this.state.user} />
-                                    <H1 bold={true} style={{textAlign: "center"}}>Cart</H1>
+                                    <H1 bold={true} textAlign="center">Cart</H1>
                                     <ListCart cart={this.state.user.cart} editable={false} />
                                 </Space>
                             </Col>
