@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Menu, Layout as layout } from "antd";
+import { Menu, Layout } from "antd";
 import { useParams } from "react-router-dom";
 
-import { Layout, Content, Header, H1, P } from "../Styles";
+import { Content, Header, H1, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
 import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
-import OrderBar from "../OrderBar";
+import OrderBar from "./OrderBar";
 import SearchBar from "../navbar/SearchBar";
-import SliderLine from '../SliderLine';
+import SliderLine from '../partials/SliderLine';
 
 interface RouteParams {
     name: string; 
@@ -19,7 +19,7 @@ interface RouteParams {
 
 const RecordListByCategory = () => {
 
-    const { Sider } = layout;
+    const { Sider } = Layout;
     const { name } = useParams<RouteParams>();
     const displayName = name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ");
 

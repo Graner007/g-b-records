@@ -8,6 +8,7 @@ type Props = {
     address: string;
     zipcode: number;
     country: string;
+    phoneNumber: string;
     isAgreement: boolean;
     isButton: boolean;
 }
@@ -41,7 +42,8 @@ export default class AddressForm extends Component<Props> {
                     lastName: this.props.lastName,
                     address: this.props.address,
                     zipcode: this.props.zipcode,
-                    country: [this.props.country]
+                    country: [this.props.country],
+                    phone: this.props.phoneNumber
                 }}
                 >
                 <Form.Item
@@ -139,7 +141,7 @@ export default class AddressForm extends Component<Props> {
                     </Checkbox>
                 </Form.Item> : null}
                 {this.props.isButton ? <Form.Item>
-                    <Button type="primary" htmlType="submit">Payment</Button>
+                    <Button type="primary" htmlType="submit"><Link to="/payment">Payment</Link></Button>
                 </Form.Item> : null}
             </Form>
         )

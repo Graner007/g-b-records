@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import "react-alice-carousel/lib/alice-carousel.css";
 import AliceCarousel from 'react-alice-carousel';
 
-import { StatusCodeModel } from './interface/StatusCodeModel';
-import ErrorMessage from "./warning/ErrorMessage";
-import Loading from "./warning/Loading";
-import { ImageModel } from "./interface/ImageModel";
+import { StatusCodeModel } from '../interface/StatusCodeModel';
+import ErrorMessage from "../warning/ErrorMessage";
+import Loading from "../warning/Loading";
+import { ImageModel } from "../interface/ImageModel";
 
 const ImageSlider = () => {
 

@@ -1,15 +1,15 @@
 import { Component } from 'react';
-import  { Layout, Button, Row, Col } from "antd";
+import  { Button, Row, Col } from "antd";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { Content, Header } from './Styles';
-import { UserModel } from "../components/interface/UserModel";
-import Loading from "./warning/Loading";
-import ErrorPage from "./warning/ErrorPage";
+import { Content, Header, Layout } from '../../Styles';
+import { UserModel } from "../../../components/interface/UserModel";
+import Loading from "../../warning/Loading";
+import ErrorPage from "../../warning/ErrorPage";
 import ListCart from "./ListCart";
-import { LoginCtx } from "../context/LoginContext";
-import { StatusCodeModel } from "../components/interface/StatusCodeModel";
+import { LoginCtx } from "../../../context/LoginContext";
+import { StatusCodeModel } from "../../../components/interface/StatusCodeModel";
  
 type State = {
     user: UserModel;
@@ -68,13 +68,13 @@ export default class Cart extends Component {
 
         return (
             <Layout>
-                <Header padding="0 15% 0 15%">
+                <Header>
                     <Row>
                         <Col span={12}><h1 style={{fontSize: 30}}>Your Cart</h1></Col>
                         <Col span={12}><Button size="large" type="primary" style={{float: "right", marginTop: 15}}><Link to="/checkout">Checkout</Link></Button></Col>
                     </Row>
                 </Header>
-                <Content padding="2% 15% 3% 15%">
+                <Content padding="3%">
                     { this.state.loading ? <Loading size={35} /> : <ListCart cart={this.state.user.cart ? this.state.user.cart : []} editable={true} /> }
                 </Content>
             </Layout>        

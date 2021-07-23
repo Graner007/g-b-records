@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Col, Image } from "antd";
+import { Row, Col, Image, Layout } from "antd";
 import { Link } from "react-router-dom";
 
-import { Layout, Content, Header, H1 } from "./Styles";
+import { Content, Header, H1 } from "../Styles";
 
 export default class Decades extends Component {
     render() {
         return (
-            <Layout>
+            <Layout style={{backgroundColor: "white"}}>
                 <Header textAlign="center" margin={30}>
                     <H1 bold={true}>Shop by Decade</H1>
                 </Header>

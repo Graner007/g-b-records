@@ -1,8 +1,10 @@
+import { Layout } from "antd";
+
 import ImageSlider from "./ImageSlider";
-import RecommendRecordList from "./record/RecommendRecordList";
-import RecordUnderPrice from "./record/RecordUnderPrice";
+import RecommendRecordList from "../record/RecommendRecordList";
+import RecordUnderPrice from "../record/RecordUnderPrice";
 import Decades from "./Decades";
-import { Layout, Content } from './Styles';
+import { Content } from '../Styles';
 
 const Home = () => {
     return (

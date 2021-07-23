@@ -23,7 +23,7 @@ type LayoutProps = {
 }
 
 export const Layout = styled(layout)<LayoutProps>(
-    props => ({ padding: props.padding,
+    props => ({ padding: props.padding || "2% 15% 3% 15%",
                 backgroundColor: props.backgroundColor || "#fff" 
     })
 );
