@@ -19,10 +19,13 @@ type State = {
 
 export default class Dropdown extends Component<Props, State> {
 
-    state: State = {
-        items: [],
-        loading: true,
-        error: false,
+    constructor(props: Props, state: State) {
+        super(props);
+        this.state = {
+            items: [],
+            loading: true,
+            error: false,
+        };
     }
 
     componentDidMount() {
