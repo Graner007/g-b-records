@@ -76,7 +76,7 @@ export default class Wishlist extends Component {
                         </Row>
                     </Header>
                     <Content padding="3%">
-                        <RecordList records={this.state.user.wishList} maxWidth={200} isWishlist={true} />
+                        <RecordList records={this.state.user.wishList} maxWidth={200} isWishlist={true} column={7} />
                     </Content>
                 </Layout>
         )

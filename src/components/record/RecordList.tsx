@@ -11,20 +11,14 @@ type Props = {
     records: RecordModel[];
     maxWidth: number;
     isWishlist: boolean;
+    column: number;
 };
 
-const RecordList = ({records, maxWidth, isWishlist}: Props) => {
+const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
     return (
         records.length === 0 ? <EmptyDescription text="No Records" /> :
         <List
-            grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 3,
-                lg: 4,
-                xl: 6
-            }}
+            grid={{gutter: 16, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
             dataSource={ records }
             renderItem={item => (
                 <List.Item>

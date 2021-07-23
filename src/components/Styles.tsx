@@ -55,7 +55,7 @@ export const H1 = styled.h1<HeadingProps>(
     },
     props => ({ fontSize: props.fontSize || 25,
                 fontWeight: props.bold ? "bold" : "initial",
-                textAlign: props.textAlign || "left"
+                textAlign: props.textAlign
     })
 );
 
@@ -68,7 +68,7 @@ type ParagraphProps = {
 export const P = styled.p<ParagraphProps>(
     props => ({ fontSize: props.fontSize, 
                 color: props.color,
-                textAlign: props.textAlign || "left"
+                textAlign: props.textAlign
     })
 );
 
