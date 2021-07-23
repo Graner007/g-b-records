@@ -9,11 +9,6 @@ type Props = {
 }
 
 export default class SearchBar extends Component<Props> {
-
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
 
         const {Search} = Input;
