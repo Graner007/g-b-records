@@ -29,6 +29,11 @@ const countries = [
 ];
 
 export default class AddressForm extends Component<Props> {
+
+    constructor(props: Props) {
+        super(props);
+    }
+
     render() {
         return (
             <Form
