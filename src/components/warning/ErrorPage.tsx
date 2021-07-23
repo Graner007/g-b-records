@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Result } from 'antd';
 import { Link } from "react-router-dom";
 
@@ -13,9 +13,12 @@ type State = {
 
 export default class ErrorPage extends Component<Props, State> {
 
-    state: State = {
-        title: "",
-        subTitle: ""
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            title: "",
+            subTitle: ""
+        }
     }
 
     componentDidMount() {

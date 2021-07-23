@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Menu, Button, message } from "antd";
 import { Link } from "react-router-dom";
 
