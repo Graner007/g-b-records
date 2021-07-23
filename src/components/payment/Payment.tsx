@@ -1,14 +1,17 @@
 import { Component } from 'react';
-import { Row, Col, Table } from "antd";
+import { Row, Col, Space } from "antd";
 import axios from 'axios';
 
-import { Layout, Header, Content } from "../Styles";
+import { Layout, Header, Content, H1 } from "../Styles";
 import PaymentStep from "./PaymentStep";
 import { UserModel } from '../interface/UserModel';
 import { StatusCodeModel } from '../interface/StatusCodeModel';
 import { LoginCtx } from '../../context/LoginContext';
 import ErrorPage from '../warning/ErrorPage';
 import InformationTable from './InformationTable';
+import PaymentTable from './PaymentTable';
+import ListCart from '../user/cart/ListCart';
+import Loading from '../warning/Loading';
 
 type State = {
     user: UserModel;
@@ -67,20 +70,30 @@ export default class Payment extends Component {
         }
         
         return (
-            <Layout>
-                <Header textAlign="center">
-                    <PaymentStep currentIndex={2} /><br />
-                    {/* <H1 bold={true}>Payment</H1> */}
-                </Header>
-                <Content>
-                    <Row justify="center" gutter={24}>
-                        <Col span={12}>
-                            
-                        </Col>
-                        <Col span={12}></Col>
-                    </Row> 
-                </Content>
-            </Layout>
+            this.state.loading ? <Loading size={35} /> :
+                <Layout>
+                    <Header textAlign="center">
+                        <PaymentStep currentIndex={2} />
+                    </Header>
+                    <Content>
+                        <Row justify="center" gutter={24}>
+                            <Col span={12}>
+                                <Space direction="vertical" size="large">
+                                    <H1 bold={true} style={{textAlign: "center"}}>Payment</H1>
+                                    <PaymentTable />
+                                </Space>
+                            </Col>
+                            <Col span={12}>
+                                <Space direction="vertical" size="large">
+                                    <H1 bold={true} style={{textAlign: "center"}}>Shipment</H1>
+                                    <InformationTable user={this.state.user} />
+                                    <H1 bold={true} style={{textAlign: "center"}}>Cart</H1>
+                                    <ListCart cart={this.state.user.cart} editable={false} />
+                                </Space>
+                            </Col>
+                        </Row> 
+                    </Content>
+                </Layout>
         )
     }
 }

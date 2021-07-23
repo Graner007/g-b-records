@@ -24,7 +24,7 @@ export default class InformationTable extends Component<Props> {
         ]
 
         return (
-            <Table pagination={false} columns={shipmentColumns} dataSource={[{email: this.props.user.email, address: this.props.user.address}]} />
+            <Table pagination={false} bordered={true} tableLayout="fixed" showHeader={false} columns={shipmentColumns} dataSource={[{email: this.props.user.email, address: this.props.user.address}]} />
         )
     }
 }

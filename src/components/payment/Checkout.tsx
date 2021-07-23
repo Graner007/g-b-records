@@ -86,6 +86,7 @@ export default class Checkout extends Component {
                                     address={this.state.user.address}
                                     zipcode={this.state.user.zipcode}
                                     country={this.state.user.country}
+                                    phoneNumber={this.state.user.phoneNumber}
                                     isAgreement={true}
                                     isButton={true}
                                 />

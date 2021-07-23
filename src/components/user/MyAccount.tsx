@@ -129,6 +129,7 @@ const MyAccount = () => {
                                     address={orders[0].user.address}
                                     zipcode={orders[0].user.zipcode}
                                     country={orders[0].user.country}
+                                    phoneNumber={orders[0].user.phoneNumber}
                                     isAgreement={false}
                                     isButton={false}
                                 />
