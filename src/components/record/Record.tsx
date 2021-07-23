@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Layout, Button, Row, Col, PageHeader, Image, Space } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 
@@ -22,6 +22,7 @@ const Record = () => {
     const [error, setError] = useState<boolean>(false);
     const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
     const { name } = useParams<RouteParams>();
+    const history = useHistory();
 
     useEffect(() => {
         axios.get(process.env.PUBLIC_URL + "/data/record.json")
@@ -71,7 +72,7 @@ const Record = () => {
         loading ? <Loading size={35} /> :
         <Layout>
             <Header className="header">
-                <PageHeader title={"Home > " + record.name} />
+                <PageHeader onBack={() => history.goBack()} title={"Home > " + record.name} />
             </Header>
             <Content padding="30px 50px 30px 50px">
                 <Row>
