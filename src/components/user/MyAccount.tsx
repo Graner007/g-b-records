@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Row, Col, List, Card, Modal, Button } from "antd";
+import { Row, Col, Card, Modal, Button } from "antd";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { OrderModel } from "../../components/interface/OrderModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import ErrorPage from "../warning/ErrorPage";
 import Loading from "../warning/Loading";
+import OrderList from "./order/OrderList";
 import AddressForm from "../partials/AddressForm";
 import { LoginCtx } from "../../context/LoginContext";
 
@@ -28,6 +29,7 @@ const MyAccount = () => {
             .then(res => {
                 if (res.status === 200) {
                     setOrders(res.data);
+                    console.log(res.data);
 
                     const accountOrders = orders.filter(order => order.user.email === state.email);
 
@@ -60,7 +62,7 @@ const MyAccount = () => {
                 setError(true);
                 setLoading(false);
             });
-    }, [orders.length, state.email]);
+    }, [state.email, orders]);
 
     const showModal = () => {
         setModalVisible(true);
@@ -84,27 +86,13 @@ const MyAccount = () => {
         loading ? <Loading size={35} /> :
             <Layout>
                 <Header textAlign="center">
-                    <h1 style={{fontSize: 25}}>My Account</h1>
+                    <H1 bold={true}>My Account</H1>
                 </Header>
                 <Content padding="3%">
                     <Row gutter={[24, 24]}>
                         <Col span={12}>
                             <Card title="Order History">
-                                <List
-                                    itemLayout="horizontal"
-                                    dataSource={orders}
-                                    size="large"
-                                    renderItem={item => (
-                                    <List.Item
-                                        actions={[<p style={{fontSize: 18}}>Payment: {item.payment}$</p>, <p>{item.productNumbers} {item.productNumbers > 1 ? "Records" : "Record"}</p>]}
-                                    >
-                                        <List.Item.Meta
-                                            title={"Date: " + item.orderDate}
-                                            description={<i>Address: {item.address}</i>}
-                                        />
-                                    </List.Item>
-                                    )}
-                                />
+                                <OrderList orders={orders} />
                             </Card>
                         </Col>
                         <Col span={12} push={6}>

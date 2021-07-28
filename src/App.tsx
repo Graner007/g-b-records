@@ -11,6 +11,7 @@ import ErrorPage from "./components/warning/ErrorPage";
 import Login from "./components/auth/Login";
 import Cart from "./components/user/cart/Cart";
 import MyAccount from "./components/user/MyAccount";
+import OrderDetails from "./components/user/order/OrderDetails";
 import Home from "./components/home/Home";
 import Checkout from "./components/payment/Checkout";
 import LoginProvider from "./context/LoginContext";
@@ -50,6 +51,9 @@ function App() {
                 </Route>
                 <Route path="/my-account" exact>
                   <MyAccount />
+                </Route>
+                <Route path="/orders/:id" exact >
+                  <OrderDetails />
                 </Route>
                 <Route path="/checkout" exact>
                   <Checkout />

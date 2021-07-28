@@ -22,13 +22,13 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             dataSource={ records }
             renderItem={item => (
                 <List.Item>
-                    <Card
+                    <Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><Card
                         className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
                         actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, (isWishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
-                            <Meta title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>} description={"by " + item.artist + " for " + item.price + "$"} />
-                    </Card>
+                            <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
+                    </Card></Link>
                 </List.Item>
             )}
         />
