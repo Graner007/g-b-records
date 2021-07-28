@@ -8,6 +8,7 @@ import { Content, Header } from "../../Styles";
 import { StatusCodeModel } from "../../interface/StatusCodeModel";
 import Loading from "../../warning/Loading";
 import ErrorPage from "../../warning/ErrorPage";
+import { LoginCtx } from "../../../context/LoginContext";
 
 type RouterParams = {
     id: string;
@@ -26,6 +27,8 @@ type State = {
 
 class OrderDetails extends Component<Props, State> {
 
+    static contextType = LoginCtx;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -37,13 +40,13 @@ class OrderDetails extends Component<Props, State> {
     }
 
     componentDidMount() {
-        axios.get(process.env.PUBLIC_URL + "/data/user.json")
+        axios.get(process.env.PUBLIC_URL + "/data/order.json")
             .then(res => {
                 if (res.status === 200) {
                     let data: OrderModel[] = [];
                     data = res.data;
 
-                    const order = data.find(order => order.id.toString() === this.props.match.params.id);
+                    const order = data.find(order => order.id.toString() === this.props.match.params.id && order.user.email === this.context.state.email);
 
                     if (order) { this.setState({order: order, loading: false, error: false, statusCode: {} as StatusCodeModel}); }
                     else { this.setState({loading: false, error: true, statusCode: {code: "404"}}); }
@@ -78,7 +81,7 @@ class OrderDetails extends Component<Props, State> {
             this.state.loading ? <Loading size={35} /> :
                 <Layout>
                     <Header>
-                        <PageHeader onBack={() => this.props.history.goBack()} title={"My Account > Order " + this.state.order.id} />
+                        <PageHeader onBack={() => this.props.history.goBack()} title={"My Account > Order " + this.state.order.id + " - " + this.state.order.orderDate} />
                     </Header>
                     <Content padding="3%">
                         
