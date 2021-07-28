@@ -29,6 +29,7 @@ const MyAccount = () => {
             .then(res => {
                 if (res.status === 200) {
                     setOrders(res.data);
+                    console.log(res.data);
 
                     const accountOrders = orders.filter(order => order.user.email === state.email);
 
@@ -61,7 +62,7 @@ const MyAccount = () => {
                 setError(true);
                 setLoading(false);
             });
-    }, [orders.length, state.email]);
+    }, [state.email, orders]);
 
     const showModal = () => {
         setModalVisible(true);
