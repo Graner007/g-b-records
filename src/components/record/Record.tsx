@@ -4,8 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Layout, Button, Row, Col, PageHeader, Image, Space } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 
-import { Content, Header } from "../Styles";
-import { P } from "../Styles";
+import { Content, Header, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
