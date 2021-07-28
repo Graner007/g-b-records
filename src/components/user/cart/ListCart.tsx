@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { List, InputNumber, Avatar } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 
 import { CartItemModel } from "../../../components/interface/CartItemModel";
 import EmptyDescription from "../../warning/EmptyDescription";
@@ -31,9 +32,9 @@ export default class ListCart extends Component<Props> {
                     actions={[<P fontSize={22} key="price">{item.price * item.quantity}$</P>, (this.props.editable ? <DeleteFilled style={{fontSize: 22}} /> : null )]}
                 >
                     <List.Item.Meta
-                        title={item.name}
+                        title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>}
                         description={item.artist}
-                        avatar={<Avatar src={item.albumCover} shape="square" size="large" />}
+                        avatar={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><Avatar src={item.albumCover} shape="square" size="large" /></Link>}
                     />
                     { this.props.editable ? <InputNumber min={0} defaultValue={item.quantity} size="large" /> : <P fontSize={20}>{item.quantity}X</P> }
                 </List.Item>
