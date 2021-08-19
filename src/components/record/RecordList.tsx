@@ -21,7 +21,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             dataSource={ records }
             renderItem={item => (
                 <List.Item>
-                    <Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><Card
+                    <Link to={"/products/" + item.id}><Card
                         className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
