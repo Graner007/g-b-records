@@ -26,7 +26,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
                         actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, (isWishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
-                            <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
+                            <Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} />
                     </Card></Link>
                 </List.Item>
             )}

@@ -26,6 +26,9 @@ const CATEGORY_QUERY = gql`
         price
         description
         albumCover
+        artist {
+            name
+        }
       }
       minPrice
       maxPrice

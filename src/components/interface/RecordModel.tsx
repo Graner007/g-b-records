@@ -1,10 +1,11 @@
 import { ArtistModel } from "./ArtistModel";
+import { GenreModel } from "./GenreModel";
 
 export interface RecordModel {
     id: number;
     name: string;
     artist: ArtistModel;
-    genre: string;
+    genre: GenreModel[];
     description: string;
     releaseDate: string;
     albumCover: string;
