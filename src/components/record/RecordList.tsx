@@ -16,22 +16,21 @@ type Props = {
 
 const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
     return (
-        records.length === 0 ? <EmptyDescription text="No Records" /> :
-        <List
+        records ? <List
             grid={{gutter: 16, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
             dataSource={ records }
             renderItem={item => (
                 <List.Item>
-                    <Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><Card
+                    <Link to={"/products/" + item.id}><Card
                         className="shadow"
                         maxWidth={ maxWidth }
                         cover={ <img src={item.albumCover} alt="cover" /> } 
                         actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} />, (isWishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
-                            <Meta title={item.name} description={"by " + item.artist + " for " + item.price + "$"} />
+                            <Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} />
                     </Card></Link>
                 </List.Item>
             )}
-        />
+        /> : <EmptyDescription text="No Records" />
     )
 }
 
