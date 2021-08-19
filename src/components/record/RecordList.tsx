@@ -16,8 +16,7 @@ type Props = {
 
 const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
     return (
-        records.length === 0 ? <EmptyDescription text="No Records" /> :
-        <List
+        records ? <List
             grid={{gutter: 16, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
             dataSource={ records }
             renderItem={item => (
@@ -31,7 +30,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                     </Card></Link>
                 </List.Item>
             )}
-        />
+        /> : <EmptyDescription text="No Records" />
     )
 }
 
