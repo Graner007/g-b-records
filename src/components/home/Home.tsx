@@ -13,7 +13,7 @@ const Home = () => {
                 <ImageSlider />
                 <RecommendRecordList />
                 <Decades />
-                <RecordUnderPrice price={30} />
+                {/* <RecordUnderPrice price={30} /> */}
             </Content>
         </Layout>
     )
