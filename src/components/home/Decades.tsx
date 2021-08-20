@@ -1,31 +1,56 @@
 import React, { Component } from 'react';
 import { Row, Col, Image, Layout } from "antd";
 import { Link } from "react-router-dom";
+import { ChildProps, graphql } from "@apollo/react-hoc";
+import { gql } from '@apollo/client';
 
+import { MediaModel } from "../interface/MediaModel";
 import { Content, Header, H1 } from "../Styles";
+import ErrorMessage from '../warning/ErrorMessage';
+import Loading from '../warning/Loading';
 
-export default class Decades extends Component {
+const DECADE_QUERY = gql`
+    query DecadeQuery {
+        decade {   
+            name
+            linkUrl
+        }
+    }
+`;
+
+type Decade = {
+    decade: MediaModel[];
+}
+
+const withDecadeImage = graphql<{}, Decade>(DECADE_QUERY);
+
+class Decades extends Component<ChildProps<{}, Decade>, {}> {
     render() {
+        const { loading, decade, error } = this.props.data!;
+
+        console.log(decade);
+
         return (
-            <Layout style={{backgroundColor: "white"}}>
-                <Header textAlign="center" margin={30}>
-                    <H1 bold={true}>Shop by Decade</H1>
-                </Header>
-                <Content>
-                    <Row gutter={16} justify="center">
-                        <Col span={8}><Link to="/collections/50's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0000_1950_998x474.png?v=1618867950" preview={false} className="shadow" /></Link></Col>
-                        <Col span={8}><Link to="/collections/60's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0001_1960_998x474.png?v=1618867978" preview={false} className="shadow" /></Link></Col>
-                    </Row>
-                    <Row gutter={16} justify="center">
-                        <Col span={8}><Link to="/collections/70's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0002_1970_1000x475.png?v=1618868017" preview={false} className="shadow" /></Link></Col>
-                        <Col span={8}><Link to="/collections/80's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0003_1980_1000x475.png?v=1618868031" preview={false} className="shadow" /></Link></Col>
-                    </Row>
-                    <Row gutter={16} justify="center">
-                        <Col span={8}><Link to="/collections/90's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0004_1990_1000x475.png?v=1618868050" preview={false} className="shadow" /></Link></Col>
-                        <Col span={8}><Link to="/collections/00's"><Image src="https://cdn.shopify.com/s/files/1/0287/4323/7725/files/TSOV_1119-Evergreen-Banners_GRID_0005_2000_1000x475.png?v=1618868089" preview={false} className="shadow" /></Link></Col>
-                    </Row>
-                </Content>
-            </Layout>
+            <>
+                {error && <ErrorMessage text={error.message} />}
+                {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+                {decade && 
+                    <Layout style={{backgroundColor: "white"}}>
+                        <Header textAlign="center" margin={30}>
+                            <H1 bold={true}>Shop by Decade</H1>
+                        </Header>
+                        <Content padding="0 150px 0 150px">
+                            <Row gutter={16} justify="center">
+                                {decade.map(d => (
+                                    <Col style={{padding: 8}} span={12}><Link to={d.linkUrl}><Image src={d.name} preview={false} className="shadow" /></Link></Col>
+                                ))}
+                            </Row>
+                        </Content>
+                    </Layout>
+                }
+            </>
         )
     }
 }
+
+export default withDecadeImage(Decades);
