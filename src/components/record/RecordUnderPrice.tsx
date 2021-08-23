@@ -11,14 +11,17 @@ import ErrorMessage from "../warning/ErrorMessage";
 
 const RECORDS_BETWEEN_TWO_PRICE_QUERY = gql`
   query RecordsBetweenTwoPriceQuery(
-    $minPrice: Int!
-    $maxPrice: Int!
+    $min: Int!
+    $max: Int!
   ) {
-    recordsBetweenTwoPrice(min: $minPrice, max: $maxPrice) {
+    recordsBetweenTwoPrice(min: $min, max: $max) {
         id
         name
         price
         albumCover
+        artist {
+            name
+        }
     }
   }
 `;
@@ -28,18 +31,18 @@ type Props = {
 }
 
 type RecordsBetweenTwoPriceVars = {
-    minPrice: number;
-    maxPrice: number;
+    min: number;
+    max: number;
 }
 
 type RecordsBetweenTwoPrice = {
     recordsBetweenTwoPrice: RecordModel[];
 }
 
-const RecommendRecordList = (props: Props) => {
+const RecordUnderPrice = (props: Props) => {
     const { data, loading, error } = useQuery<RecordsBetweenTwoPrice, RecordsBetweenTwoPriceVars>(
         RECORDS_BETWEEN_TWO_PRICE_QUERY, 
-        { variables: { minPrice: 0, maxPrice: props.price } }
+        { variables: { min: 0, max: props.price } }
     );
 
     return (
@@ -66,4 +69,4 @@ const RecommendRecordList = (props: Props) => {
     )
 }
 
-export default RecommendRecordList;
+export default RecordUnderPrice;
