@@ -28,8 +28,6 @@ class Decades extends Component<ChildProps<{}, Decade>, {}> {
     render() {
         const { loading, decade, error } = this.props.data!;
 
-        console.log(decade);
-
         return (
             <>
                 {error && <ErrorMessage text={error.message} />}

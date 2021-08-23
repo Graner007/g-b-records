@@ -1,5 +1,31 @@
-import { Form, Input, Button } from 'antd';
+import { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import { Form, Input, Button, message } from 'antd';
+import { useHistory } from 'react-router-dom';
+
 import { Header, H1 } from '../Styles';
+import { UserModel } from '../interface/UserModel';
+import ErrorMessage from "../warning/ErrorMessage";
+
+const REGISTER = gql`
+  mutation SignUp($email: String!, $password: String!) {
+    signup(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+type AuthPayload = {
+    signup: {
+        token: string;
+        user: UserModel;
+    }
+}
+
+type NewUserDetails = {
+    email: string;
+    password: string;
+}
 
 const formItemLayout = {
     labelCol: {
@@ -34,8 +60,25 @@ const tailFormItemLayout = {
 };
 
 const Registration = () => {
-
     const [form] = Form.useForm();
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const history = useHistory();
+
+    const [signUp, { error }] = useMutation<AuthPayload, NewUserDetails>(
+        REGISTER, 
+        { 
+            variables: { email: email, password: password },
+            onCompleted: () => {
+                message.success("Successful sign up");
+                setEmail("");
+                setPassword("");
+                history.push("/");
+            },
+            onError: () => {}
+        }
+    );
+
 
     return (
         <Form
@@ -61,7 +104,7 @@ const Registration = () => {
                 },
                 ]}
             >
-                <Input />
+                <Input onChange={e => setEmail(e.target.value)} />
             </Form.Item>
 
             <Form.Item
@@ -75,7 +118,7 @@ const Registration = () => {
                 ]}
                 hasFeedback
             >
-                <Input.Password />
+                <Input.Password onChange={e => setPassword(e.target.value)}/>
             </Form.Item>
 
             <Form.Item
@@ -103,10 +146,13 @@ const Registration = () => {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={() => email && password && signUp()}>
                     Register
                 </Button>
             </Form.Item>
+
+            {error && <ErrorMessage text={error.message} />}
+
         </Form>
     )
 }
