@@ -1,48 +1,58 @@
-import { useEffect, useState, useContext } from "react";
 import { Form, Input, Button, Row, Col, Space, Alert, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
+import { useMutation, gql } from '@apollo/client';
+import { useState } from "react";
+import Cookies from 'universal-cookie';
 
 import { Header, H1 } from '../Styles';
 import { UserModel } from '../interface/UserModel';
-import { LoginCtx } from '../../context/LoginContext';
+
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+          id
+          email
+      }
+    }
+  }
+`;
+
+type AuthPayload = {
+    login: {
+        token: string;
+        user: UserModel;
+    }
+}
  
-type LoginForm = {
+type UserDetails = {
     email: string;
     password: string;
 }
 
 const Login = () => {
-
-    const [users, setUsers] = useState<UserModel[]>([] as UserModel[]);
-    const [error, setError] = useState<boolean>(false);
     const history = useHistory();
-    const {update} = useContext(LoginCtx);
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
-    useEffect(() => {
-        axios.get(process.env.PUBLIC_URL + '/data/user.json')
-        .then(res => {
-            if (res.status === 200) {
-                setUsers(res.data);
-            }
-        })
-        .catch(err => {
-            setError(true);
-        });
-    }, [users.length]);
-
-    const onFinish = (values: LoginForm) => {
-        const user = users.find(user => user.email === values.email && user.password === values.password);
-
-        if (user) {
-            setError(false);
-            message.success("Successful login!");
-            update({loggedIn: true, email: user.email});
-            history.push("/");
+    const [login, { error }] = useMutation<AuthPayload, UserDetails>(
+        LOGIN, 
+        { 
+            variables: { email: email, password: password },
+            onCompleted: (data: AuthPayload) => {
+                message.success("Successful login");
+                setEmail("");
+                setPassword("");
+                const token = data.login.token;
+                const cookies = new Cookies();
+                cookies.set('token', `Bearer ${token}`, { path: "/", httpOnly: true });
+                history.push("/");
+            },
+            onError: () => {}
         }
-        else { setError(true); }
-    };
+    );
     
     return (
         <Row>
@@ -54,10 +64,9 @@ const Login = () => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={onFinish}
                 >
 
-                    <Header textAlign="center"><H1 bold={true}>Sing in</H1></Header><br /><br />
+                    <Header textAlign="center"><H1 bold={true}>Sign in</H1></Header><br /><br />
 
                 <Form.Item
                     name="email"
@@ -69,7 +78,11 @@ const Login = () => {
                     },
                     ]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+                    <Input 
+                        prefix={<UserOutlined 
+                        className="site-form-item-icon" />} 
+                        placeholder="Email" 
+                        onChange={e => setEmail(e.target.value)} />
                 </Form.Item>
 
                 <Form.Item
@@ -83,17 +96,18 @@ const Login = () => {
                     ]}
                 >
                     <Input
-                    prefix={<LockOutlined className="site-form-item-icon" />}
-                    type="password"
-                    placeholder="Password"
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                        onChange={e => setPassword(e.target.value)}
                     />
                 </Form.Item>
 
-                {error ? <Alert message="Authentication Failed" type="error" showIcon style={{width: "75%", marginBottom: 20}} /> : null}
+                {error && <Alert message={error.message} type="error" showIcon style={{width: "75%", marginBottom: 20}} />}
             
                 <Form.Item>
                     <Space direction="horizontal" size="small">
-                        <Button type="primary" htmlType="submit" className="login-form-button">Sign in</Button>
+                        <Button type="primary" htmlType="submit" className="login-form-button" onClick={() => email && password && login()}>Sign in</Button>
                         Or<Link to="/registration">Register now!</Link>
                     </Space>
                 </Form.Item>

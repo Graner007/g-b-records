@@ -33,7 +33,7 @@ type RecordVars = {
     recordId: number;
 }
 
-type Record = {
+type RecordType = {
     record: RecordModel;
 }
 
@@ -42,7 +42,7 @@ const Record = () => {
     const { id } = useParams<RouteParams>();
     const history = useHistory();
 
-    const { data, loading, error } = useQuery<Record, RecordVars>(
+    const { data, loading, error } = useQuery<RecordType, RecordVars>(
         RECORD_QUERY, 
         { variables: { recordId: parseInt(id) } }
     );

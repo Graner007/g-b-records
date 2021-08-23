@@ -17,12 +17,12 @@ const IMAGE_SLIDER_QUERY = gql`
     }
 `;
 
-type ImageSlider = {
+type ImageSliderType = {
     imageSlider: MediaModel[];
 }
 
 const ImageSlider = () => {
-    const { data, loading, error } = useQuery<ImageSlider>(IMAGE_SLIDER_QUERY);
+    const { data, loading, error } = useQuery<ImageSliderType>(IMAGE_SLIDER_QUERY);
 
     return (
         <>

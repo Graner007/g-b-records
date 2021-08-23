@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Alert } from 'antd';
 import { useHistory } from 'react-router-dom';
 
 import { Header, H1 } from '../Styles';
 import { UserModel } from '../interface/UserModel';
-import ErrorMessage from "../warning/ErrorMessage";
 
 const REGISTER = gql`
   mutation SignUp($email: String!, $password: String!) {
@@ -151,7 +150,7 @@ const Registration = () => {
                 </Button>
             </Form.Item>
 
-            {error && <ErrorMessage text={error.message} />}
+            {error && <Alert message={error.message} type="error" showIcon style={{width: "75%", marginBottom: 20}} />}
 
         </Form>
     )
