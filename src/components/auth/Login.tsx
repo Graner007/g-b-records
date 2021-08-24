@@ -47,7 +47,7 @@ const Login = () => {
                 setPassword("");
                 const token = data.login.token;
                 const cookies = new Cookies();
-                cookies.set('token', `Bearer ${token}`, { path: "/", httpOnly: true });
+                cookies.set('token', `Bearer ${token}`, { path: "/" });
                 history.push("/");
             },
             onError: () => {}
