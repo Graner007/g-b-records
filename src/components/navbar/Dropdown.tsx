@@ -1,64 +1,75 @@
 import { Component } from 'react';
-import { Dropdown as Drop, List } from 'antd';
-import axios from 'axios';
+import { Dropdown as Drop, List, Alert } from 'antd';
 import { Link } from "react-router-dom";
+import { gql } from '@apollo/client';
+import { ChildProps, graphql } from "@apollo/react-hoc";
 
 import Loading from "../warning/Loading";
-import ErrorMessage from "../warning/ErrorMessage"; 
+import { Content, Layout } from '../Styles';
+
+const DROPDOWN_QUERY = gql`
+    query DropdownQuery(
+        $type: Type!
+    ) {
+        dropdown(type: $type) {
+            id
+            name
+        }
+    }
+`;
+
+type DropdownModel = {
+    id: number;
+    name: string;
+}
+
+type DropdownType = {
+    dropdown: DropdownModel[];
+}
 
 type Props = {
     title: string;
-    itemName: "artist" | "genre";
+    type: "artist" | "genre";
 }
 
-type State = {
-    items: any[];
-    loading: boolean;
-    error: boolean;
-}
+const withDropdownItems = graphql<Props, DropdownType>(DROPDOWN_QUERY, {
+    options: ({ type }) => ({
+      variables: { 
+        type
+      }
+    })
+});
 
-export default class Dropdown extends Component<Props, State> {
-
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            items: [],
-            loading: true,
-            error: false,
-        };
-    }
-
-    componentDidMount() {
-        axios.get(process.env.PUBLIC_URL + `/data/${this.props.itemName}.json`)
-            .then(res => {
-                if (res.status === 200) {
-                    this.setState({loading: false, error: false, items: res.data});
-                }
-            })
-            .catch(err => this.setState({ error: true, loading: false, }));
-    }
-
+class Dropdown extends Component<ChildProps<Props, DropdownType>, {}> {
     render() {
+        const { loading, dropdown, error } = this.props.data!;
 
         const menuList = (
-            this.state.error ? <ErrorMessage text={"Sorry, " + this.props.itemName + "s can't be loaded."} /> : 
-            (this.state.loading ? <Loading size={30} /> : <List
-                    grid={{ gutter: 16, column: 4 }}
-                    dataSource={this.state.items}
-                    renderItem={(item, index) => (
-                        <Link to={"/collections/" + item.name.split(" ").join("-").toLowerCase()}>
-                            <List.Item key={index} style={{cursor: "pointer", margin: "5px"}}>{item.name}</List.Item>
-                        </Link>
-                    )}
-            />)
+            <List
+                grid={{ gutter: 16, column: 4 }}
+                dataSource={dropdown}
+                renderItem={(item, index) => (
+                    <Link to={"/collections/" + item.name.split(" ").join("-").toLowerCase()}>
+                        <List.Item key={index} style={{cursor: "pointer", margin: "5px"}}>{item.name}</List.Item>
+                    </Link>
+                )}
+            />
         )
 
         return (
-            <Drop overlay={menuList} >
-                <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    {this.props.title}
-                </div>
-            </Drop>
+            <>
+                {error && <Alert message={error.message} type="error" showIcon />}
+                {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+                {dropdown && 
+                    <Drop overlay={menuList}>
+                        <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            {this.props.title}
+                        </div>
+                    </Drop>
+                }
+            </>
         )
     }
 }
+
+export default withDropdownItems(Dropdown);
