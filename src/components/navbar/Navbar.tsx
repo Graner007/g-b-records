@@ -12,8 +12,8 @@ export default class Navbar extends Component {
         return (
             <Menu theme="light" mode="horizontal">
                 <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
-                <Menu.Item key="2"><Dropdown title="Shop By Artist" itemName="artist" /></Menu.Item>
-                <Menu.Item key="3"><Dropdown title="Shop By Category" itemName="genre" /></Menu.Item>
+                <Menu.Item key="2"><Dropdown title="Shop By Artist" type="artist" /></Menu.Item>
+                <Menu.Item key="3"><Dropdown title="Shop By Category" type="genre" /></Menu.Item>
                 <Menu.Item key="4" disabled={true} style={{cursor: "auto"}}><SearchBar placeholder="Search for Records" size="large" width="300px" padding="12px 0 0 0" /></Menu.Item>
                 <Menu.Item key="5" style={{marginLeft: "auto"}}><Link to="/cart"><ShoppingCartOutlined style={{fontSize: 20}} /></Link></Menu.Item>
                 <Menu.Item key="6">
