@@ -36,7 +36,8 @@ const withDropdownItems = graphql<Props, DropdownType>(DROPDOWN_QUERY, {
     options: ({ type }) => ({
       variables: { 
         type
-      }
+      },
+      fetchPolicy: "no-cache"
     })
 });
 
