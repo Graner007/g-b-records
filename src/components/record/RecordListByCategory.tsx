@@ -7,7 +7,7 @@ import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import RecordList from "./RecordList";
 import OrderBar from "./OrderBar";
-import SearchBar from "../navbar/SearchBar";
+import SearchBar from "../partials/SearchBar";
 import SliderLine from '../partials/SliderLine';
 import ErrorMessage from "../warning/ErrorMessage";
 
