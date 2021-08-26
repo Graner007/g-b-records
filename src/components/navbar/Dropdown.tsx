@@ -1,11 +1,10 @@
 import { Component } from 'react';
-import { Dropdown as Drop, List, Alert } from 'antd';
+import { Dropdown as Drop, List } from 'antd';
 import { Link } from "react-router-dom";
-import { gql } from '@apollo/client';
+import { ApolloError, gql } from '@apollo/client';
 import { ChildProps, graphql } from "@apollo/react-hoc";
 
-import Loading from "../warning/Loading";
-import { Content, Layout } from '../Styles';
+import ErrorMessage from '../warning/ErrorMessage';
 
 const DROPDOWN_QUERY = gql`
     query DropdownQuery(
@@ -37,18 +36,22 @@ const withDropdownItems = graphql<Props, DropdownType>(DROPDOWN_QUERY, {
       variables: { 
         type
       },
-      fetchPolicy: "no-cache"
+      fetchPolicy: "no-cache",
+      onError: (error: ApolloError) => {
+          return <ErrorMessage text={error.message} />
+      }
     })
 });
 
 class Dropdown extends Component<ChildProps<Props, DropdownType>, {}> {
     render() {
-        const { loading, dropdown, error } = this.props.data!;
+        const { loading, dropdown } = this.props.data!;
 
         const menuList = (
             <List
                 grid={{ gutter: 16, column: 4 }}
                 dataSource={dropdown}
+                loading={loading}
                 renderItem={(item, index) => (
                     <Link to={"/collections/" + item.name.split(" ").join("-").toLowerCase()}>
                         <List.Item key={index} style={{cursor: "pointer", margin: "5px"}}>{item.name}</List.Item>
@@ -58,17 +61,11 @@ class Dropdown extends Component<ChildProps<Props, DropdownType>, {}> {
         )
 
         return (
-            <>
-                {error && <Alert message={error.message} type="error" showIcon />}
-                {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
-                {dropdown && 
-                    <Drop overlay={menuList}>
-                        <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            {this.props.title}
-                        </div>
-                    </Drop>
-                }
-            </>
+            <Drop overlay={menuList}>
+                <div className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    {this.props.title}
+                </div>
+            </Drop>
         )
     }
 }

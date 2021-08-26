@@ -59,10 +59,10 @@ const RecordUnderPrice = (props: Props) => {
                     </Header>
                     <Content textAlign="center">
                         <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                            <Col className="gutter-row"><RecordList records={data.recordsBetweenTwoPrice.slice(0, 5)} maxWidth={250} isWishlist={false} column={5} /></Col>
+                            <Col className="gutter-row"><RecordList records={data.recordsBetweenTwoPrice.slice(0, 5)} maxWidth={200} isWishlist={false} column={5} /></Col>
                         </Row>
                         <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                            <Col className="gutter-row"><RecordList records={data.recordsBetweenTwoPrice.slice(5, 10)} maxWidth={250} isWishlist={false} column={5} /></Col>
+                            <Col className="gutter-row"><RecordList records={data.recordsBetweenTwoPrice.slice(5, 10)} maxWidth={200} isWishlist={false} column={5} /></Col>
                         </Row>
                         <Button type="primary" size="large"><Link to='/'>SHOP ALL VINYL UNDER {props.price}$</Link></Button>
                     </Content>
