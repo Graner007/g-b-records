@@ -37,7 +37,7 @@ class Decades extends Component<ChildProps<{}, Decade>, {}> {
                         <Header textAlign="center" margin={30}>
                             <H1 bold={true}>Shop by Decade</H1>
                         </Header>
-                        <Content padding="0 150px 0 150px">
+                        <Content padding="0 200px 0 200px">
                             <Row gutter={16} justify="center">
                                 {decade.map(d => (
                                     <Col style={{padding: 8}} span={12}><Link to={d.linkUrl}><Image src={d.name} preview={false} className="shadow" /></Link></Col>
