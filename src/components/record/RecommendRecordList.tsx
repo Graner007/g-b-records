@@ -1,71 +1,53 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Row, Col, Layout } from 'antd';
+import { useQuery, gql } from '@apollo/client';
 
 import { Header, Content } from "../Styles";
 import { H1 } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
-import { StatusCodeModel } from "../interface/StatusCodeModel";
 import Loading from "../warning/Loading";
-import ErrorPage from "../warning/ErrorPage";
 import RecordList from "./RecordList";
+import ErrorMessage from '../warning/ErrorMessage';
+
+const RECOMMEND_RECORDS_QUERY = gql`
+    query RecommendRecordQuery {
+        recommendedRecords { 
+            id
+            name
+            price
+            albumCover
+            artist {
+                name
+            }
+        }
+    }
+`;
+
+type RecommendRecords = {
+    recommendedRecords: RecordModel[];
+}
 
 const RecommendRecordList = () => {
-
-    const [records, setRecords] = useState<RecordModel[]>([] as RecordModel[]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<boolean>(false);
-    const [statusCode, setStatusCode] = useState<StatusCodeModel>({code: "500"});
-
-    useEffect(() => {
-        axios.get(process.env.PUBLIC_URL + "/data/record.json")
-            .then(res => {
-                if (res.status === 200) {
-                    let data: RecordModel[] = [];
-                    data = res.data;
-
-                    const filteredRecords = data.filter(d => d.id < 6);
-
-                    setRecords(filteredRecords);
-                    setLoading(false);
-                    setError(false);
-                }
-            })
-            .catch(err => {
-                switch (err.response.status) {
-                    case 404:
-                        setStatusCode({code : "404"});
-                        break;
-                    case 500:
-                        setStatusCode({code : "500"});
-                        break;
-                    default:
-                        break;
-                }
-                setError(true);
-                setLoading(false);
-            });
-        
-    }, [records.length]);
-
-    if (error) {
-        return (
-            <ErrorPage status={statusCode.code} />
-        )
-    }
+    const { data, loading, error } = useQuery<RecommendRecords, {}>(RECOMMEND_RECORDS_QUERY, {
+        fetchPolicy: "no-cache"
+    });
 
     return (
-        loading ? <Loading size={35} /> : 
-            <Layout style={{backgroundColor: "white"}}>
-                <Header textAlign="center" margin={30}>
-                    <H1 bold={true}>Recommended Records</H1>
-                </Header>
-                <Content>
-                    <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                        <Col className="gutter-row"><RecordList records={records} maxWidth={250} isWishlist={false} column={5} /></Col>
-                    </Row>
-                </Content>
-            </Layout>
+        <>
+            {error && <ErrorMessage text={error.message} />}
+            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {data && 
+                <Layout style={{backgroundColor: "white"}}>
+                    <Header textAlign="center" margin={30}>
+                        <H1 bold={true}>Recommended Records</H1>
+                    </Header>
+                    <Content>
+                        <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                             <Col className="gutter-row"><RecordList records={data.recommendedRecords} maxWidth={250} isWishlist={false} column={data.recommendedRecords.length} /></Col>
+                        </Row>
+                    </Content>
+                </Layout>
+            }
+        </>
     )
 }
 

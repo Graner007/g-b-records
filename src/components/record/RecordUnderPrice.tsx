@@ -42,7 +42,10 @@ type RecordsBetweenTwoPrice = {
 const RecordUnderPrice = (props: Props) => {
     const { data, loading, error } = useQuery<RecordsBetweenTwoPrice, RecordsBetweenTwoPriceVars>(
         RECORDS_BETWEEN_TWO_PRICE_QUERY, 
-        { variables: { min: 0, max: props.price } }
+        { 
+            variables: { min: 0, max: props.price },
+            fetchPolicy: "no-cache" 
+        }
     );
 
     return (
