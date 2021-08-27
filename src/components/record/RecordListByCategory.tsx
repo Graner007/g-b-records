@@ -115,7 +115,7 @@ const RecordListByCategory = () => {
                             <OrderBar recordsLength={data.category.count} />
                         </Header>
                         <Content backgroundColor="#ececec" padding="3%">
-                            <RecordList maxWidth={200} records={data.category.records} isWishlist={false} column={6} />
+                            <RecordList maxwidth={200} records={data.category.records} iswishlist={false} column={6} />
                         </Content>
                     </Layout>
                 </Layout>}

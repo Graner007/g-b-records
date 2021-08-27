@@ -42,7 +42,7 @@ const RecommendRecordList = () => {
                     </Header>
                     <Content>
                         <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                             <Col className="gutter-row"><RecordList records={data.recommendedRecords} maxWidth={200} isWishlist={false} column={data.recommendedRecords.length} /></Col>
+                             <Col className="gutter-row"><RecordList records={data.recommendedRecords} maxwidth={200} iswishlist={false} column={data.recommendedRecords.length} /></Col>
                         </Row>
                     </Content>
                 </Layout>

@@ -1,84 +1,78 @@
-import { Component } from 'react';
-import { Button, Row, Col } from "antd";
-import axios from "axios"; 
+import { Button, Row, Col, message } from "antd";
+import { useQuery, gql, useMutation, ApolloError } from '@apollo/client';
 
 import { Layout, Content, Header, H1 } from "../Styles";
-import ErrorPage from "../../components/warning/ErrorPage";
 import Loading from "../../components/warning/Loading";
 import RecordList from '../record/RecordList';
-import { UserModel } from "../../components/interface/UserModel";
-import { StatusCodeModel } from "../../components/interface/StatusCodeModel";
-import { LoginCtx } from "../../context/LoginContext";
+import { RecordModel } from "../interface/RecordModel";
+import ErrorMessage from "../warning/ErrorMessage";
 
-type State = {
-    user: UserModel;
-    error: boolean;
-    loading: boolean;
-    statusCode: StatusCodeModel;
+const WISHLIST_QUERY = gql`
+    query WishlistQuery {
+        wishlist { 
+            products {
+                id
+                name
+                price
+                albumCover
+                artist {
+                    name
+                }
+            }
+        }
+    }
+`;
+
+const ADD_ALL_TO_CART_MUTATION = gql`
+    mutation AddAllToCartMutation {
+        addAllProductsToCart {
+            id
+        }
+    }
+`;
+
+type WishlistType = {
+    wishlist: {
+        products: RecordModel[];
+    }
 }
 
-export default class Wishlist extends Component {
+const Wishlist = () => {
+    const { data, loading, error } = useQuery<WishlistType, {}>(WISHLIST_QUERY, {
+        fetchPolicy: "no-cache"
+    });
 
-    static contextType = LoginCtx;
-
-    state: State = {
-        user: {} as UserModel,
-        error: false,
-        loading: true,
-        statusCode: {} as StatusCodeModel
-    }
-
-    componentDidMount() {
-        axios.get(process.env.PUBLIC_URL + "/data/user.json")
-            .then(res => {
-                if (res.status === 200) {
-                    let data: UserModel[] = [];
-                    data = res.data;
-
-                    const user = data.find(user => user.email === this.context.state.email);
-
-                    if (user) { this.setState({user: user, loading: false, error: false, statusCode: {} as StatusCodeModel}); }
-                    else { this.setState({loading: false, error: true, statusCode: {code: "403"}}); }
-                }
-            })
-            .catch(err => {
-                switch (err.response.status) {
-                    case 403:
-                        this.setState({loading: false, error: true, statusCode: {code: "403"}});
-                        break; 
-                    case 404:
-                        this.setState({loading: false, error: true, statusCode: {code: "404"}});
-                        break;
-                    case 500:
-                        this.setState({loading: false, error: true, statusCode: {code: "500"}});                     
-                        break;
-                    default:
-                        break;
-                }
-            });
-    }
-
-    render() {
-
-        if (this.state.error) {
-            return (
-                <ErrorPage status={this.state.statusCode.code} />
-            )
+    const [addAllToCart] = useMutation<{}, {}>(
+        ADD_ALL_TO_CART_MUTATION, 
+        { 
+            onCompleted: () => {
+                message.success("All item(s) add to Cart");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
         }
+    );
 
-        return (
-            this.state.loading ? <Loading size={35} /> :
+    return (
+        <>
+            {error && <ErrorMessage text={error.message} />}
+            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {data && 
                 <Layout>
                     <Header>
                         <Row gutter={24}>
                             <Col span={12}><H1 bold={true}>Wish List</H1></Col>
-                            <Col span={12} push={8}><Button type="primary">ADD ALL TO CART</Button></Col>
+                            <Col span={12} push={8}><Button type="primary" onClick={() => addAllToCart()}>ADD ALL TO CART</Button></Col>
                         </Row>
                     </Header>
                     <Content padding="3%">
-                        <RecordList records={this.state.user.wishList} maxWidth={200} isWishlist={true} column={7} />
+                        <RecordList records={data.wishlist.products} maxwidth={200} iswishlist={true} />
                     </Content>
                 </Layout>
-        )
-    }
+            }
+        </>
+    )
 }
+
+export default Wishlist;
