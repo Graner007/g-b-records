@@ -1,5 +1,5 @@
-import { Button, Row, Col } from "antd";
-import { useQuery, gql } from '@apollo/client';
+import { Button, Row, Col, message } from "antd";
+import { useQuery, gql, useMutation, ApolloError } from '@apollo/client';
 
 import { Layout, Content, Header, H1 } from "../Styles";
 import Loading from "../../components/warning/Loading";
@@ -23,6 +23,14 @@ const WISHLIST_QUERY = gql`
     }
 `;
 
+const ADD_ALL_TO_CART_MUTATION = gql`
+    mutation AddAllToCartMutation {
+        addAllProductsToCart {
+            id
+        }
+    }
+`;
+
 type WishlistType = {
     wishlist: {
         products: RecordModel[];
@@ -34,6 +42,18 @@ const Wishlist = () => {
         fetchPolicy: "no-cache"
     });
 
+    const [addAllToCart] = useMutation<{}, {}>(
+        ADD_ALL_TO_CART_MUTATION, 
+        { 
+            onCompleted: () => {
+                message.success("All item(s) add to Cart");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
+        }
+    );
+
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
@@ -43,11 +63,11 @@ const Wishlist = () => {
                     <Header>
                         <Row gutter={24}>
                             <Col span={12}><H1 bold={true}>Wish List</H1></Col>
-                            <Col span={12} push={8}><Button type="primary">ADD ALL TO CART</Button></Col>
+                            <Col span={12} push={8}><Button type="primary" onClick={() => addAllToCart()}>ADD ALL TO CART</Button></Col>
                         </Row>
                     </Header>
                     <Content padding="3%">
-                        <RecordList records={data.wishlist.products} maxWidth={200} isWishlist={true} />
+                        <RecordList records={data.wishlist.products} maxwidth={200} iswishlist={true} />
                     </Content>
                 </Layout>
             }
