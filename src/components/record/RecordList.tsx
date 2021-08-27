@@ -11,13 +11,13 @@ type Props = {
     records: RecordModel[];
     maxWidth: number;
     isWishlist: boolean;
-    column: number;
+    column?: number;
 };
 
 const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
     return (
         records ? <List
-            grid={{gutter: 16, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
+            grid={{gutter: 24, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
             dataSource={ records }
             renderItem={item => (
                 <List.Item>

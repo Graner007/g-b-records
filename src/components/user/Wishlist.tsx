@@ -1,73 +1,44 @@
-import { Component } from 'react';
 import { Button, Row, Col } from "antd";
-import axios from "axios"; 
+import { useQuery, gql } from '@apollo/client';
 
 import { Layout, Content, Header, H1 } from "../Styles";
-import ErrorPage from "../../components/warning/ErrorPage";
 import Loading from "../../components/warning/Loading";
 import RecordList from '../record/RecordList';
-import { UserModel } from "../../components/interface/UserModel";
-import { StatusCodeModel } from "../../components/interface/StatusCodeModel";
-import { LoginCtx } from "../../context/LoginContext";
+import { RecordModel } from "../interface/RecordModel";
+import ErrorMessage from "../warning/ErrorMessage";
 
-type State = {
-    user: UserModel;
-    error: boolean;
-    loading: boolean;
-    statusCode: StatusCodeModel;
+const WISHLIST_QUERY = gql`
+    query WishlistQuery {
+        wishlist { 
+            products {
+                id
+                name
+                price
+                albumCover
+                artist {
+                    name
+                }
+            }
+        }
+    }
+`;
+
+type WishlistType = {
+    wishlist: {
+        products: RecordModel[];
+    }
 }
 
-export default class Wishlist extends Component {
+const Wishlist = () => {
+    const { data, loading, error } = useQuery<WishlistType, {}>(WISHLIST_QUERY, {
+        fetchPolicy: "no-cache"
+    });
 
-    static contextType = LoginCtx;
-
-    state: State = {
-        user: {} as UserModel,
-        error: false,
-        loading: true,
-        statusCode: {} as StatusCodeModel
-    }
-
-    componentDidMount() {
-        axios.get(process.env.PUBLIC_URL + "/data/user.json")
-            .then(res => {
-                if (res.status === 200) {
-                    let data: UserModel[] = [];
-                    data = res.data;
-
-                    const user = data.find(user => user.email === this.context.state.email);
-
-                    if (user) { this.setState({user: user, loading: false, error: false, statusCode: {} as StatusCodeModel}); }
-                    else { this.setState({loading: false, error: true, statusCode: {code: "403"}}); }
-                }
-            })
-            .catch(err => {
-                switch (err.response.status) {
-                    case 403:
-                        this.setState({loading: false, error: true, statusCode: {code: "403"}});
-                        break; 
-                    case 404:
-                        this.setState({loading: false, error: true, statusCode: {code: "404"}});
-                        break;
-                    case 500:
-                        this.setState({loading: false, error: true, statusCode: {code: "500"}});                     
-                        break;
-                    default:
-                        break;
-                }
-            });
-    }
-
-    render() {
-
-        if (this.state.error) {
-            return (
-                <ErrorPage status={this.state.statusCode.code} />
-            )
-        }
-
-        return (
-            this.state.loading ? <Loading size={35} /> :
+    return (
+        <>
+            {error && <ErrorMessage text={error.message} />}
+            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {data && 
                 <Layout>
                     <Header>
                         <Row gutter={24}>
@@ -76,9 +47,12 @@ export default class Wishlist extends Component {
                         </Row>
                     </Header>
                     <Content padding="3%">
-                        <RecordList records={this.state.user.wishList} maxWidth={200} isWishlist={true} column={7} />
+                        <RecordList records={data.wishlist.products} maxWidth={200} isWishlist={true} />
                     </Content>
                 </Layout>
-        )
-    }
+            }
+        </>
+    )
 }
+
+export default Wishlist;
