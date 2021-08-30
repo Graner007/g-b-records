@@ -16,10 +16,25 @@ const ADD_CART_ITEM = gql`
   }
 `;
 
+const TOGGLE_PRODUCT_IN_WISHLIST = gql`
+  mutation toggleProductInWhislistMutation($recordId: Int!) {
+    toggleProductInWhislist(recordId: $recordId) {
+      products {
+          id
+          name
+      }
+    }
+  }
+`;
+
 type AddCartItemType = {
     name: string;
     albumCover: string;
     price: number;
+}
+
+type ToggleProductInWhislistType = {
+    recordId: number;
 }
 
 type Props = {
@@ -42,6 +57,18 @@ const RecordList = ({records, maxwidth, iswishlist, column}: Props) => {
         }
     );
 
+    const [toggleProductInWhislist] = useMutation<{}, ToggleProductInWhislistType>(
+        TOGGLE_PRODUCT_IN_WISHLIST, 
+        { 
+            onCompleted: () => {
+                message.success("Wishlist");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
+        }
+    );
+
     return (
         records ? <List
             grid={{gutter: 24, column: column, xs: 1, sm: 2, md: 3, lg: 3 }}
@@ -52,7 +79,14 @@ const RecordList = ({records, maxwidth, iswishlist, column}: Props) => {
                         className="shadow"
                         maxWidth={ maxwidth }
                         cover={ <Link to={"/products/" + item.id}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
-                        actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, (iswishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
+                        actions={[ 
+                            <ShoppingCartOutlined 
+                                style={{color: "green", fontSize: 20}} 
+                                onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
+                                    (iswishlist ? 
+                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
+                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: item.id}})} />
+                                    ) ]}>
                             <Link to={"/products/" + item.id}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
                 </List.Item>

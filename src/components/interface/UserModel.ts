@@ -1,9 +1,8 @@
-import { CartItemModel } from './CartItemModel';
-import { RecordModel } from "./RecordModel";
+import { CartModel } from './CartModel';
+import { WishlistModel } from "./WishlistModel";
 
 export interface UserModel {
     id: number;
-    cart: CartItemModel[];
     name: string;
     email: string;
     password: string;
@@ -12,5 +11,6 @@ export interface UserModel {
     zipcode: number;
     country: string;
     phoneNumber: string;
-    wishList: RecordModel[];
+    wishList: WishlistModel;
+    cart: CartModel;
 }

@@ -3,12 +3,12 @@ import { List, InputNumber, Avatar } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
-import { CartItemModel } from "../../../components/interface/CartItemModel";
+import { CartModel } from "../../../components/interface/CartModel";
 import EmptyDescription from "../../warning/EmptyDescription";
 import { P } from "../../Styles";
 
 type Props = {
-    cart: CartItemModel[];
+    cart: CartModel;
     editable: boolean;
 }
 
@@ -16,16 +16,16 @@ export default class ListCart extends Component<Props> {
 
     grandTotal():number {
         let total: number = 0;
-        this.props.cart.map(item => total += item.price * item.quantity);
+        this.props.cart.products.map(item => total += item.price * item.quantity);
         return total;
     }
 
     render() {
         return (
-            this.props.cart.length === 0 ? <EmptyDescription text="Your cart is empty" /> : 
+            this.props.cart.products.length === 0 ? <EmptyDescription text="Your cart is empty" /> : 
             <List
                 itemLayout="horizontal"
-                dataSource={this.props.cart}
+                dataSource={this.props.cart.products}
                 size="large"
                 renderItem={item => (
                 <List.Item className="shadow"

@@ -1,5 +1,6 @@
 import { ArtistModel } from "./ArtistModel";
 import { GenreModel } from "./GenreModel";
+import { WishlistModel } from "./WishlistModel";
 
 export interface RecordModel {
     id: number;
@@ -10,4 +11,5 @@ export interface RecordModel {
     releaseDate: string;
     albumCover: string;
     price: number;
+    wishlist: WishlistModel[];
 }
