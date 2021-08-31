@@ -7,7 +7,6 @@ import { UserModel } from "../interface/UserModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import ErrorPage from "../warning/ErrorPage";
 import Loading from "../warning/Loading";
-import AddressForm from "../partials/AddressForm";
 import { LoginCtx } from "../../context/LoginContext";
 import PaymentStep from "./PaymentStep";
 
@@ -79,16 +78,6 @@ export default class Checkout extends Component {
                             <Header backgroundcolor="inherit" textalign="center">
                                 <H1 bold={true}>Checkout</H1>
                             </Header>
-                                {/* <AddressForm 
-                                    firstName={this.state.user.firstName} 
-                                    lastName={this.state.user.lastName} 
-                                    address={this.state.user.address}
-                                    zipcode={this.state.user.zipcode}
-                                    country={this.state.user.country}
-                                    phoneNumber={this.state.user.telephone}
-                                    isAgreement={true}
-                                    isButton={true}
-                                /> */}
                         </Col>
                         <Col span={12}>
                             <Header backgroundcolor="inherit" textalign="center"><H1 bold={true}>Cart</H1></Header>

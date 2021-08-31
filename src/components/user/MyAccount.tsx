@@ -1,14 +1,12 @@
-import { useState } from "react";
-import { Row, Col, Card, Modal, Button } from "antd";
+import { Row, Col, Card } from "antd";
 import { gql, useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
 
 import { Content, Header, P, H1, Layout } from '../Styles';
 import Loading from "../warning/Loading";
 import OrderList from "./order/OrderList";
-import AddressForm from "../partials/AddressForm";
 import ErrorMessage from "../warning/ErrorMessage";
 import { UserModel } from "../interface/UserModel";
+import { UserDetailsModal } from "../partials/UserDetailsModal"; 
 
 const USER_DETAILS_QUERY = gql`
   query userQuery {
@@ -43,21 +41,6 @@ type UserDetailsType = {
 const MyAccount = () => {
     const { data, loading, error } = useQuery<UserDetailsType, {}>(USER_DETAILS_QUERY);
 
-    const [modalVisible, setModalVisible] = useState<boolean>(false);
-    const [modalConfirmLoading, setModalConfirmLoading] = useState<boolean>(false);
-
-    const showModal = () => {
-        setModalVisible(true);
-      };
-    
-    const handleOk = () => {
-        setModalConfirmLoading(true);
-    };
-
-    const handleCancel = () => {
-        setModalVisible(false);
-    };
-
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
@@ -77,30 +60,14 @@ const MyAccount = () => {
                             <Col span={12} push={6}>
                                 <H1 bold={true} fontsize={18}>{data.user.firstName + " " + data.user.lastName}</H1>
                                 <P fontsize={16}>{data.user.email}</P>
-                                <Link to="#" onClick={showModal} >Add new address</Link>
-
-                                <Modal
-                                    title="Add new address"
-                                    visible={modalVisible}
-                                    onOk={handleOk}
-                                    confirmLoading={modalConfirmLoading}
-                                    onCancel={handleCancel}
-                                    footer={[
-                                        <Button onClick={handleCancel}>Cancel</Button>,
-                                        <Button type="primary" onClick={handleOk}>Save</Button>
-                                    ]}
-                                >
-                                <AddressForm 
-                                        firstName={data.user.firstName} 
-                                        lastName={data.user.lastName} 
-                                        address={data.user.address}
-                                        zipcode={data.user.zipcode}
-                                        country={data.user.country}
-                                        phoneNumber={data.user.telephone}
-                                        isAgreement={false}
-                                        isButton={false}
-                                    />
-                                </Modal>
+                                <UserDetailsModal
+                                    firstName={data.user.firstName}
+                                    lastName={data.user.lastName}
+                                    address={data.user.address}
+                                    zipcode={data.user.zipcode}
+                                    country={data.user.country}
+                                    telephone={data.user.telephone}
+                                />
                             </Col>
                         </Row>
                     </Content>
