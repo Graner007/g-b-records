@@ -72,23 +72,23 @@ export default class Payment extends Component {
         return (
             this.state.loading ? <Loading size={35} /> :
                 <Layout>
-                    <Header textAlign="center">
+                    <Header textalign="center">
                         <PaymentStep currentIndex={2} />
                     </Header>
                     <Content>
                         <Row justify="center" gutter={24}>
                             <Col span={12}>
                                 <Space direction="vertical" size="large">
-                                    <H1 bold={true} textAlign="center">Payment</H1>
+                                    <H1 bold={true} textalign="center">Payment</H1>
                                     <PaymentTable />
                                 </Space>
                             </Col>
                             <Col span={12}>
                                 <Space direction="vertical" size="large">
-                                    <H1 bold={true} textAlign="center">Shipment</H1>
+                                    <H1 bold={true} textalign="center">Shipment</H1>
                                     <InformationTable user={this.state.user} />
-                                    <H1 bold={true} textAlign="center">Cart</H1>
-                                    <ListCart cart={this.state.user.cart} editable={false} />
+                                    <H1 bold={true} textalign="center">Cart</H1>
+                                    <ListCart cart={this.state.user.cart} grandTotal={0} editable={false} />
                                 </Space>
                             </Col>
                         </Row> 

@@ -66,7 +66,7 @@ const Login = () => {
                 }}
                 >
 
-                    <Header textAlign="center"><H1 bold={true}>Sign in</H1></Header><br /><br />
+                    <Header textalign="center"><H1 bold={true}>Sign in</H1></Header><br /><br />
 
                 <Form.Item
                     name="email"

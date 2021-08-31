@@ -34,15 +34,15 @@ const RecommendRecordList = () => {
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
-            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
             {data && 
                 <Layout style={{backgroundColor: "white"}}>
-                    <Header textAlign="center" margin={30}>
+                    <Header textalign="center" margin={30}>
                         <H1 bold={true}>Recommended Records</H1>
                     </Header>
                     <Content>
                         <Row justify="center" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                             <Col className="gutter-row"><RecordList records={data.recommendedRecords} maxwidth={200} iswishlist={false} column={data.recommendedRecords.length} /></Col>
+                             <Col className="gutter-row"><RecordList records={data.recommendedRecords} maxWidth={200} isWishlist={false} column={data.recommendedRecords.length} /></Col>
                         </Row>
                     </Content>
                 </Layout>

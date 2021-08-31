@@ -50,7 +50,7 @@ const Record = () => {
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
-            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
             {data && 
                 <Layout>
                 <Header className="header">
@@ -60,13 +60,13 @@ const Record = () => {
                     <Row>
                         <Col span={12}><Image src={data.record.albumCover} preview={false} style={{maxWidth: "90%"}} /></Col>
                         <Col span={12}>
-                            <P fontSize={50}>{data.record.name}</P>
-                            <P fontSize={40}>{data.record.artist.name}</P>
-                            <P fontSize={40} color="#01579b">{data.record.price}$</P>
+                            <P fontsize={50}>{data.record.name}</P>
+                            <P fontsize={40}>{data.record.artist.name}</P>
+                            <P fontsize={40} color="#01579b">{data.record.price}$</P>
                             <Space direction="vertical" size="middle" style={{width: "100%"}}>
                                 <Button block type="primary" size="large"><ShoppingCartOutlined /> ADD TO CART</Button>
                                 <Button block type="primary" danger size="large"><HeartOutlined /> WISHLIST</Button><br />
-                                <P fontSize={20}>{data.record.description}</P>
+                                <P fontsize={20}>{data.record.description}</P>
                             </Space>
                         </Col>
                     </Row>

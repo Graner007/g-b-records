@@ -7,11 +7,23 @@ import { useMutation, gql, ApolloError } from '@apollo/client';
 
 import { RecordModel } from '../interface/RecordModel';
 import EmptyDescription from '../warning/EmptyDescription';
+import { WishlistModel } from '../interface/WishlistModel';
 
 const ADD_CART_ITEM = gql`
   mutation addCartItemMutation($name: String!, $albumCover: String!, $price: Int!) {
     addCartItem(name: $name, albumCover: $albumCover, price: $price) {
       id
+    }
+  }
+`;
+
+const TOGGLE_PRODUCT_IN_WISHLIST = gql`
+  mutation toggleProductInWhislistMutation($recordId: ID!) {
+    toggleProductInWhislist(recordId: $recordId) {
+      products {
+          id
+          name
+      }
     }
   }
 `;
@@ -22,19 +34,40 @@ type AddCartItemType = {
     price: number;
 }
 
+type ToggleProductInWhislistType = {
+    recordId: number;
+}
+
+type WishlistType = {
+    wishlist: WishlistModel;
+}
+
 type Props = {
     records: RecordModel[];
-    maxwidth: number;
-    iswishlist: boolean;
+    maxWidth: number;
+    isWishlist: boolean;
     column?: number;
 };
 
-const RecordList = ({records, maxwidth, iswishlist, column}: Props) => {
+const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
     const [addCartItem] = useMutation<{}, AddCartItemType>(
         ADD_CART_ITEM, 
         { 
             onCompleted: () => {
                 message.success("Record added to cart");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
+        }
+    );
+
+    const [toggleProductInWhislist] = useMutation<WishlistType, ToggleProductInWhislistType>(
+        TOGGLE_PRODUCT_IN_WISHLIST, 
+        { 
+            onCompleted: (data: WishlistType) => {
+                console.log(data);
+                message.success("Wishlist");
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
@@ -50,9 +83,16 @@ const RecordList = ({records, maxwidth, iswishlist, column}: Props) => {
                 <List.Item>
                     <Card
                         className="shadow"
-                        maxWidth={ maxwidth }
+                        maxwidth={ maxWidth }
                         cover={ <Link to={"/products/" + item.id}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
-                        actions={[ <ShoppingCartOutlined style={{color: "green", fontSize: 20}} onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, (iswishlist ? <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : <HeartOutlined style={{color: "red", fontSize: 20}} />) ]}>
+                        actions={[ 
+                            <ShoppingCartOutlined 
+                                style={{color: "green", fontSize: 20}} 
+                                onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
+                                    (isWishlist ? 
+                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
+                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: item.id}})} />
+                                    ) ]}>
                             <Link to={"/products/" + item.id}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
                 </List.Item>

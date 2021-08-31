@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Row, Col, Image, Layout } from "antd";
 import { Link } from "react-router-dom";
 import { ChildProps, graphql } from "@apollo/react-hoc";
@@ -31,16 +31,16 @@ class Decades extends Component<ChildProps<{}, Decade>, {}> {
         return (
             <>
                 {error && <ErrorMessage text={error.message} />}
-                {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+                {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
                 {decade && 
                     <Layout style={{backgroundColor: "white"}}>
-                        <Header textAlign="center" margin={30}>
+                        <Header textalign="center" margin={30}>
                             <H1 bold={true}>Shop by Decade</H1>
                         </Header>
                         <Content padding="0 200px 0 200px">
                             <Row gutter={16} justify="center">
-                                {decade.map(d => (
-                                    <Col style={{padding: 8}} span={12}><Link to={d.linkUrl}><Image src={d.name} preview={false} className="shadow" /></Link></Col>
+                                {decade.map((d, index) => (
+                                    <Col key={index} style={{padding: 8}} span={12}><Link to={d.linkUrl}><Image src={d.name} preview={false} className="shadow" /></Link></Col>
                                 ))}
                             </Row>
                         </Content>

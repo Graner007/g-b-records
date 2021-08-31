@@ -85,7 +85,7 @@ const MyAccount = () => {
     return (
         loading ? <Loading size={35} /> :
             <Layout>
-                <Header textAlign="center">
+                <Header textalign="center">
                     <H1 bold={true}>My Account</H1>
                 </Header>
                 <Content padding="3%">
@@ -96,8 +96,8 @@ const MyAccount = () => {
                             </Card>
                         </Col>
                         <Col span={12} push={6}>
-                            <H1 bold={true} fontSize={18}>{orders[0].user.name}</H1>
-                            <P fontSize={16}>{orders[0].user.email}</P>
+                            <H1 bold={true} fontsize={18}>{orders[0].user.name}</H1>
+                            <P fontsize={16}>{orders[0].user.email}</P>
                             <Link to="#" onClick={showModal} >Add new address</Link>
 
                             <Modal
