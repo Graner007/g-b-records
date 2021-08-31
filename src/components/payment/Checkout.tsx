@@ -79,16 +79,16 @@ export default class Checkout extends Component {
                             <Header backgroundcolor="inherit" textalign="center">
                                 <H1 bold={true}>Checkout</H1>
                             </Header>
-                                <AddressForm 
-                                    firstName={this.state.user.name.split(" ")[0]} 
-                                    lastName={this.state.user.name.split(" ")[1]} 
+                                {/* <AddressForm 
+                                    firstName={this.state.user.firstName} 
+                                    lastName={this.state.user.lastName} 
                                     address={this.state.user.address}
                                     zipcode={this.state.user.zipcode}
                                     country={this.state.user.country}
-                                    phoneNumber={this.state.user.phoneNumber}
+                                    phoneNumber={this.state.user.telephone}
                                     isAgreement={true}
                                     isButton={true}
-                                />
+                                /> */}
                         </Col>
                         <Col span={12}>
                             <Header backgroundcolor="inherit" textalign="center"><H1 bold={true}>Cart</H1></Header>
