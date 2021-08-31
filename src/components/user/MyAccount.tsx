@@ -13,7 +13,6 @@ import { UserModel } from "../interface/UserModel";
 const USER_DETAILS_QUERY = gql`
   query userQuery {
     user {
-        id
         firstName
         lastName
         email

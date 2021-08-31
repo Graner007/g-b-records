@@ -2,6 +2,8 @@ import { Component } from 'react'
 import { Form, Input, Cascader, Checkbox, Button} from 'antd';
 import { Link } from "react-router-dom";
 
+import { countries, Country } from "./Countires";
+
 type Props = {
     firstName: string;
     lastName: string;
@@ -13,20 +15,15 @@ type Props = {
     isButton: boolean;
 }
 
-const countries = [
-    {
-      value: 'hungary',
-      label: 'Hungary',
-    },
-    {
-      value: 'unitedKingdom',
-      label: 'United Kingdom',
-    },
-    {
-        value: 'usa',
-        label: "USA"
-    }
-];
+let allCountries: Country[] = [];
+
+const getCountries = () => {
+    countries()
+        .then(res => allCountries = res)
+        .catch(err => console.error(err));
+}
+
+getCountries();
 
 export default class AddressForm extends Component<Props> {
     render() {
@@ -110,7 +107,7 @@ export default class AddressForm extends Component<Props> {
                     ]}
                     hasFeedback
                 >
-                    <Cascader options={countries} />
+                    <Cascader options={allCountries} />
                 </Form.Item>
 
                 <Form.Item
