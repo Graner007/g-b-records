@@ -57,7 +57,7 @@ const Wishlist = () => {
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
-            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
             {data && 
                 <Layout>
                     <Header>
@@ -67,7 +67,7 @@ const Wishlist = () => {
                         </Row>
                     </Header>
                     <Content padding="3%">
-                        <RecordList records={data.wishlist.products} maxwidth={200} iswishlist={true} />
+                        <RecordList records={data.wishlist.products} maxWidth={200} isWishlist={true} />
                     </Content>
                 </Layout>
             }

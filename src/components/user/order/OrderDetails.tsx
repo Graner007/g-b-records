@@ -89,7 +89,7 @@ class OrderDetails extends Component<Props, State> {
                             <Col span={12}>
                                 <Card
                                     title={this.state.order.address}
-                                    extra={<P fontSize={18}>{this.state.order.payment}$</P>}
+                                    extra={<P fontsize={18}>{this.state.order.payment}$</P>}
                                     >
                                     <List
                                         itemLayout="horizontal"
@@ -98,7 +98,7 @@ class OrderDetails extends Component<Props, State> {
                                         renderItem={item => (
                                         <Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><List.Item
                                             className="shadow"
-                                            actions={[<P fontSize={18}>Price: {item.price * item.quantity}$</P>, <P fontSize={18}>Quantity: {item.quantity}</P>]}
+                                            actions={[<P fontsize={18}>Price: {item.price * item.quantity}$</P>, <P fontsize={18}>Quantity: {item.quantity}</P>]}
                                         >
                                             <List.Item.Meta
                                                 title={item.name}

@@ -86,36 +86,36 @@ const RecordListByCategory = () => {
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
-            {loading && <Layout><Content textAlign="center"><Loading size={35} /></Content></Layout>}
+            {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
             {data && 
                 <Layout>
                     <Sider theme="light" breakpoint="lg" collapsedWidth="0" >
                         <Menu theme="light" mode="inline" selectable={false} style={{cursor: "no-pointer"}}>
                             <Menu.Item key="1">
-                                <H1 bold={false} fontSize={18}>Filters</H1>
+                                <H1 bold={false} fontsize={18}>Filters</H1>
                             </Menu.Item>
                             <Menu.Item key="2">
-                                <H1 bold={false} fontSize={16}>Artist</H1>
+                                <H1 bold={false} fontsize={16}>Artist</H1>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <SearchBar placeholder="artist" size="small" width="75%" padding="10px 0 10px 0" />
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <P fontSize={14} color="black">{displayName}</P>
+                                <P fontsize={14} color="black">{displayName}</P>
                             </Menu.Item>
                             {data.category.count > 1 ? <Menu.Item key="5" style={{height:"fit-content"}}>
-                                <H1 bold={false} fontSize={16}>Price</H1>
+                                <H1 bold={false} fontsize={16}>Price</H1>
                                 <SliderLine defaultValue={[data.category.minPrice, data.category.maxPrice]} isDot={false} />
                             </Menu.Item> : null}
                         </Menu>
                     </Sider>
                     <Layout>
                         <Header style={{height: "fit-content"}}>
-                            <H1 fontSize={18} bold={false}>Home {'>'} {displayName}</H1>
+                            <H1 fontsize={18} bold={false}>Home {'>'} {displayName}</H1>
                             <OrderBar recordsLength={data.category.count} />
                         </Header>
-                        <Content backgroundColor="#ececec" padding="3%">
-                            <RecordList maxwidth={200} records={data.category.records} iswishlist={false} column={6} />
+                        <Content backgroundcolor="#ececec" padding="3%">
+                            <RecordList maxWidth={200} records={data.category.records} isWishlist={false} column={6} />
                         </Content>
                     </Layout>
                 </Layout>}

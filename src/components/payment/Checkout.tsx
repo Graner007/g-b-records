@@ -7,7 +7,6 @@ import { UserModel } from "../interface/UserModel";
 import { StatusCodeModel } from "../interface/StatusCodeModel";
 import ErrorPage from "../warning/ErrorPage";
 import Loading from "../warning/Loading";
-import ListCart from "../user/cart/ListCart";
 import AddressForm from "../partials/AddressForm";
 import { LoginCtx } from "../../context/LoginContext";
 import PaymentStep from "./PaymentStep";
@@ -77,7 +76,7 @@ export default class Checkout extends Component {
                 <Content>
                     <Row justify="end" gutter={24}>
                         <Col span={12}>
-                            <Header backgroundColor="inherit" textAlign="center">
+                            <Header backgroundcolor="inherit" textalign="center">
                                 <H1 bold={true}>Checkout</H1>
                             </Header>
                                 <AddressForm 
@@ -92,8 +91,8 @@ export default class Checkout extends Component {
                                 />
                         </Col>
                         <Col span={12}>
-                            <Header backgroundColor="inherit" textAlign="center"><H1 bold={true}>Cart</H1></Header>
-                            <ListCart cart={ this.state.user.cart } editable={false} />
+                            <Header backgroundcolor="inherit" textalign="center"><H1 bold={true}>Cart</H1></Header>
+                            {/* <ListCart cart={ this.state.user.cart } editable={false} /> */}
                         </Col>
                     </Row> 
                 </Content>

@@ -4,7 +4,7 @@ import { Footer as Foot } from '../Styles';
 export default class Footer extends Component {
     render() {
         return (
-            <Foot backgroundColor="#2b2929" textAlign="center" color="#fff">
+            <Foot backgroundcolor="#2b2929" textalign="center" color="#fff">
                 Copyright © 2021 G-B Records.
             </Foot>
         )

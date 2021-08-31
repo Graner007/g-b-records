@@ -17,7 +17,6 @@ import Checkout from "./components/payment/Checkout";
 import LoginProvider from "./context/LoginContext";
 import RecordListByCategory from './components/record/RecordListByCategory';
 import Wishlist from './components/user/Wishlist';
-import Payment from './components/payment/Payment';
 
 function App() {
   return (
@@ -60,9 +59,6 @@ function App() {
                 </Route> 
                 <Route path="/wishlist" exact>
                   <Wishlist />
-                </Route>
-                <Route path="/payment" exact>
-                  <Payment />
                 </Route>
                 <Route path="/" exact>
                   <Home />

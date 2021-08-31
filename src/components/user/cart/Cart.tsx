@@ -1,83 +1,65 @@
 import { Component } from 'react';
 import  { Button, Row, Col } from "antd";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { ChildProps, graphql } from "@apollo/react-hoc";
+import { gql } from '@apollo/client';
 
 import { Content, Header, Layout } from '../../Styles';
-import { UserModel } from "../../../components/interface/UserModel";
 import Loading from "../../warning/Loading";
-import ErrorPage from "../../warning/ErrorPage";
 import ListCart from "./ListCart";
-import { LoginCtx } from "../../../context/LoginContext";
-import { StatusCodeModel } from "../../../components/interface/StatusCodeModel";
- 
-type State = {
-    user: UserModel;
-    error: boolean;
-    loading: boolean;
-    statusCode: StatusCodeModel;
+import { CartModel } from '../../interface/CartModel';
+import ErrorMessage from '../../warning/ErrorMessage';
+
+const CART_QUERY = gql`
+    query CartQuery {
+        cart {
+            cart {   
+                products {
+                    id
+                    name
+                    albumCover
+                    price
+                    quantity
+                }
+            }
+            grandTotal
+        }
+    }
+`;
+
+type CartType = {
+    cart: {
+        cart: CartModel;
+        grandTotal: number;
+    }
 }
 
-export default class Cart extends Component {
+const withCart = graphql<{}, CartType>(CART_QUERY);
 
-    static contextType = LoginCtx;
-
-    state: State = {
-        user: {} as UserModel,
-        error: false,
-        loading: true,
-        statusCode: {} as StatusCodeModel
-    }
-
-    componentDidMount() {
-        axios.get(process.env.PUBLIC_URL + '/data/user.json')
-            .then(res => {
-                if (res.status === 200) {
-                    let data: UserModel[] = [];
-                    data = res.data;
-
-                    const user = data.find(user => user.email === this.context.state.email);
-
-                    if (user) { this.setState({user: user, loading: false, error: false, statusCode: {} as StatusCodeModel}); }
-                    else { this.setState({loading: false, error: true, statusCode: {code: "403"}}); }
-                }
-            })
-            .catch(err => {
-                console.log(err.response.status);
-                switch (err.response.status) {
-                    case 403:
-                        this.setState({loading: false, error: true, statusCode: {code: "403"}});
-                        break; 
-                    case 404:
-                        this.setState({loading: false, error: true, statusCode: {code: "404"}});
-                        break;
-                    case 500:
-                        this.setState({loading: false, error: true, statusCode: {code: "500"}});                     
-                        break;
-                    default:
-                        break;
-                }
-            });
-    }
-
+class Cart extends Component<ChildProps<{}, CartType>, {}> {
     render() {
-
-        if (this.state.error) {
-            <ErrorPage status={this.state.statusCode.code} />
-        }
-
+        const { loading, cart, error } = this.props.data!;
+        
         return (
-            <Layout>
-                <Header>
-                    <Row>
-                        <Col span={12}><h1 style={{fontSize: 30}}>Your Cart</h1></Col>
-                        <Col span={12}><Button size="large" type="primary" style={{float: "right", marginTop: 15}}><Link to="/checkout">Checkout</Link></Button></Col>
-                    </Row>
-                </Header>
-                <Content padding="3%">
-                    { this.state.loading ? <Loading size={35} /> : <ListCart cart={this.state.user.cart ? this.state.user.cart : []} editable={true} /> }
-                </Content>
-            </Layout>        
+            <>
+                {error && <ErrorMessage text={error.message} />}
+                {loading && <Layout><Content textalign="center"><Loading size={35} /></Content></Layout>}
+                {cart &&
+                    <Layout>
+                        <Header>
+                            <Row>
+                                <Col span={12}><h1 style={{fontSize: 30}}>Your Cart</h1></Col>
+                                <Col span={12}><Button size="large" type="primary" style={{float: "right", marginTop: 15}}><Link to="/checkout">Checkout</Link></Button></Col>
+                            </Row>
+                        </Header>
+                        <Content padding="3%">
+                            <ListCart cart={cart.cart} grandTotal={cart.grandTotal} editable={true} />
+                        </Content>
+                    </Layout>  
+                }
+            </>
         )
     }
 }
+
+export default withCart(Cart);
