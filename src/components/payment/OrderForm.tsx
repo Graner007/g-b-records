@@ -1,6 +1,8 @@
-import { Component } from 'react'
+import { Component } from 'react';
 import { Form, Input, Cascader, Checkbox, Button} from 'antd';
 import { Link } from "react-router-dom";
+
+import { countries, Country } from '../partials/Countires';
 
 type Props = {
     firstName: string;
@@ -8,42 +10,35 @@ type Props = {
     address: string;
     zipcode: number;
     country: string;
-    phoneNumber: string;
-    isAgreement: boolean;
-    isButton: boolean;
+    telephone: string;
 }
 
-const countries = [
-    {
-      value: 'hungary',
-      label: 'Hungary',
-    },
-    {
-      value: 'unitedKingdom',
-      label: 'United Kingdom',
-    },
-    {
-        value: 'usa',
-        label: "USA"
-    }
-];
+let allCountries: Country[] = [];
 
-export default class AddressForm extends Component<Props> {
+const getCountries = () => {
+    countries()
+        .then(res => allCountries = res)
+        .catch(err => console.error(err));
+}
+
+getCountries();
+
+export default class OrderForm extends Component<Props> {
     render() {
         return (
             <Form
                 name="checkout"
                 scrollToFirstError
-                /* wrapperCol={{ sm: { span: 6, offset: 12 },
+                wrapperCol={{ sm: { span: 6, offset: 12 },
                             xs: { span: 6, offset: 12 }
-                }} */
+                }}
                 initialValues={{
                     firstName: this.props.firstName,
                     lastName: this.props.lastName,
                     address: this.props.address,
                     zipcode: this.props.zipcode,
                     country: [this.props.country],
-                    phone: this.props.phoneNumber
+                    phone: this.props.telephone
                 }}
                 >
                 <Form.Item
@@ -56,7 +51,7 @@ export default class AddressForm extends Component<Props> {
                     ]}
                     hasFeedback
                 >
-                    <Input placeholder="First name" type="text" />
+                    <Input placeholder="First name" type="text" onChange={e => this.setState({firstName: e.target.value})} />
                 </Form.Item>
 
                 <Form.Item
@@ -110,7 +105,7 @@ export default class AddressForm extends Component<Props> {
                     ]}
                     hasFeedback
                 >
-                    <Cascader options={countries} />
+                    <Cascader options={allCountries} />
                 </Form.Item>
 
                 <Form.Item
@@ -126,7 +121,7 @@ export default class AddressForm extends Component<Props> {
                     <Input placeholder="Phone Number" type="tel" />
                 </Form.Item>
 
-                {this.props.isAgreement ? <Form.Item
+                <Form.Item
                     name="agreement"
                     valuePropName="checked"
                     rules={[
@@ -139,10 +134,10 @@ export default class AddressForm extends Component<Props> {
                     <Checkbox>
                     I have read the <Link to="">agreement</Link>
                     </Checkbox>
-                </Form.Item> : null}
-                {this.props.isButton ? <Form.Item>
+                </Form.Item>
+                <Form.Item>
                     <Button type="primary" htmlType="submit"><Link to="/payment">Payment</Link></Button>
-                </Form.Item> : null}
+                </Form.Item>
             </Form>
         )
     }

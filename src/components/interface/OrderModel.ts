@@ -8,5 +8,5 @@ export interface OrderModel {
     address: string;
     products: CartItemModel[];
     payment: number;
-    productNumbers: number;
+    productNumber: number;
 }

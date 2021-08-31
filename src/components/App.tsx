@@ -2,21 +2,21 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 
-import { Content, Header } from './components/Styles';
-import Navbar from "./components/navbar/Navbar";
-import Registration from "./components/auth/Registration";
-import Record from "./components/record/Record";
-import Footer from './components/partials/Footer';
-import ErrorPage from "./components/warning/ErrorPage";
-import Login from "./components/auth/Login";
-import Cart from "./components/user/cart/Cart";
-import MyAccount from "./components/user/MyAccount";
-import OrderDetails from "./components/user/order/OrderDetails";
-import Home from "./components/home/Home";
-import Checkout from "./components/payment/Checkout";
-import LoginProvider from "./context/LoginContext";
-import RecordListByCategory from './components/record/RecordListByCategory';
-import Wishlist from './components/user/Wishlist';
+import { Content, Header } from './Styles';
+import Navbar from "./navbar/Navbar";
+import Registration from "./auth/Registration";
+import Record from "./record/Record";
+import Footer from './partials/Footer';
+import ErrorPage from "./warning/ErrorPage";
+import Login from "./auth/Login";
+import Cart from "./user/cart/Cart";
+import MyAccount from "./user/MyAccount";
+import OrderDetails from "./user/order/OrderDetails";
+import Home from "./home/Home";
+import Checkout from "./payment/Checkout";
+import LoginProvider from "../context/LoginContext";
+import RecordListByCategory from './record/RecordListByCategory';
+import Wishlist from './user/Wishlist';
 
 function App() {
   return (

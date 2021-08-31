@@ -18,10 +18,10 @@ export default class OrderList extends Component<Props> {
                 size="large"
                 renderItem={item => (
                 <Link to={"/orders/" + item.id}><List.Item
-                    actions={[<P fontsize={18}>Payment: {item.payment}$</P>, <P fontsize={18}>{item.productNumbers} {item.productNumbers > 1 ? "Records" : "Record"}</P>]}
+                    actions={[<P fontsize={18}>Payment: {item.payment}$</P>, <P fontsize={18}>{item.productNumber} {item.productNumber > 1 ? "Records" : "Record"}</P>]}
                 >
                     <List.Item.Meta
-                        title={"Date: " + item.orderDate}
+                        title={"Date: " + item.orderDate.split("T")[0]}
                         description={<i>Address: {item.address}</i>}
                     />
                 </List.Item></Link>
