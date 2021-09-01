@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Layout, PageHeader, Card, Row, Col, List, Avatar } from "antd";
-import { withRouter, RouteComponentProps, useParams } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { ChildProps, graphql } from "@apollo/react-hoc";
 import { gql } from '@apollo/client';
@@ -70,12 +70,12 @@ class OrderDetails extends Component<ChildProps<Props, OrderType, OrderVars>, {}
                                             dataSource={order.products}
                                             size="large"
                                             renderItem={item => (
-                                            <Link to={"/products/" + item.id}><List.Item
+                                            <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><List.Item
                                                 className="shadow"
                                                 actions={[<P fontsize={18}>Price: {item.price * item.quantity}$</P>, <P fontsize={18}>Quantity: {item.quantity}</P>]}
                                             >
                                                 <List.Item.Meta
-                                                    title={item.name}
+                                                    title={item.name.toLowerCase().replaceAll(" ", "-")}
                                                     avatar={<Avatar src={item.albumCover} shape="square" size="large" />}
                                                 />
                                             </List.Item></Link>

@@ -32,7 +32,7 @@ function App() {
                 <Route path="/collections/:name" exact>
                   <RecordListByCategory />
                 </Route>
-                <Route path="/products/:id" exact>
+                <Route path="/products/:name" exact>
                   <Record />
                 </Route>
                 <Route path="/registration" exact>

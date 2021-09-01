@@ -82,7 +82,7 @@ const RecordListByCategory = () => {
         CATEGORY_QUERY, 
         { variables: getQueryVariables(displayName) }
     );
-
+    
     return (
         <>
             {error && <ErrorMessage text={error.message} />}

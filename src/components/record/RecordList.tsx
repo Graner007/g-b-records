@@ -83,7 +83,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                     <Card
                         className="shadow"
                         maxwidth={ maxWidth }
-                        cover={ <Link to={"/products/" + item.id}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
+                        cover={ <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
                         actions={[ 
                             <ShoppingCartOutlined 
                                 style={{color: "green", fontSize: 20}} 
@@ -92,7 +92,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                                         <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
                                         <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />
                                     ) ]}>
-                            <Link to={"/products/" + item.id}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
+                            <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
                 </List.Item>
             )}
