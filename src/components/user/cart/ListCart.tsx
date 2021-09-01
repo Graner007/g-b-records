@@ -11,7 +11,7 @@ import { P } from "../../Styles";
 import { CartItemModel } from '../../interface/CartItemModel';
 
 const UPDATE_CARTITEM_QUANTITY_MUTATION = gql`
-    mutation UpdateCartItemQuantity($cartItemId: ID!, $cartItemQuantity: Int!) {
+    mutation UpdateCartItemQuantity($cartItemId: Int!, $cartItemQuantity: Int!) {
         updateCartItemQuantity(cartItemId: $cartItemId, cartItemQuantity: $cartItemQuantity) {
             name   
             quantity

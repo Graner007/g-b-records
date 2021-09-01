@@ -18,7 +18,7 @@ const ADD_CART_ITEM = gql`
 `;
 
 const TOGGLE_PRODUCT_IN_WISHLIST = gql`
-  mutation toggleProductInWhislistMutation($recordId: ID!) {
+  mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
       products {
           id
@@ -66,7 +66,6 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
         TOGGLE_PRODUCT_IN_WISHLIST, 
         { 
             onCompleted: (data: WishlistType) => {
-                console.log(data);
                 message.success("Wishlist");
             },
             onError: (error: ApolloError) => {
@@ -91,7 +90,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                                 onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
                                     (isWishlist ? 
                                         <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
-                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: item.id}})} />
+                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />
                                     ) ]}>
                             <Link to={"/products/" + item.id}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
