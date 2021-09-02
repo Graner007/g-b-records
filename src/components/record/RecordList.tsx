@@ -20,10 +20,12 @@ const ADD_CART_ITEM = gql`
 const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
-      products {
-          id
-          name
-      }
+        wishlist {
+            products {
+                name
+            }
+        }
+        operationType
     }
   }
 `;
@@ -39,7 +41,10 @@ type ToggleProductInWhislistType = {
 }
 
 type WishlistType = {
-    wishlist: WishlistModel;
+    toggleProductInWhislist: {
+        wishlist: WishlistModel;
+        operationType: string;
+    }
 }
 
 type Props = {
@@ -66,7 +71,14 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
         TOGGLE_PRODUCT_IN_WISHLIST, 
         { 
             onCompleted: (data: WishlistType) => {
-                message.success("Wishlist");
+                switch(data.toggleProductInWhislist.operationType) {
+                    case "add":
+                        message.success("Record added to wishlist");
+                        break;
+                    case "remove":
+                        message.success("Record removed from wishlist");
+                        break;
+                }
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
