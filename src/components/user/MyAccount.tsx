@@ -19,6 +19,7 @@ const USER_DETAILS_QUERY = gql`
         telephone
         country
         orders {
+            id
             orderDate
             address
             productNumber

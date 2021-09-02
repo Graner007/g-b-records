@@ -18,12 +18,14 @@ const ADD_CART_ITEM = gql`
 `;
 
 const TOGGLE_PRODUCT_IN_WISHLIST = gql`
-  mutation toggleProductInWhislistMutation($recordId: ID!) {
+  mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
-      products {
-          id
-          name
-      }
+        wishlist {
+            products {
+                name
+            }
+        }
+        operationType
     }
   }
 `;
@@ -39,7 +41,10 @@ type ToggleProductInWhislistType = {
 }
 
 type WishlistType = {
-    wishlist: WishlistModel;
+    toggleProductInWhislist: {
+        wishlist: WishlistModel;
+        operationType: string;
+    }
 }
 
 type Props = {
@@ -66,8 +71,14 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
         TOGGLE_PRODUCT_IN_WISHLIST, 
         { 
             onCompleted: (data: WishlistType) => {
-                console.log(data);
-                message.success("Wishlist");
+                switch(data.toggleProductInWhislist.operationType) {
+                    case "add":
+                        message.success("Record added to wishlist");
+                        break;
+                    case "remove":
+                        message.success("Record removed from wishlist");
+                        break;
+                }
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
@@ -84,16 +95,16 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                     <Card
                         className="shadow"
                         maxwidth={ maxWidth }
-                        cover={ <Link to={"/products/" + item.id}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
+                        cover={ <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
                         actions={[ 
                             <ShoppingCartOutlined 
                                 style={{color: "green", fontSize: 20}} 
                                 onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
                                     (isWishlist ? 
                                         <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
-                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: item.id}})} />
+                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />
                                     ) ]}>
-                            <Link to={"/products/" + item.id}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
+                            <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
                 </List.Item>
             )}

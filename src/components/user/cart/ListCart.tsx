@@ -11,7 +11,7 @@ import { P } from "../../Styles";
 import { CartItemModel } from '../../interface/CartItemModel';
 
 const UPDATE_CARTITEM_QUANTITY_MUTATION = gql`
-    mutation UpdateCartItemQuantity($cartItemId: ID!, $cartItemQuantity: Int!) {
+    mutation UpdateCartItemQuantity($cartItemId: Int!, $cartItemQuantity: Int!) {
         updateCartItemQuantity(cartItemId: $cartItemId, cartItemQuantity: $cartItemQuantity) {
             name   
             quantity
@@ -47,9 +47,9 @@ class ListCart extends Component<ChildProps<Props, CartItemType, UpdateCartItemQ
                     actions={[<P fontsize={22} key="price">{item.price * item.quantity}$</P>, (this.props.editable ? <DeleteFilled style={{fontSize: 22, cursor: "pointer"}} /> : null )]}
                 >
                     <List.Item.Meta
-                        title={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}>{item.name}</Link>}
+                        title={<Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}>{item.name}</Link>}
                         description={item.artist}
-                        avatar={<Link to={"/products/" + item.name.split(" ").join("-").toLowerCase()}><Avatar src={item.albumCover} shape="square" size="large" /></Link>}
+                        avatar={<Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Avatar src={item.albumCover} shape="square" size="large" /></Link>}
                     />
                     { this.props.editable ? 
                         <InputNumber onChange={e => this.props.mutate && this.props.mutate({ variables: { cartItemId: item.id, cartItemQuantity: e.valueOf() } }).then((res) => console.log(res.data)).catch((err) => console.error(err))} min={0} defaultValue={item.quantity} size="large" /> : 
