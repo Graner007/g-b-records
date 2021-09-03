@@ -1,12 +1,13 @@
 import { useParams, useHistory } from "react-router-dom";
-import { Layout, Button, Row, Col, PageHeader, Image, Space } from "antd";
+import { Layout, Button, Row, Col, PageHeader, Image, Space, message } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useMutation, ApolloError } from '@apollo/client';
 
 import { Content, Header, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import ErrorMessage from "../warning/ErrorMessage";
+import { AddCartItemType, ToggleProductInWhislistType, WishlistType, ADD_CART_ITEM, TOGGLE_PRODUCT_IN_WISHLIST } from "./RecordList";
 
 const RECORD_QUERY = gql`
   query RecordQuery(
@@ -47,6 +48,37 @@ const Record = () => {
         { variables: { recordName: name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ") } }
     );
 
+    const [addCartItem] = useMutation<{}, AddCartItemType>(
+        ADD_CART_ITEM, 
+        { 
+            onCompleted: () => {
+                message.success("Record added to cart");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
+        }
+    );
+
+    const [toggleProductInWhislist] = useMutation<WishlistType, ToggleProductInWhislistType>(
+        TOGGLE_PRODUCT_IN_WISHLIST, 
+        { 
+            onCompleted: (data: WishlistType) => {
+                switch(data.toggleProductInWhislist.operationType) {
+                    case "add":
+                        message.success("Record added to wishlist");
+                        break;
+                    case "remove":
+                        message.success("Record removed from wishlist");
+                        break;
+                }
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            }
+        }
+    );
+
     return (
         <>
             {error && <ErrorMessage text={error.message} />}
@@ -64,8 +96,8 @@ const Record = () => {
                             <P fontsize={40}>{data.recordByName.artist.name}</P>
                             <P fontsize={40} color="#01579b">{data.recordByName.price}$</P>
                             <Space direction="vertical" size="middle" style={{width: "100%"}}>
-                                <Button block type="primary" size="large"><ShoppingCartOutlined /> ADD TO CART</Button>
-                                <Button block type="primary" danger size="large"><HeartOutlined /> WISHLIST</Button><br />
+                                <Button block type="primary" size="large" onClick={() => addCartItem({variables: {name: data.recordByName.name, albumCover: data.recordByName.albumCover, price: data.recordByName.price}})}><ShoppingCartOutlined /> ADD TO CART</Button>
+                                <Button block type="primary" danger size="large" onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(data.recordByName.id))}})}><HeartOutlined /> WISHLIST</Button><br />
                                 <P fontsize={20}>{data.recordByName.description}</P>
                             </Space>
                         </Col>

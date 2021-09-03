@@ -9,7 +9,7 @@ import { RecordModel } from '../interface/RecordModel';
 import EmptyDescription from '../warning/EmptyDescription';
 import { WishlistModel } from '../interface/WishlistModel';
 
-const ADD_CART_ITEM = gql`
+export const ADD_CART_ITEM = gql`
   mutation addCartItemMutation($name: String!, $albumCover: String!, $price: Int!) {
     addCartItem(name: $name, albumCover: $albumCover, price: $price) {
       id
@@ -17,7 +17,7 @@ const ADD_CART_ITEM = gql`
   }
 `;
 
-const TOGGLE_PRODUCT_IN_WISHLIST = gql`
+export const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
         wishlist {
@@ -30,17 +30,17 @@ const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   }
 `;
 
-type AddCartItemType = {
+export type AddCartItemType = {
     name: string;
     albumCover: string;
     price: number;
 }
 
-type ToggleProductInWhislistType = {
+export type ToggleProductInWhislistType = {
     recordId: number;
 }
 
-type WishlistType = {
+export type WishlistType = {
     toggleProductInWhislist: {
         wishlist: WishlistModel;
         operationType: string;
