@@ -10,7 +10,7 @@ import ListCart from "./ListCart";
 import { CartModel } from '../../interface/CartModel';
 import ErrorMessage from '../../warning/ErrorMessage';
 
-const CART_QUERY = gql`
+export const CART_QUERY = gql`
     query CartQuery {
         cart {
             cart {   
@@ -27,14 +27,14 @@ const CART_QUERY = gql`
     }
 `;
 
-type CartType = {
+export type CartType = {
     cart: {
         cart: CartModel;
         grandTotal: number;
     }
 }
 
-const withCart = graphql<{}, CartType>(CART_QUERY);
+const withCart = graphql<{}, CartType>(CART_QUERY, { options: { fetchPolicy: "no-cache" } });
 
 class Cart extends Component<ChildProps<{}, CartType>, {}> {
     render() {
