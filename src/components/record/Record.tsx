@@ -7,7 +7,7 @@ import { Content, Header, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import ErrorMessage from "../warning/ErrorMessage";
-import { AddCartItemType, ToggleProductInWhislistType, WishlistType, ADD_CART_ITEM, TOGGLE_PRODUCT_IN_WISHLIST } from "./RecordList";
+import { AddCartItemType, ProductWishlistType, ToggleProductInWhislistType, ADD_CART_ITEM, TOGGLE_PRODUCT_IN_WISHLIST } from "./RecordList";
 
 const RECORD_QUERY = gql`
   query RecordQuery(
@@ -60,10 +60,10 @@ const Record = () => {
         }
     );
 
-    const [toggleProductInWhislist] = useMutation<WishlistType, ToggleProductInWhislistType>(
+    const [toggleProductInWhislist] = useMutation<ToggleProductInWhislistType, ProductWishlistType>(
         TOGGLE_PRODUCT_IN_WISHLIST, 
         { 
-            onCompleted: (data: WishlistType) => {
+            onCompleted: (data: ToggleProductInWhislistType) => {
                 switch(data.toggleProductInWhislist.operationType) {
                     case "add":
                         message.success("Record added to wishlist");
