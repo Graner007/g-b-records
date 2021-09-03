@@ -34,7 +34,7 @@ export type CartType = {
     }
 }
 
-const withCart = graphql<{}, CartType>(CART_QUERY, { options: { fetchPolicy: "no-cache" } });
+const withCart = graphql<{}, CartType>(CART_QUERY);
 
 class Cart extends Component<ChildProps<{}, CartType>, {}> {
     render() {

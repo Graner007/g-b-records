@@ -3,7 +3,7 @@ import { List, InputNumber, Avatar, message } from "antd";
 import { DeleteFilled } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import { ChildProps, graphql } from "@apollo/react-hoc";
-import { ApolloCache, ApolloError, gql } from '@apollo/client';
+import { ApolloError, gql } from '@apollo/client';
 
 import { CartModel } from "../../../components/interface/CartModel";
 import EmptyDescription from "../../warning/EmptyDescription";

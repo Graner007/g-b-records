@@ -7,7 +7,7 @@ import RecordList from '../record/RecordList';
 import { RecordModel } from "../interface/RecordModel";
 import ErrorMessage from "../warning/ErrorMessage";
 
-const WISHLIST_QUERY = gql`
+export const WISHLIST_QUERY = gql`
     query WishlistQuery {
         wishlist { 
             products {
@@ -31,16 +31,14 @@ const ADD_ALL_TO_CART_MUTATION = gql`
     }
 `;
 
-type WishlistType = {
+export type WishlistType = {
     wishlist: {
         products: RecordModel[];
     }
 }
 
 const Wishlist = () => {
-    const { data, loading, error } = useQuery<WishlistType, {}>(WISHLIST_QUERY, {
-        fetchPolicy: "no-cache"
-    });
+    const { data, loading, error } = useQuery<WishlistType, {}>(WISHLIST_QUERY);
 
     const [addAllToCart] = useMutation<{}, {}>(
         ADD_ALL_TO_CART_MUTATION, 

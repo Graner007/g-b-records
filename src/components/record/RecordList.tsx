@@ -8,6 +8,8 @@ import { useMutation, gql, ApolloError } from '@apollo/client';
 import { RecordModel } from '../interface/RecordModel';
 import EmptyDescription from '../warning/EmptyDescription';
 import { WishlistModel } from '../interface/WishlistModel';
+import { WISHLIST_QUERY } from '../user/Wishlist';
+import { WishlistType } from '../user/Wishlist';
 
 export const ADD_CART_ITEM = gql`
   mutation addCartItemMutation($name: String!, $albumCover: String!, $price: Int!) {
@@ -30,21 +32,37 @@ export const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   }
 `;
 
+const DELETE_WISHLIST_ITEM = gql`
+  mutation deleteWishlistItemMutation($recordId: Int!) {
+      deleteWishlistItem(recordId: $recordId) {
+        id
+        name
+        price
+        description
+        albumCover
+      }
+  }
+`
+
 export type AddCartItemType = {
     name: string;
     albumCover: string;
     price: number;
 }
 
-export type ToggleProductInWhislistType = {
+export type ProductWishlistType = {
     recordId: number;
 }
 
-export type WishlistType = {
+export type ToggleProductInWhislistType = {
     toggleProductInWhislist: {
         wishlist: WishlistModel;
         operationType: string;
     }
+}
+
+type DeleteWishlistItemType = {
+    deleteWishlistItem: RecordModel;
 }
 
 type Props = {
@@ -67,10 +85,10 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
         }
     );
 
-    const [toggleProductInWhislist] = useMutation<WishlistType, ToggleProductInWhislistType>(
+    const [toggleProductInWhislist] = useMutation<ToggleProductInWhislistType, ProductWishlistType>(
         TOGGLE_PRODUCT_IN_WISHLIST, 
         { 
-            onCompleted: (data: WishlistType) => {
+            onCompleted: (data: ToggleProductInWhislistType) => {
                 switch(data.toggleProductInWhislist.operationType) {
                     case "add":
                         message.success("Record added to wishlist");
@@ -85,6 +103,24 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             }
         }
     );
+
+    const [deleteWishlistItem] = useMutation<DeleteWishlistItemType, ProductWishlistType>(
+        DELETE_WISHLIST_ITEM,
+        {
+            onCompleted: () => {
+                message.success("Record removed from wishlist");
+            },
+            onError: (error: ApolloError) => {
+                message.error(error.message);
+            },
+            update: (proxy, { data }) => {
+                const wishlist = proxy.readQuery<WishlistType>({ query: WISHLIST_QUERY });
+                if (data && wishlist) {
+                    proxy.writeQuery({ query: WISHLIST_QUERY, data: { wishlist: { wishlist: wishlist.wishlist.products.filter(product => product.id !== data.deleteWishlistItem.id) } } });
+                }
+            }
+        }
+    )
 
     return (
         records ? <List
@@ -101,7 +137,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                                 style={{color: "green", fontSize: 20}} 
                                 onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
                                     (isWishlist ? 
-                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} /> : 
+                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} onClick={() => deleteWishlistItem({variables: {recordId: parseInt(String(item.id))}})} /> : 
                                         <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />
                                     ) ]}>
                             <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
