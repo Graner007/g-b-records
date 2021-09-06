@@ -1,4 +1,4 @@
-import { Menu, Layout } from "antd";
+import { Menu, Layout, Row, Col, Select } from "antd";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
 
@@ -6,7 +6,6 @@ import { Content, Header, H1, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import RecordList from "./RecordList";
-import OrderBar from "./OrderBar";
 import SearchBar from "../navbar/SearchBar";
 import SliderLine from '../partials/SliderLine';
 import ErrorMessage from "../warning/ErrorMessage";
@@ -64,24 +63,49 @@ type RouteParams = {
 
 const RECORDS_PER_PAGE = 10;
 
-const getQueryVariables = (phrase: string) => {
+const getQueryVariables = (phrase: string, sortBy?: RecordOrderByInput) => {
     const filter: string = phrase;
     const skip: number = 0;
     const take: number = RECORDS_PER_PAGE;
-    const orderBy: RecordOrderByInput = { name: "desc" };
+    const orderBy: RecordOrderByInput = sortBy ? sortBy : { name: "desc" };
 
     return { filter, skip, take, orderBy };
 };
 
 const RecordListByCategory = () => {
     const { Sider } = Layout;
+    const { Option } = Select;
     const { name } = useParams<RouteParams>();
     const displayName = name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ");
+    const sortTitles = ["Title A-Z", "Title Z-A", "Price High-Low", "Price Low-High", "Newest to Oldest", "Oldest to Newest"];
 
-    const { data, loading, error } = useQuery<Category, CategoryVars>(
+    let { data, loading, error, refetch } = useQuery<Category, CategoryVars>(
         CATEGORY_QUERY, 
         { variables: getQueryVariables(displayName) }
     );
+
+    const search = (value: string) => {
+        switch(value) {
+            case "Title A-Z":
+                refetch(getQueryVariables(displayName, { name: "desc" }));
+                break;
+            case "Title Z-A":
+                refetch(getQueryVariables(displayName, { name: "asc" }));
+                break;
+            case "Price High-Low":
+                refetch(getQueryVariables(displayName, { price: "desc" }));
+                break;
+            case "Price Low-High":
+                refetch(getQueryVariables(displayName, { price: "asc" }));
+                break;
+            case "Newest to Oldest":
+                refetch(getQueryVariables(displayName, { releaseDate: "desc" }));
+                break;
+            case "Oldest to Newest":
+                refetch(getQueryVariables(displayName, { releaseDate: "asc" }));
+                break;
+        }
+    }
     
     return (
         <>
@@ -112,7 +136,19 @@ const RecordListByCategory = () => {
                     <Layout>
                         <Header style={{height: "fit-content"}}>
                             <H1 fontsize={18} bold={false}>Home {'>'} {displayName}</H1>
-                            <OrderBar recordsLength={data.category.count} />
+                            <Row gutter={[24, 24]}>
+                                <Col span={12}>
+                                    <b>{data.category.records.length} results found</b>
+                                </Col>
+                                <Col span={12} push={8}>
+                                    Sort By
+                                    <Select onChange={value => search(value)} defaultValue={sortTitles[0]} style={{ width: 'auto' }} bordered={false} size={"large"}>
+                                        {sortTitles.map((item, index) => (
+                                            <Option value={item} key={index}>{item}</Option>
+                                        ))}
+                                    </Select>
+                                </Col>
+                            </Row>
                         </Header>
                         <Content backgroundcolor="#ececec" padding="3%">
                             <RecordList maxWidth={200} records={data.category.records} isWishlist={false} column={6} />
