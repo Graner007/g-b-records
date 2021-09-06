@@ -6,6 +6,7 @@ export interface CartItemModel {
     description: string;
     releaseDate: string;
     albumCover: string;
+    oneUnitPrice: number;
     price: number;
     quantity: number;
 }
