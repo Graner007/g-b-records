@@ -44,7 +44,7 @@ const RecordUnderPrice = (props: Props) => {
         RECORDS_BETWEEN_TWO_PRICE_QUERY, 
         { 
             variables: { min: 0, max: props.price },
-            fetchPolicy: "no-cache" 
+            pollInterval: 5000
         }
     );
 

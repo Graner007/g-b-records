@@ -8,6 +8,8 @@ import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import ErrorMessage from "../warning/ErrorMessage";
 import { AddCartItemType, ProductWishlistType, ToggleProductInWhislistType, ADD_CART_ITEM, TOGGLE_PRODUCT_IN_WISHLIST } from "./RecordList";
+import { CART_QUERY } from "../user/cart/Cart";
+import { WISHLIST_QUERY } from "../user/Wishlist";
 
 const RECORD_QUERY = gql`
   query RecordQuery(
@@ -56,7 +58,8 @@ const Record = () => {
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
-            }
+            },
+            refetchQueries: [{query: CART_QUERY}]
         }
     );
 
@@ -75,7 +78,8 @@ const Record = () => {
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
-            }
+            },
+            refetchQueries: [{query: WISHLIST_QUERY}]
         }
     );
 
