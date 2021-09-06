@@ -28,7 +28,7 @@ type RecommendRecords = {
 
 const RecommendRecordList = () => {
     const { data, loading, error } = useQuery<RecommendRecords, {}>(RECOMMEND_RECORDS_QUERY, {
-        fetchPolicy: "no-cache"
+        pollInterval: 5000
     });
 
     return (

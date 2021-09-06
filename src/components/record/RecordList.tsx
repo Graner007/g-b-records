@@ -10,6 +10,7 @@ import EmptyDescription from '../warning/EmptyDescription';
 import { WishlistModel } from '../interface/WishlistModel';
 import { WISHLIST_QUERY } from '../user/Wishlist';
 import { WishlistType } from '../user/Wishlist';
+import { CART_QUERY } from '../user/cart/Cart';
 
 export const ADD_CART_ITEM = gql`
   mutation addCartItemMutation($name: String!, $albumCover: String!, $price: Int!) {
@@ -81,7 +82,8 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
-            }
+            },
+            refetchQueries: [{query: CART_QUERY}]
         }
     );
 
@@ -100,7 +102,8 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             },
             onError: (error: ApolloError) => {
                 message.error(error.message);
-            }
+            },
+            refetchQueries: [{query: WISHLIST_QUERY}]
         }
     );
 

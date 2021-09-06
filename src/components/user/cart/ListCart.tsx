@@ -9,14 +9,17 @@ import { CartModel } from "../../../components/interface/CartModel";
 import EmptyDescription from "../../warning/EmptyDescription";
 import { P } from "../../Styles";
 import { CartItemModel } from '../../interface/CartItemModel';
-import { CART_QUERY, CartType } from './Cart';
+import { CART_QUERY } from './Cart';
 
 const UPDATE_CARTITEM_QUANTITY_MUTATION = gql`
     mutation UpdateCartItemQuantity($cartItemId: Int!, $cartItemQuantity: Int!) {
         updateCartItemQuantity(cartItemId: $cartItemId, cartItemQuantity: $cartItemQuantity) {
-            name   
-            quantity
+            id
+            name
+            albumCover
+            oneUnitPrice
             price
+            quantity
         }
     }
 `;
@@ -56,29 +59,14 @@ class ListCart extends Component<ChildProps<Props, CartItemType, UpdateCartItemQ
                     { this.props.editable ? 
                         <InputNumber 
                         onChange={e => {
+                            e !== null &&
                             this.props.mutate && 
                             this.props.mutate({ 
                                 variables: { 
                                     cartItemId: parseInt(String(item.id)), 
                                     cartItemQuantity: e.valueOf() 
                                 },
-                                update: (proxy, { data }) => {
-                                    const localeCache = proxy.readQuery<CartType>({ query: CART_QUERY });
-
-                                    if (data && localeCache) {
-                                        if (data.updateCartItemQuantity.quantity === 0) {
-                                            localeCache.cart.cart.products.filter(product => product.id === data.updateCartItemQuantity.id);
-                                        }
-                                        else {
-                                            localeCache.cart.cart.products.forEach(product => {
-                                                if (product.id === data.updateCartItemQuantity.id) {
-                                                    product.price = data.updateCartItemQuantity.price;
-                                                }
-                                            });
-                                        }
-                                        proxy.writeQuery({ query: CART_QUERY, data: localeCache });
-                                    }
-                                }
+                                refetchQueries: [{ query: CART_QUERY }]
                             })
                                 .then(() => message.success("Record quantity updated"))
                                 .catch((err: ApolloError) => message.error(err.message));
