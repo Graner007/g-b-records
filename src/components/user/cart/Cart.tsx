@@ -18,6 +18,7 @@ export const CART_QUERY = gql`
                     id
                     name
                     albumCover
+                    oneUnitPrice
                     price
                     quantity
                 }

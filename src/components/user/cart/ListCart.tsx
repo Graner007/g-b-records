@@ -46,7 +46,7 @@ class ListCart extends Component<ChildProps<Props, CartItemType, UpdateCartItemQ
                 size="large"
                 renderItem={item => (
                 <List.Item className="shadow"
-                    actions={[<P fontsize={22} key="price">{item.price * item.quantity}$</P>, (this.props.editable ? <DeleteFilled style={{fontSize: 22, cursor: "pointer"}} /> : null )]}
+                    actions={[<P fontsize={22} key="price">{item.price}$</P>, (this.props.editable ? <DeleteFilled style={{fontSize: 22, cursor: "pointer"}} /> : null )]}
                 >
                     <List.Item.Meta
                         title={<Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}>{item.name}</Link>}
@@ -63,20 +63,20 @@ class ListCart extends Component<ChildProps<Props, CartItemType, UpdateCartItemQ
                                     cartItemQuantity: e.valueOf() 
                                 },
                                 update: (proxy, { data }) => {
-                                    const cart = proxy.readQuery<CartType>({ query: CART_QUERY });
+                                    const localeCache = proxy.readQuery<CartType>({ query: CART_QUERY });
 
-                                    if (data && cart) {
+                                    if (data && localeCache) {
                                         if (data.updateCartItemQuantity.quantity === 0) {
-                                            cart.cart.cart.products.filter(product => product.id === data.updateCartItemQuantity.id);
+                                            localeCache.cart.cart.products.filter(product => product.id === data.updateCartItemQuantity.id);
                                         }
                                         else {
-                                            cart.cart.cart.products.forEach(product => {
+                                            localeCache.cart.cart.products.forEach(product => {
                                                 if (product.id === data.updateCartItemQuantity.id) {
-                                                    product.price = data.updateCartItemQuantity.price * data.updateCartItemQuantity.quantity;
+                                                    product.price = data.updateCartItemQuantity.price;
                                                 }
                                             });
                                         }
-                                        proxy.writeQuery({ query: CART_QUERY, data: cart });
+                                        proxy.writeQuery({ query: CART_QUERY, data: localeCache });
                                     }
                                 }
                             })
