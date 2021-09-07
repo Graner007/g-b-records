@@ -1,4 +1,5 @@
-import { Menu, Layout, Row, Col, Select } from "antd";
+import { useState } from "react";
+import { Menu, Layout, Row, Col, Select, Slider } from "antd";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
 
@@ -7,7 +8,6 @@ import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import RecordList from "./RecordList";
 import SearchBar from "../navbar/SearchBar";
-import SliderLine from '../partials/SliderLine';
 import ErrorMessage from "../warning/ErrorMessage";
 
 const CATEGORY_QUERY = gql`
@@ -16,8 +16,10 @@ const CATEGORY_QUERY = gql`
     $take: Int
     $skip: Int
     $orderBy: RecordOrderByInput
+    $min: Int
+    $max: Int
   ) {
-    category(filter: $filter, take: $take, skip: $skip, orderBy: $orderBy) {
+    category(filter: $filter, take: $take, skip: $skip, orderBy: $orderBy, min: $min, max: $max) {
       count
       records {
         id
@@ -63,13 +65,12 @@ type RouteParams = {
 
 const RECORDS_PER_PAGE = 10;
 
-const getQueryVariables = (phrase: string, sortBy?: RecordOrderByInput) => {
-    const filter: string = phrase;
+const getQueryVariables = (filter: string, sortBy?: RecordOrderByInput, min?: number, max?: number) => {
     const skip: number = 0;
     const take: number = RECORDS_PER_PAGE;
     const orderBy: RecordOrderByInput = sortBy ? sortBy : { name: "desc" };
 
-    return { filter, skip, take, orderBy };
+    return { filter, skip, take, orderBy, min, max };
 };
 
 const RecordListByCategory = () => {
@@ -78,10 +79,16 @@ const RecordListByCategory = () => {
     const { name } = useParams<RouteParams>();
     const displayName = name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ");
     const sortTitles = ["Title A-Z", "Title Z-A", "Price High-Low", "Price Low-High", "Newest to Oldest", "Oldest to Newest"];
+    const [records, setRecords] = useState<RecordModel[]>();
 
     let { data, loading, error, refetch } = useQuery<Category, CategoryVars>(
         CATEGORY_QUERY, 
-        { variables: getQueryVariables(displayName) }
+        { 
+            variables: getQueryVariables(displayName),
+            onCompleted: (data: Category) => {
+                setRecords(data.category.records);
+            }
+        }
     );
 
     const search = (value: string) => {
@@ -104,6 +111,13 @@ const RecordListByCategory = () => {
             case "Oldest to Newest":
                 refetch(getQueryVariables(displayName, { releaseDate: "asc" }));
                 break;
+        }
+    }
+
+    const filterByTwoPrice = (min: number, max: number) => {
+        if (data && min && max) {
+            const filteredRecords = data.category.records.filter(record => record.price >= min && record.price <= max);
+            setRecords(filteredRecords);
         }
     }
     
@@ -129,7 +143,7 @@ const RecordListByCategory = () => {
                             </Menu.Item>
                             {data.category.count > 1 ? <Menu.Item key="5" style={{height:"fit-content"}}>
                                 <H1 bold={false} fontsize={16}>Price</H1>
-                                <SliderLine defaultValue={[data.category.minPrice, data.category.maxPrice]} isDot={false} />
+                                <Slider onChange={value => filterByTwoPrice(value[0], value[1])} dots={false} min={data.category.minPrice} max={data.category.maxPrice} defaultValue={[data.category.minPrice, data.category.maxPrice]} range /> 
                             </Menu.Item> : null}
                         </Menu>
                     </Sider>
@@ -151,7 +165,7 @@ const RecordListByCategory = () => {
                             </Row>
                         </Header>
                         <Content backgroundcolor="#ececec" padding="3%">
-                            <RecordList maxWidth={200} records={data.category.records} isWishlist={false} column={6} />
+                            <RecordList maxWidth={200} records={records!} isWishlist={false} column={6} />
                         </Content>
                     </Layout>
                 </Layout>}
