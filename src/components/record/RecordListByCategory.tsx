@@ -7,7 +7,7 @@ import { Content, Header, H1, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import RecordList from "./RecordList";
-import SearchBar from "../navbar/SearchBar";
+import SearchBar from "../partials/SearchBar";
 import ErrorMessage from "../warning/ErrorMessage";
 
 const CATEGORY_QUERY = gql`
