@@ -7,6 +7,7 @@ import { countries, Country } from '../partials/Countires';
 type Props = {
     firstName: string;
     lastName: string;
+    email: string;
     address: string;
     zipcode: number;
     country: string;
@@ -29,17 +30,16 @@ export default class OrderForm extends Component<Props> {
             <Form
                 name="checkout"
                 scrollToFirstError
-                wrapperCol={{ sm: { span: 6, offset: 12 },
-                            xs: { span: 6, offset: 12 }
-                }}
                 initialValues={{
                     firstName: this.props.firstName,
                     lastName: this.props.lastName,
+                    email: this.props.email,
                     address: this.props.address,
                     zipcode: this.props.zipcode,
                     country: [this.props.country],
                     phone: this.props.telephone
                 }}
+                onFinish={() => alert("bence")}
                 >
                 <Form.Item
                     name="firstName"
@@ -65,6 +65,19 @@ export default class OrderForm extends Component<Props> {
                     hasFeedback
                 >
                     <Input placeholder="Last name" type="text" />
+                </Form.Item>
+
+                <Form.Item
+                    name="email"
+                    rules={[
+                    {
+                        required: true,
+                        message: 'Please input your email!',
+                    },
+                    ]}
+                    hasFeedback
+                >
+                    <Input placeholder="Email" type="email" />
                 </Form.Item>
 
                 <Form.Item
@@ -136,7 +149,7 @@ export default class OrderForm extends Component<Props> {
                     </Checkbox>
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit"><Link to="/payment">Payment</Link></Button>
+                    <Button type="primary" htmlType="submit">Payment</Button>
                 </Form.Item>
             </Form>
         )
