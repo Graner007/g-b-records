@@ -18,7 +18,7 @@ const RECORD_QUERY = gql`
     recordByName(recordName: $recordName) {
         id
         name
-        oneUnitPrice
+        price
         description
         albumCover
         artist {
