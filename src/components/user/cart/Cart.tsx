@@ -12,16 +12,14 @@ import ErrorMessage from '../../warning/ErrorMessage';
 
 export const CART_QUERY = gql`
     query CartQuery {
-        cart {
-            cart {   
-                products {
-                    id
-                    name
-                    albumCover
-                    oneUnitPrice
-                    price
-                    quantity
-                }
+        cart {   
+            products {
+                id
+                name
+                albumCover
+                oneUnitPrice
+                price
+                quantity
             }
             grandTotal
         }
@@ -29,10 +27,7 @@ export const CART_QUERY = gql`
 `;
 
 export type CartType = {
-    cart: {
-        cart: CartModel;
-        grandTotal: number;
-    }
+    cart: CartModel;
 }
 
 const withCart = graphql<{}, CartType>(CART_QUERY);
@@ -54,7 +49,7 @@ class Cart extends Component<ChildProps<{}, CartType>, {}> {
                             </Row>
                         </Header>
                         <Content padding="3%">
-                            <ListCart cart={cart.cart} grandTotal={cart.grandTotal} editable={true} />
+                            <ListCart cart={cart} editable={true} />
                         </Content>
                     </Layout>  
                 }

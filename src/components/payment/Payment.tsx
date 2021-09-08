@@ -88,7 +88,7 @@ export default class Payment extends Component {
                                     <H1 bold={true} textalign="center">Shipment</H1>
                                     <InformationTable user={this.state.user} />
                                     <H1 bold={true} textalign="center">Cart</H1>
-                                    <ListCart cart={this.state.user.cart} grandTotal={0} editable={false} />
+                                    <ListCart cart={this.state.user.cart} editable={false} />
                                 </Space>
                             </Col>
                         </Row> 

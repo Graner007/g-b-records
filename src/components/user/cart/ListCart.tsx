@@ -41,7 +41,6 @@ type DeleteCartItemVars = {
 
 type Props = {
     cart: CartModel;
-    grandTotal: number;
     editable: boolean;
 }
 
@@ -107,7 +106,7 @@ const ListCart = (props: Props) => {
                 }
             </List.Item>
             )}
-            footer={<P fontsize={22} textalign="right">Grand Total: {props.grandTotal}$</P>}
+            footer={<P fontsize={22} textalign="right">Grand Total: {props.cart.grandTotal}$</P>}
         />
     )
 }
