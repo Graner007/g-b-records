@@ -1,6 +1,7 @@
 import { CartModel } from './CartModel';
 import { OrderModel } from './OrderModel';
 import { WishlistModel } from "./WishlistModel";
+import { CheckoutDetailModel } from "./CheckoutDetailModel";
 
 export interface UserModel {
     id: number;
@@ -16,4 +17,5 @@ export interface UserModel {
     wishList: WishlistModel;
     cart: CartModel;
     orders: OrderModel[];
+    checkoutDetails: CheckoutDetailModel[];
 }
