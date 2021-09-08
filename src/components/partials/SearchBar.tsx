@@ -1,6 +1,9 @@
 import { Input } from 'antd';
 import { gql, useLazyQuery } from '@apollo/client';
+import { useState, useEffect } from "react";
+
 import { RecordModel } from '../interface/RecordModel';
+import SearchBarResults from "./SearchBarResults";
 
 const SEARCH_RECORDS = gql`
   query SearchRecords($searchPhrase: String!) {
@@ -8,12 +11,15 @@ const SEARCH_RECORDS = gql`
       id
       name
       albumCover
+      artist {
+        name
+      }
     }
   }
 `;
 
 type SearchType = {
-    searchRecods: RecordModel[];
+    searchRecords: RecordModel[];
 }
 
 type SearchVars = {
@@ -29,17 +35,35 @@ type Props = {
 
 const SearchBar = (props: Props) => {
     const {Search} = Input;
+    const [phrase, setPhrase] = useState<string>("");
+    const [records, setRecords] = useState<RecordModel[]>();
 
-    const [executeSearch, { data }] = useLazyQuery<SearchType, SearchVars>(SEARCH_RECORDS); 
+    const [executeSearch, { data, loading, error }] = useLazyQuery<SearchType, SearchVars>(SEARCH_RECORDS,
+      { variables: { searchPhrase: phrase }, 
+        onCompleted: (data: SearchType) => { 
+          setRecords(data.searchRecords); 
+        } 
+      });
+
+    useEffect(() => {
+      executeSearch();
+    }, [phrase, executeSearch]);
 
     return (
+      <>
         <Search 
             placeholder={props.placeholder} 
             size={props.size} 
             allowClear 
             style={{ width: props.width, padding: props.padding }}
-            onChange={(e) => e !== null && executeSearch({ variables: { searchPhrase: e.target.value } })} 
+            onChange={(e) => e !== null && setPhrase(e.target.value)}
+            onBlur={() => {
+              setPhrase("");
+              setRecords([]);
+            }}
         />
+        { data && phrase.length > 0 && <SearchBarResults records={records!} error={error} loading={loading} /> }
+      </>
     )
 }
 

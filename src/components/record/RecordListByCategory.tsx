@@ -7,7 +7,6 @@ import { Content, Header, H1, P } from "../Styles";
 import { RecordModel } from "../interface/RecordModel";
 import Loading from "../warning/Loading";
 import RecordList from "./RecordList";
-import SearchBar from "../partials/SearchBar";
 import ErrorMessage from "../warning/ErrorMessage";
 
 const CATEGORY_QUERY = gql`
@@ -136,9 +135,6 @@ const RecordListByCategory = () => {
                                 <H1 bold={false} fontsize={16}>Artist</H1>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <SearchBar placeholder="artist" size="small" width="75%" padding="10px 0 10px 0" />
-                            </Menu.Item>
-                            <Menu.Item key="4">
                                 <P fontsize={14} color="black">{displayName}</P>
                             </Menu.Item>
                             {data.category.count > 1 ? <Menu.Item key="5" style={{height:"fit-content"}}>
