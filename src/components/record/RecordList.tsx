@@ -13,8 +13,8 @@ import { WishlistType } from '../user/Wishlist';
 import { CART_QUERY } from '../user/cart/Cart';
 
 export const ADD_CART_ITEM = gql`
-  mutation addCartItemMutation($name: String!, $albumCover: String!, $price: Int!) {
-    addCartItem(name: $name, albumCover: $albumCover, price: $price) {
+  mutation addCartItemMutation($recordId: Int!) {
+    addCartItem(recordId: $recordId) {
       id
     }
   }
@@ -48,9 +48,7 @@ const DELETE_WISHLIST_ITEM = gql`
 `
 
 export type AddCartItemType = {
-    name: string;
-    albumCover: string;
-    price: number;
+    recordId: number;
 }
 
 export type ProductWishlistType = {
@@ -141,7 +139,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                         actions={[ 
                             <ShoppingCartOutlined 
                                 style={{color: "green", fontSize: 20}} 
-                                onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
+                                onClick={() => addCartItem({variables: { recordId: parseInt(String(item.id)) }})} />, 
                                     (isWishlist ? 
                                         <DeleteOutlined style={{fontSize: 20, color: "red"}} onClick={() => deleteWishlistItem({variables: {recordId: parseInt(String(item.id))}})} /> :
                                         (item.isInWishlist ? <HeartFilled style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} /> : <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />)                                    
