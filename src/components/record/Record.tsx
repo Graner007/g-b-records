@@ -100,7 +100,7 @@ const Record = () => {
                             <P fontsize={40}>{data.recordByName.artist.name}</P>
                             <P fontsize={40} color="#01579b">{data.recordByName.price}$</P>
                             <Space direction="vertical" size="middle" style={{width: "100%"}}>
-                                <Button block type="primary" size="large" onClick={() => addCartItem({variables: {name: data.recordByName.name, albumCover: data.recordByName.albumCover, price: data.recordByName.price}})}><ShoppingCartOutlined /> ADD TO CART</Button>
+                                <Button block type="primary" size="large" onClick={() => addCartItem({variables: { recordId: parseInt(String(data.recordByName.id)) }})}><ShoppingCartOutlined /> ADD TO CART</Button>
                                 <Button block type="primary" danger size="large" onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(data.recordByName.id))}})}><HeartOutlined /> WISHLIST</Button><br />
                                 <P fontsize={20}>{data.recordByName.description}</P>
                             </Space>
