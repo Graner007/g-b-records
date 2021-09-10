@@ -20,8 +20,10 @@ const RECORDS_BETWEEN_TWO_PRICE_QUERY = gql`
         price
         albumCover
         artist {
+            id
             name
         }
+        isInWishlist
     }
   }
 `;

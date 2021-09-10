@@ -16,8 +16,10 @@ const RECOMMEND_RECORDS_QUERY = gql`
             price
             albumCover
             artist {
+                id
                 name
             }
+            isInWishlist
         }
     }
 `;
@@ -27,9 +29,7 @@ type RecommendRecords = {
 }
 
 const RecommendRecordList = () => {
-    const { data, loading, error } = useQuery<RecommendRecords, {}>(RECOMMEND_RECORDS_QUERY, {
-        pollInterval: 5000
-    });
+    const { data, loading, error } = useQuery<RecommendRecords, {}>(RECOMMEND_RECORDS_QUERY, { pollInterval: 5000 });
 
     return (
         <>

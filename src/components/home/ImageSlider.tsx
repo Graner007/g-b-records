@@ -22,7 +22,7 @@ type ImageSliderType = {
 }
 
 const ImageSlider = () => {
-    const { data, loading, error } = useQuery<ImageSliderType>(IMAGE_SLIDER_QUERY);
+    const { data, loading, error } = useQuery<ImageSliderType>(IMAGE_SLIDER_QUERY, { pollInterval: 5000 });
 
     return (
         <>

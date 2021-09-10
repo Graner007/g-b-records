@@ -22,7 +22,7 @@ type Decade = {
     decade: MediaModel[];
 }
 
-const withDecadeImage = graphql<{}, Decade>(DECADE_QUERY);
+const withDecadeImage = graphql<{}, Decade>(DECADE_QUERY, { options: { pollInterval: 5000 } });
 
 class Decades extends Component<ChildProps<{}, Decade>, {}> {
     render() {

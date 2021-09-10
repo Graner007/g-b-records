@@ -10,6 +10,7 @@ import ErrorMessage from "../warning/ErrorMessage";
 export const WISHLIST_QUERY = gql`
     query WishlistQuery {
         wishlist { 
+            id
             products {
                 id
                 name
