@@ -18,7 +18,15 @@ const CATEGORY_QUERY = gql`
     $min: Int
     $max: Int
   ) {
-    category(filter: $filter, take: $take, skip: $skip, orderBy: $orderBy, min: $min, max: $max) {
+    category(
+        filter: $filter,
+        take: $take, 
+        skip: $skip, 
+        orderBy: $orderBy, 
+        min: $min, 
+        max: $max
+    ) 
+    {
       count
       records {
         id
@@ -27,8 +35,10 @@ const CATEGORY_QUERY = gql`
         description
         albumCover
         artist {
+            id
             name
         }
+        isInWishlist
       }
       minPrice
       maxPrice
@@ -46,7 +56,9 @@ type CategoryVars = {
     filter: string;
     take?: number;
     skip?: number;
-    orderBy?: RecordOrderByInput
+    orderBy?: RecordOrderByInput;
+    min?: number;
+    max?: number;
 }
 
 type Category = {
@@ -64,12 +76,19 @@ type RouteParams = {
 
 const RECORDS_PER_PAGE = 10;
 
-const getQueryVariables = (filter: string, sortBy?: RecordOrderByInput, min?: number, max?: number) => {
+const getQueryVariables = (args: CategoryVars) => {
     const skip: number = 0;
     const take: number = RECORDS_PER_PAGE;
-    const orderBy: RecordOrderByInput = sortBy ? sortBy : { name: "desc" };
+    const orderBy: RecordOrderByInput = args.orderBy ? args.orderBy : { name: "desc" };
 
-    return { filter, skip, take, orderBy, min, max };
+    return { 
+        filter: args.filter,
+        skip,
+        take, 
+        orderBy,
+        min: args.min,
+        max: args.max 
+    };
 };
 
 const RecordListByCategory = () => {
@@ -79,36 +98,47 @@ const RecordListByCategory = () => {
     const displayName = name.split("-").map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(" ");
     const sortTitles = ["Title A-Z", "Title Z-A", "Price High-Low", "Price Low-High", "Newest to Oldest", "Oldest to Newest"];
     const [records, setRecords] = useState<RecordModel[]>();
+    const [resultFound, setResultFound] = useState<number>();
 
     let { data, loading, error, refetch } = useQuery<Category, CategoryVars>(
         CATEGORY_QUERY, 
         { 
-            variables: getQueryVariables(displayName),
+            variables: getQueryVariables({ filter: displayName }),
             onCompleted: (data: Category) => {
                 setRecords(data.category.records);
+                setResultFound(data.category.count);
             }
         }
     );
 
+    const refetchRecords = (args: CategoryVars) => {
+        refetch(getQueryVariables({ filter: args.filter, orderBy: args.orderBy}))
+            .then(res => {
+                setRecords(res.data.category.records);
+                setResultFound(res.data.category.count);
+            })
+            .catch(err => console.error(err));
+    }
+
     const search = (value: string) => {
         switch(value) {
             case "Title A-Z":
-                refetch(getQueryVariables(displayName, { name: "desc" }));
+                refetchRecords({ filter: displayName, orderBy: { name: "asc" } });
                 break;
             case "Title Z-A":
-                refetch(getQueryVariables(displayName, { name: "asc" }));
+                refetchRecords({ filter: displayName, orderBy: { name: "desc" } });
                 break;
             case "Price High-Low":
-                refetch(getQueryVariables(displayName, { price: "desc" }));
+                refetchRecords({ filter: displayName, orderBy: { price: "desc" } });
                 break;
             case "Price Low-High":
-                refetch(getQueryVariables(displayName, { price: "asc" }));
+                refetchRecords({ filter: displayName, orderBy: { name: "asc" } });
                 break;
             case "Newest to Oldest":
-                refetch(getQueryVariables(displayName, { releaseDate: "desc" }));
+                refetchRecords({ filter: displayName, orderBy: { releaseDate: "desc" } });
                 break;
             case "Oldest to Newest":
-                refetch(getQueryVariables(displayName, { releaseDate: "asc" }));
+                refetchRecords({ filter: displayName, orderBy: { releaseDate: "asc" } });
                 break;
         }
     }
@@ -117,6 +147,7 @@ const RecordListByCategory = () => {
         if (data && min && max) {
             const filteredRecords = data.category.records.filter(record => record.price >= min && record.price <= max);
             setRecords(filteredRecords);
+            setResultFound(filteredRecords.length);
         }
     }
     
@@ -148,7 +179,7 @@ const RecordListByCategory = () => {
                             <H1 fontsize={18} bold={false}>Home {'>'} {displayName}</H1>
                             <Row gutter={[24, 24]}>
                                 <Col span={12}>
-                                    <b>{data.category.records.length} results found</b>
+                                    <b>{resultFound} results found</b>
                                 </Col>
                                 <Col span={12} push={8}>
                                     Sort By
