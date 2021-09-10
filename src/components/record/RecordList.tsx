@@ -1,4 +1,4 @@
-import { ShoppingCartOutlined, HeartOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, HeartOutlined, DeleteOutlined, HeartFilled } from '@ant-design/icons';
 import { Card } from "./Styles";
 import { List, message, Image } from 'antd';
 import Meta from 'antd/lib/card/Meta';
@@ -23,8 +23,10 @@ export const ADD_CART_ITEM = gql`
 export const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
+        id
         wishlist {
             products {
+                id
                 name
             }
         }
@@ -132,6 +134,7 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
             renderItem={item => (
                 <List.Item>
                     <Card
+                        itemID={item.id.toString()}
                         className="shadow"
                         maxwidth={ maxWidth }
                         cover={ <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Image src={item.albumCover} alt="cover" preview={false} /></Link> } 
@@ -140,8 +143,8 @@ const RecordList = ({records, maxWidth, isWishlist, column}: Props) => {
                                 style={{color: "green", fontSize: 20}} 
                                 onClick={() => addCartItem({variables: {name: item.name, albumCover: item.albumCover, price: item.price}})} />, 
                                     (isWishlist ? 
-                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} onClick={() => deleteWishlistItem({variables: {recordId: parseInt(String(item.id))}})} /> : 
-                                        <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />
+                                        <DeleteOutlined style={{fontSize: 20, color: "red"}} onClick={() => deleteWishlistItem({variables: {recordId: parseInt(String(item.id))}})} /> :
+                                        (item.isInWishlist ? <HeartFilled style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} /> : <HeartOutlined style={{color: "red", fontSize: 20}} onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(item.id))}})} />)                                    
                                     ) ]}>
                             <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Meta title={item.name} description={"by " + item.artist.name + " for " + item.price + "$"} /></Link>
                     </Card>
