@@ -1,3 +1,5 @@
+recordUnderPrice
+
 import { Link } from "react-router-dom";
 import { Row, Col, Button, Layout } from 'antd';
 import { useQuery, gql } from '@apollo/client';
@@ -20,8 +22,10 @@ const RECORDS_BETWEEN_TWO_PRICE_QUERY = gql`
         price
         albumCover
         artist {
+            id
             name
         }
+        isInWishlist
     }
   }
 `;
