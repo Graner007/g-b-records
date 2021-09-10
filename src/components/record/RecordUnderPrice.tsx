@@ -1,5 +1,3 @@
-recordUnderPrice
-
 import { Link } from "react-router-dom";
 import { Row, Col, Button, Layout } from 'antd';
 import { useQuery, gql } from '@apollo/client';
