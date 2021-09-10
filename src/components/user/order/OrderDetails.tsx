@@ -72,10 +72,10 @@ class OrderDetails extends Component<ChildProps<Props, OrderType, OrderVars>, {}
                                             renderItem={item => (
                                             <Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><List.Item
                                                 className="shadow"
-                                                actions={[<P fontsize={18}>Price: {item.price * item.quantity}$</P>, <P fontsize={18}>Quantity: {item.quantity}</P>]}
+                                                actions={[<P fontsize={18}>Price: {item.price}$</P>, <P fontsize={18}>Quantity: {item.quantity}</P>]}
                                             >
                                                 <List.Item.Meta
-                                                    title={item.name.toLowerCase().replaceAll(" ", "-")}
+                                                    title={item.name}
                                                     avatar={<Avatar src={item.albumCover} shape="square" size="large" />}
                                                 />
                                             </List.Item></Link>
