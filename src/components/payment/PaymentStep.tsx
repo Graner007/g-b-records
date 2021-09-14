@@ -15,7 +15,7 @@ export default class PaymentStep extends Component<Props> {
             <Steps size="small" current={this.props.currentIndex}>
                 <Step title={<Link to="/cart">Cart</Link>} />
                 <Step title={<Link to="/checkout">Checkout</Link>} />
-                <Step title={<Link to="/payment">Payment</Link>} />
+                <Step title={<Link to="*">Payment</Link>} />
             </Steps>
         )
     }

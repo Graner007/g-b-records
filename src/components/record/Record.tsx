@@ -21,6 +21,8 @@ const RECORD_QUERY = gql`
         price
         description
         albumCover
+        leftInStock
+        releaseDate
         artist {
             name
         }
@@ -97,11 +99,13 @@ const Record = () => {
                         <Col span={12}><Image src={data.recordByName.albumCover} preview={false} style={{maxWidth: "90%"}} /></Col>
                         <Col span={12}>
                             <P fontsize={50}>{data.recordByName.name}</P>
-                            <P fontsize={40}>{data.recordByName.artist.name}</P>
+                            <P fontsize={40}>By {data.recordByName.artist.name}</P>
+                            <P fontsize={30}>From {data.recordByName.releaseDate.split("T")[0]}</P>
                             <P fontsize={40} color="#01579b">{data.recordByName.price}$</P>
                             <Space direction="vertical" size="middle" style={{width: "100%"}}>
                                 <Button block type="primary" size="large" onClick={() => addCartItem({variables: { recordId: parseInt(String(data.recordByName.id)) }})}><ShoppingCartOutlined /> ADD TO CART</Button>
-                                <Button block type="primary" danger size="large" onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(data.recordByName.id))}})}><HeartOutlined /> WISHLIST</Button><br />
+                                <Button block type="primary" danger size="large" onClick={() => toggleProductInWhislist({variables: {recordId: parseInt(String(data.recordByName.id))}})}><HeartOutlined /> WISHLIST</Button>
+                                <P fontsize={20}>Only {data.recordByName.leftInStock} left in stock!</P>
                                 <P fontsize={20}>{data.recordByName.description}</P>
                             </Space>
                         </Col>

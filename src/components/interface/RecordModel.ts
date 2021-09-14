@@ -11,6 +11,7 @@ export interface RecordModel {
     releaseDate: string;
     albumCover: string;
     price: number;
+    leftInStock: number;
     wishlist: WishlistModel[];
     isInWishlist: boolean;
 }

@@ -15,6 +15,7 @@ const UPDATE_CARTITEM_QUANTITY_MUTATION = gql`
             name
             albumCover
             oneUnitPrice
+            leftInStock
             price
             quantity
         }
@@ -71,6 +72,8 @@ const ListCart = (props: Props) => {
         }
     );
 
+    console.log(props.cart.products);
+
     return (
         props.cart.products.length === 0 ? <EmptyDescription text="Your cart is empty" /> : 
         <List
@@ -93,14 +96,15 @@ const ListCart = (props: Props) => {
                         >
                 <List.Item.Meta
                     title={<Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}>{item.name}</Link>}
-                    description={item.artist}
+                    description={props.editable && item.leftInStock + " left in stock"}
                     avatar={<Link to={"/products/" + item.name.toLowerCase().replaceAll(" ", "-")}><Avatar src={item.albumCover} shape="square" size="large" /></Link>}
                 />
                 { props.editable ? 
                     <InputNumber 
                     onChange={e => e !== null && updateCartItemQuantity({ variables: { cartItemId: parseInt(String(item.id)), cartItemQuantity: e.valueOf()  } })} 
-                    min={0} 
-                    defaultValue={item.quantity} 
+                    min={0}
+                    max={item.leftInStock} 
+                    defaultValue={item.quantity}
                     size="large" /> : 
                     <P fontsize={20}>{item.quantity}X</P> 
                 }

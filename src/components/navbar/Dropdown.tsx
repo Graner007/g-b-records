@@ -37,7 +37,6 @@ const withDropdownItems = graphql<Props, DropdownType>(DROPDOWN_QUERY, {
         type
       },
       fetchPolicy: "no-cache",
-      pollInterval: 5000,
       onError: (error: ApolloError) => {
           return <ErrorMessage text={error.message} />
       }

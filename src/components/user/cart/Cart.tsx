@@ -19,6 +19,7 @@ export const CART_QUERY = gql`
                 albumCover
                 oneUnitPrice
                 price
+                leftInStock
                 quantity
             }
             grandTotal
