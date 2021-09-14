@@ -23,7 +23,6 @@ export const ADD_CART_ITEM = gql`
 export const TOGGLE_PRODUCT_IN_WISHLIST = gql`
   mutation toggleProductInWhislistMutation($recordId: Int!) {
     toggleProductInWhislist(recordId: $recordId) {
-        id
         wishlist {
             products {
                 id

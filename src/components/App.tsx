@@ -14,6 +14,7 @@ import MyAccount from "./user/MyAccount";
 import OrderDetails from "./user/order/OrderDetails";
 import Home from "./home/Home";
 import Checkout from "./payment/Checkout";
+import SuccessfulPayment from "./payment/SuccessfulPayment";
 import LoginProvider from "../context/LoginContext";
 import RecordListByCategory from './record/RecordListByCategory';
 import Wishlist from './user/Wishlist';
@@ -59,6 +60,9 @@ function App() {
                 </Route> 
                 <Route path="/wishlist" exact>
                   <Wishlist />
+                </Route>
+                <Route path="/successful-payment" exact>
+                  <SuccessfulPayment />
                 </Route>
                 <Route path="/" exact>
                   <Home />
