@@ -1,5 +1,6 @@
 import { Row, Col, Card } from "antd";
 import { gql, useQuery } from '@apollo/client';
+import { Link } from "react-router-dom";
 
 import { Content, Header, P, H1, Layout } from '../Styles';
 import Loading from "../warning/Loading";
@@ -56,7 +57,8 @@ const MyAccount = () => {
                             <Col span={12}>
                                 <Card title="Order History">
                                     <OrderList orders={data.user.orders} />
-                                </Card>
+                                </Card><br />
+                                <Link to="/orders">See all orders</Link>
                             </Col>
                             <Col span={12} push={6}>
                                 <H1 bold={true} fontsize={18}>{data.user.firstName + " " + data.user.lastName}</H1>

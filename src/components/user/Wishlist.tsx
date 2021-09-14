@@ -84,7 +84,7 @@ const Wishlist = () => {
                                 total={RECORDS_PER_PAGE * 5} 
                                 hideOnSinglePage={true}
                                 onChange={(e) => refetch({ take: RECORDS_PER_PAGE, skip: ((e.valueOf() - 1) * RECORDS_PER_PAGE) })}
-                            />
+                        />
                     </Content>
                 </Layout>
             }
