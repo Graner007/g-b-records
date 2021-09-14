@@ -18,6 +18,7 @@ export default class OrderList extends Component<Props> {
                 size="large"
                 renderItem={item => (
                 <Link to={"/orders/" + item.id}><List.Item
+                    className="shadow"
                     actions={[<P fontsize={18}>Payment: {item.payment}$</P>, <P fontsize={18}>{item.productNumber} {item.productNumber > 1 ? "Records" : "Record"}</P>]}
                 >
                     <List.Item.Meta

@@ -12,6 +12,7 @@ import Login from "./auth/Login";
 import Cart from "./user/cart/Cart";
 import MyAccount from "./user/MyAccount";
 import OrderDetails from "./user/order/OrderDetails";
+import Orders from "./user/order/Orders";
 import Home from "./home/Home";
 import Checkout from "./payment/Checkout";
 import SuccessfulPayment from "./payment/SuccessfulPayment";
@@ -50,8 +51,11 @@ function App() {
               <Route path="/my-account" exact>
                 <MyAccount />
               </Route>
-              <Route path="/orders/:id" exact >
+              <Route path="/orders/:id" exact>
                 <OrderDetails />
+              </Route>
+              <Route path="/orders" exact>
+                <Orders />
               </Route>
               <Route path="/checkout" exact>
                 <Checkout />

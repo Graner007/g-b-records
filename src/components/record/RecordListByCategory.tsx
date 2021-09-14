@@ -80,7 +80,6 @@ const getQueryVariables = (args: CategoryVars) => {
     const skip = args.skip ? args.skip : 0;
     const take = RECORDS_PER_PAGE;
     const orderBy: RecordOrderByInput = args.orderBy ? args.orderBy : { name: "asc" };
-    console.log(skip);
 
     return { 
         filter: args.filter,
