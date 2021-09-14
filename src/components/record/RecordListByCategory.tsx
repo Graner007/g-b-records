@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Layout, Row, Col, Select, Slider } from "antd";
+import { Menu, Layout, Row, Col, Select, Slider, Pagination } from "antd";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
 
@@ -77,9 +77,10 @@ type RouteParams = {
 const RECORDS_PER_PAGE = 10;
 
 const getQueryVariables = (args: CategoryVars) => {
-    const skip: number = 0;
-    const take: number = RECORDS_PER_PAGE;
-    const orderBy: RecordOrderByInput = args.orderBy ? args.orderBy : { name: "desc" };
+    const skip = args.skip ? args.skip : 0;
+    const take = RECORDS_PER_PAGE;
+    const orderBy: RecordOrderByInput = args.orderBy ? args.orderBy : { name: "asc" };
+    console.log(skip);
 
     return { 
         filter: args.filter,
@@ -106,16 +107,16 @@ const RecordListByCategory = () => {
             variables: getQueryVariables({ filter: displayName }),
             onCompleted: (data: Category) => {
                 setRecords(data.category.records);
-                setResultFound(data.category.count);
+                setResultFound(data.category.records.length);
             }
         }
     );
 
     const refetchRecords = (args: CategoryVars) => {
-        refetch(getQueryVariables({ filter: args.filter, orderBy: args.orderBy}))
+        refetch(getQueryVariables({ filter: args.filter, orderBy: args.orderBy, skip: args.skip}))
             .then(res => {
                 setRecords(res.data.category.records);
-                setResultFound(res.data.category.count);
+                setResultFound(res.data.category.records.length);
             })
             .catch(err => console.error(err));
     }
@@ -192,7 +193,15 @@ const RecordListByCategory = () => {
                             </Row>
                         </Header>
                         <Content backgroundcolor="#ececec" padding="3%">
-                            <RecordList maxWidth={200} records={records!} isWishlist={false} column={6} />
+                            <RecordList maxWidth={200} records={records!} isWishlist={false} column={5} />
+                            <Pagination 
+                                size="small" 
+                                pageSize={RECORDS_PER_PAGE} 
+                                defaultCurrent={1} 
+                                total={data.category.count} 
+                                hideOnSinglePage={true}
+                                onChange={(e) => refetchRecords({ filter: displayName, skip: ((e.valueOf() - 1) * RECORDS_PER_PAGE) })}
+                            />
                         </Content>
                     </Layout>
                 </Layout>}

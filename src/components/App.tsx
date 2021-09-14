@@ -15,67 +15,64 @@ import OrderDetails from "./user/order/OrderDetails";
 import Home from "./home/Home";
 import Checkout from "./payment/Checkout";
 import SuccessfulPayment from "./payment/SuccessfulPayment";
-import LoginProvider from "../context/LoginContext";
 import RecordListByCategory from './record/RecordListByCategory';
 import Wishlist from './user/Wishlist';
 
 function App() {
   return (
     <Router>
-      <LoginProvider>
-        <div className="App">
-          <Layout>
-            <Header>
-              <Navbar />
-            </Header>
-              <Content padding="30px 0 30px 0">
-              <Switch>
-                <Route path="/collections/:name" exact>
-                  <RecordListByCategory />
-                </Route>
-                <Route path="/products/:name" exact>
-                  <Record />
-                </Route>
-                <Route path="/registration" exact>
-                  <Registration />
-                </Route>
-                <Route path="/login" exact>
-                  <Login />
-                </Route>
-                <Route path="/cart" exact>
-                  <Cart />
-                </Route>
-                <Route path="/log-out" exact render={() => {
-                  return <Redirect to="/" />;
-                }}>
-                </Route>
-                <Route path="/my-account" exact>
-                  <MyAccount />
-                </Route>
-                <Route path="/orders/:id" exact >
-                  <OrderDetails />
-                </Route>
-                <Route path="/checkout" exact>
-                  <Checkout />
-                </Route> 
-                <Route path="/wishlist" exact>
-                  <Wishlist />
-                </Route>
-                <Route path="/successful-payment" exact>
-                  <SuccessfulPayment />
-                </Route>
-                <Route path="/" exact>
-                  <Home />
-                </Route>
-                <Route path="*" exact>
-                  <ErrorPage status="404" />
-                </Route>
-              </Switch>
-              </Content>
-            <Footer />
-          </Layout>
-        </div>
-      </LoginProvider>
+      <div className="App">
+        <Layout>
+          <Header>
+            <Navbar />
+          </Header>
+            <Content padding="30px 0 30px 0">
+            <Switch>
+              <Route path="/collections/:name" exact>
+                <RecordListByCategory />
+              </Route>
+              <Route path="/products/:name" exact>
+                <Record />
+              </Route>
+              <Route path="/registration" exact>
+                <Registration />
+              </Route>
+              <Route path="/login" exact>
+                <Login />
+              </Route>
+              <Route path="/cart" exact>
+                <Cart />
+              </Route>
+              <Route path="/log-out" exact render={() => {
+                return <Redirect to="/" />;
+              }}>
+              </Route>
+              <Route path="/my-account" exact>
+                <MyAccount />
+              </Route>
+              <Route path="/orders/:id" exact >
+                <OrderDetails />
+              </Route>
+              <Route path="/checkout" exact>
+                <Checkout />
+              </Route> 
+              <Route path="/wishlist" exact>
+                <Wishlist />
+              </Route>
+              <Route path="/successful-payment" exact>
+                <SuccessfulPayment />
+              </Route>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="*" exact>
+                <ErrorPage status="404" />
+              </Route>
+            </Switch>
+            </Content>
+          <Footer />
+        </Layout>
+      </div>
     </Router>
   );
 }
